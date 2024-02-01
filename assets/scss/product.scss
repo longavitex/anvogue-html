@@ -65,7 +65,7 @@
                 display: block;
             }
 
-            svg {
+            svg, i {
                 color: #3DAB25;
             }
         }
@@ -209,7 +209,8 @@
     &.active {
         background-color: var(--red);
 
-        svg {
+        svg,
+        i {
             color: var(--white);
 
             path {
