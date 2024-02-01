@@ -1,5 +1,7 @@
 /* Product Item */
 .product-item {
+    display: block;
+
     .product-thumb .list-action-right {
         transform: translateX(60px);
         transition: all ease 0.4s;
@@ -65,7 +67,8 @@
                 display: block;
             }
 
-            svg, i {
+            svg,
+            i {
                 color: #3DAB25;
             }
         }
