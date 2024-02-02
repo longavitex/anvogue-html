@@ -722,6 +722,10 @@ video {
   top: 74px;
 }
 
+.-right-\[40px\] {
+  right: -40px;
+}
+
 .z-\[1\] {
   z-index: 1;
 }
@@ -919,6 +923,10 @@ video {
   width: 44px;
 }
 
+.w-\[54\%\] {
+  width: 54%;
+}
+
 .w-auto {
   width: auto;
 }
@@ -943,22 +951,6 @@ video {
 
 .w-screen {
   width: 100vw;
-}
-
-.w-\[54\%\] {
-  width: 54%;
-}
-
-.w-\[59\%\] {
-  width: 59%;
-}
-
-.w-\[56\%\] {
-  width: 56%;
-}
-
-.w-\[57\%\] {
-  width: 57%;
 }
 
 .flex-shrink-0 {
@@ -1190,6 +1182,11 @@ video {
   background-color: rgb(233 233 233 / var(--tw-bg-opacity));
 }
 
+.bg-purple {
+  --tw-bg-opacity: 1;
+  background-color: rgb(134 132 212 / var(--tw-bg-opacity));
+}
+
 .bg-red {
   --tw-bg-opacity: 1;
   background-color: rgb(219 68 68 / var(--tw-bg-opacity));
@@ -1214,9 +1211,19 @@ video {
   background-color: rgb(236 176 24 / var(--tw-bg-opacity));
 }
 
-.bg-purple {
+.bg-\[\#ACB99B\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(134 132 212 / var(--tw-bg-opacity));
+  background-color: rgb(172 185 155 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#B0A092\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(176 160 146 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#B19696\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(177 150 150 / var(--tw-bg-opacity));
 }
 
 .object-cover {
@@ -1710,6 +1717,10 @@ video {
   .max-\[420px\]\:h-\[400px\] {
     height: 400px;
   }
+
+  .max-\[420px\]\:h-\[340px\] {
+    height: 340px;
+  }
 }
 
 @media (min-width: 640px) {
@@ -1743,6 +1754,10 @@ video {
 
   .sm\:w-\[180px\] {
     width: 180px;
+  }
+
+  .sm\:w-\[52\%\] {
+    width: 52%;
   }
 
   .sm\:grid-cols-2 {
@@ -1785,6 +1800,10 @@ video {
     margin-top: 5rem;
   }
 
+  .md\:mt-4 {
+    margin-top: 1rem;
+  }
+
   .md\:mt-5 {
     margin-top: 1.25rem;
   }
@@ -1795,10 +1814,6 @@ video {
 
   .md\:mt-8 {
     margin-top: 2rem;
-  }
-
-  .md\:mt-4 {
-    margin-top: 1rem;
   }
 
   .md\:h-12 {
@@ -1955,6 +1970,10 @@ video {
 }
 
 @media (min-width: 1536px) {
+  .\32xl\:-right-\[36px\] {
+    right: -36px;
+  }
+
   .\32xl\:-right-\[60px\] {
     right: -60px;
   }
@@ -1967,7 +1986,7 @@ video {
     top: 1.5rem;
   }
 
-  .\32xl\:-right-\[36px\] {
-    right: -36px;
+  .\32xl\:-right-\[100px\] {
+    right: -100px;
   }
 }
