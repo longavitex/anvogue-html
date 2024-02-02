@@ -151,6 +151,8 @@ modalCartMain.addEventListener('click', (e) => {
 
 // Slider
 var swiper = new Swiper(".swiper-slider", {
+    spaceBetween: 0,
+    slidesPerView: 1,
     pagination: {
         el: ".swiper-pagination",
         clickable: true,
@@ -427,37 +429,40 @@ const createProductItem = (product) => {
 }
 
 
-// Appen child
+// Append child
 const listFourProduct = document.querySelector('.list-product.four-product');
 const listSixProduct = document.querySelector('.list-product.six-product .swiper .swiper-wrapper');
-// const list8Product = document.querySelector('.list-product.8-product');
+const listEightProduct = document.querySelector('.list-product.eight-product');
 
 // Fetch products from JSON file (assuming products.json)
-fetch('./assets/data/Product.json')
+fetch('/assets/data/Product.json')
     .then(response => response.json())
     .then(products => {
         // Display the first 4 products
-        for (let i = 0; i < 4; i++) {
-            const product = products[i];
-            const productElement = createProductItem(product);
-            listFourProduct.appendChild(productElement);
+        if (listFourProduct) {
+            products.slice(0, 4).forEach(product => {
+                const productElement = createProductItem(product);
+                listFourProduct.appendChild(productElement);
+            })
         }
 
-        // Display the first 4 products
-        for (let i = 5; i < 11; i++) {
-            const product = products[i];
-            const swiperSlide = document.createElement('div')
-            swiperSlide.classList.add('swiper-slide')
-            swiperSlide.appendChild(createProductItem(product));
-            listSixProduct.appendChild(swiperSlide);
+        // Display the first 6 products
+        if (listSixProduct) {
+            products.slice(5, 11).forEach(product => {
+                const swiperSlide = document.createElement('div')
+                swiperSlide.classList.add('swiper-slide')
+                swiperSlide.appendChild(createProductItem(product));
+                listSixProduct.appendChild(swiperSlide);
+            })
         }
 
-        // // Display the first 4 products
-        // for (let i = 0; i < 8; i++) {
-        //     const product = products[i];
-        //     const productElement = createProductItem(product);
-        //     list8Product.appendChild(productElement);
-        // }
+        // Display the first 8 products
+        if (listEightProduct) {
+            products.slice(11, 19).forEach(product => {
+                const productElement = createProductItem(product);
+                listEightProduct.appendChild(productElement);
+            })
+        }
 
         // Product item
         const productItems = document.querySelectorAll('.product-item')
@@ -469,7 +474,6 @@ fetch('./assets/data/Product.json')
             const quickviewIcon = product.querySelector('.quick-view-btn')
             const quickshopIcon = product.querySelector('.quick-shop-btn')
             const modalQuickshop = product.querySelector('.quick-shop-block')
-            // const sizeItems = product.querySelectorAll('.quick-shop-block .list-size .size-item')
 
             addWishlistIcon.addEventListener('click', (e) => {
                 e.stopPropagation()
@@ -578,8 +582,6 @@ fetch('./assets/data/Product.json')
         })
     })
     .catch(error => console.error('Error loading products:', error));
-
-
 
 
 // list-testimonial
