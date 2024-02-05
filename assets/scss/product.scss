@@ -1,6 +1,7 @@
 /* Product Item */
 .product-item {
     display: block;
+    animation: showProduct .6s ease-out;
 
     .product-thumb .list-action-right {
         transform: translateX(60px);
@@ -559,5 +560,17 @@
 
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes showProduct {
+    0% {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

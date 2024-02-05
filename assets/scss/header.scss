@@ -365,4 +365,26 @@
     overflow: hidden;
     max-width: 100%;
     width: 100%;
+
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        .swiper-wrapper {
+            -webkit-transition-timing-function: linear !important;
+            transition-timing-function: linear !important;
+            position: relative;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: auto;
+            position: relative;
+            padding: 0 20px;
+        }
+    }
 }

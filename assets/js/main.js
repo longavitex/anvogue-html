@@ -9,6 +9,20 @@ window.addEventListener('scroll', () => {
     }
 })
 
+// Marquee banner top
+let SwiperTop = new Swiper('.marquee-block', {
+    spaceBetween: 0,
+    centeredSlides: true,
+    speed: 5000,
+    autoplay: {
+        delay: 1,
+    },
+    loop: true,
+    slidesPerView: 'auto',
+    allowTouchMove: false,
+    disableOnInteraction: true
+});
+
 // Menu mobile
 const menuMobileIcon = document.querySelector('.menu-mobile-icon')
 const menuMobileBlock = document.querySelector('#menu-mobile')
@@ -53,17 +67,20 @@ const searchIcon = document.querySelector('.search-icon')
 const modalSearch = document.querySelector('.modal-search-block')
 const modalSearchMain = document.querySelector('.modal-search-block .modal-search-main')
 
-searchIcon.addEventListener('click', () => {
-    modalSearchMain.classList.add('open')
-})
+if (searchIcon) {
+    searchIcon.addEventListener('click', () => {
+        modalSearchMain.classList.add('open')
+    })
 
-modalSearch.addEventListener('click', () => {
-    modalSearchMain.classList.remove('open')
-})
+    modalSearch.addEventListener('click', () => {
+        modalSearchMain.classList.remove('open')
+    })
 
-modalSearchMain.addEventListener('click', (e) => {
-    e.stopPropagation()
-})
+    modalSearchMain.addEventListener('click', (e) => {
+        e.stopPropagation()
+    })
+}
+
 
 
 // Modal login
@@ -188,59 +205,63 @@ tabItems.forEach(item => {
 
 
 // Collection
-var swiperCollection = new Swiper(".swiper-collection", {
-    navigation: {
-        prevEl: ".swiper-button-prev",
-        nextEl: ".swiper-button-next",
-    },
-    loop: true,
-    autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
-    },
-    slidesPerView: 2,
-    spaceBetween: 16,
-    breakpoints: {
-        640: {
-            slidesPerView: 3,
-            spaceBetween: 16,
+if (document.querySelector('.swiper-collection')) {
+    var swiperCollection = new Swiper(".swiper-collection", {
+        navigation: {
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
         },
-        768: {
-            slidesPerView: 3,
-            spaceBetween: 20,
+        loop: true,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
         },
-        1280: {
-            slidesPerView: 4,
-            spaceBetween: 20,
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            1280: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            },
         },
-    },
-});
+    });
+}
 
 
 // list-product
-var swiperListProduct = new Swiper(".swiper-list-product", {
-    navigation: {
-        prevEl: ".swiper-button-prev2",
-        nextEl: ".swiper-button-next2",
-    },
-    loop: true,
-    slidesPerView: 2,
-    spaceBetween: 16,
-    breakpoints: {
-        640: {
-            slidesPerView: 3,
-            spaceBetween: 16,
+if (document.querySelector('.swiper-list-product')) {
+    var swiperListProduct = new Swiper(".swiper-list-product", {
+        navigation: {
+            prevEl: ".swiper-button-prev2",
+            nextEl: ".swiper-button-next2",
         },
-        768: {
-            slidesPerView: 3,
-            spaceBetween: 30,
+        loop: true,
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1280: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+            },
         },
-        1280: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-        },
-    },
-});
+    });
+}
 
 
 // Modal Compare
@@ -429,6 +450,127 @@ const createProductItem = (product) => {
 }
 
 
+const addEventToProductItem = () => {
+    // Product item
+    const productItems = document.querySelectorAll('.product-item')
+
+    productItems.forEach(product => {
+        const compareIcon = product.querySelector('.compare-btn')
+        const addWishlistIcon = product.querySelector('.add-wishlist-btn')
+        const addCartIcon = product.querySelector('.add-cart-btn')
+        const quickviewIcon = product.querySelector('.quick-view-btn')
+        const quickshopIcon = product.querySelector('.quick-shop-btn')
+        const modalQuickshop = product.querySelector('.quick-shop-block')
+
+        addWishlistIcon.addEventListener('click', (e) => {
+            e.stopPropagation()
+            addWishlistIcon.classList.toggle('active')
+
+            if (addWishlistIcon.classList.contains('active')) {
+                addWishlistIcon.querySelector('i').classList.remove('ph')
+                addWishlistIcon.querySelector('i').classList.add('ph-fill')
+                openModalWishlist()
+            } else {
+                addWishlistIcon.querySelector('i').classList.add('ph')
+                addWishlistIcon.querySelector('i').classList.remove('ph-fill')
+            }
+        })
+
+        compareIcon.addEventListener('click', (e) => {
+            e.stopPropagation()
+            openModalCompare()
+            compareIcon.classList.toggle('active')
+        })
+
+        quickviewIcon.addEventListener('click', (e) => {
+            e.stopPropagation()
+            openModalQuickview()
+        })
+
+        addCartIcon.addEventListener('click', (e) => {
+            e.stopPropagation()
+            openModalCart()
+        })
+
+        if (quickshopIcon) {
+            quickshopIcon.addEventListener('click', (e) => {
+                e.stopPropagation()
+                modalQuickshop.classList.add('open')
+            })
+
+            addCartIcon.addEventListener('click', (e) => {
+                e.stopPropagation()
+                if (modalQuickshop.classList.contains('open')) {
+                    modalQuickshop.classList.remove('open')
+                }
+            })
+        }
+    })
+
+
+    const listSizes = document.querySelectorAll('.list-size')
+
+    listSizes.forEach(list => {
+        const sizeItems = list.querySelectorAll('.size-item')
+
+        sizeItems.forEach(size => {
+            size.addEventListener('click', () => {
+                let parent = size.parentElement
+                if (!parent.querySelector('.active')) {
+                    size.classList.add('active')
+                } else {
+                    parent.querySelector('.active').classList.remove('active')
+                    size.classList.add('active')
+                }
+            })
+        })
+
+        list.addEventListener('click', (e) => {
+            e.stopPropagation()
+            const chooseSizeBlock = list.parentElement
+            const sizeSelected = chooseSizeBlock.querySelector('.size')
+            const activeSize = list.querySelector('.size-item.active')
+
+            if (sizeSelected && activeSize) {
+                sizeSelected.textContent = activeSize.textContent
+            }
+        })
+    })
+
+
+    const listColors = document.querySelectorAll('.list-color')
+
+    listColors.forEach(list => {
+        const colorItems = list.querySelectorAll('.color-item')
+
+        colorItems.forEach(color => {
+            color.addEventListener('click', () => {
+                let parent = color.parentElement
+                if (!parent.querySelector('.active')) {
+                    color.classList.add('active')
+                } else {
+                    parent.querySelector('.active').classList.remove('active')
+                    color.classList.add('active')
+                }
+            })
+        })
+
+        list.addEventListener('click', (e) => {
+            e.stopPropagation()
+            const chooseColorBlock = list.parentElement
+            const colorSelected = chooseColorBlock.querySelector('.color')
+            const activeColor = list.querySelector('.color-item.active .tag-action')
+
+            if (colorSelected && activeColor) {
+                colorSelected.textContent = activeColor.textContent
+            }
+        })
+    })
+}
+
+addEventToProductItem()
+
+
 // Append child
 const listFourProduct = document.querySelector('.list-product.four-product');
 const listSixProduct = document.querySelector('.list-product.six-product .swiper .swiper-wrapper');
@@ -440,9 +582,31 @@ fetch('/assets/data/Product.json')
     .then(products => {
         // Display the first 4 products
         if (listFourProduct) {
-            products.slice(0, 4).forEach(product => {
+            const parent = listFourProduct.parentElement
+            const menuItemActive = parent.querySelector('.menu-tab .active').getAttribute('data-item');
+            const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
+
+            products.filter(product => product.type === menuItemActive).slice(0, 4).forEach(product => {
                 const productElement = createProductItem(product);
                 listFourProduct.appendChild(productElement);
+            })
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // remove old product
+                    const productItems = listFourProduct.querySelectorAll('.product-item')
+                    productItems.forEach(prdItem => {
+                        prdItem.remove()
+                    })
+
+                    products.filter(product => product.type === item.getAttribute('data-item')).slice(0, 4).forEach(product => {
+                        // create product
+                        const productElement = createProductItem(product);
+                        listFourProduct.appendChild(productElement);
+                    })
+
+                    addEventToProductItem()
+                })
             })
         }
 
@@ -464,124 +628,10 @@ fetch('/assets/data/Product.json')
             })
         }
 
-        // Product item
-        const productItems = document.querySelectorAll('.product-item')
-
-        productItems.forEach(product => {
-            const compareIcon = product.querySelector('.compare-btn')
-            const addWishlistIcon = product.querySelector('.add-wishlist-btn')
-            const addCartIcon = product.querySelector('.add-cart-btn')
-            const quickviewIcon = product.querySelector('.quick-view-btn')
-            const quickshopIcon = product.querySelector('.quick-shop-btn')
-            const modalQuickshop = product.querySelector('.quick-shop-block')
-
-            addWishlistIcon.addEventListener('click', (e) => {
-                e.stopPropagation()
-                addWishlistIcon.classList.toggle('active')
-
-                if (addWishlistIcon.classList.contains('active')) {
-                    addWishlistIcon.querySelector('i').classList.remove('ph')
-                    addWishlistIcon.querySelector('i').classList.add('ph-fill')
-                    openModalWishlist()
-                } else {
-                    addWishlistIcon.querySelector('i').classList.add('ph')
-                    addWishlistIcon.querySelector('i').classList.remove('ph-fill')
-                }
-            })
-
-            compareIcon.addEventListener('click', (e) => {
-                e.stopPropagation()
-                openModalCompare()
-                compareIcon.classList.toggle('active')
-            })
-
-            quickviewIcon.addEventListener('click', (e) => {
-                e.stopPropagation()
-                openModalQuickview()
-            })
-
-            addCartIcon.addEventListener('click', (e) => {
-                e.stopPropagation()
-                openModalCart()
-            })
-
-            if (quickshopIcon) {
-                quickshopIcon.addEventListener('click', (e) => {
-                    e.stopPropagation()
-                    modalQuickshop.classList.add('open')
-                })
-
-                addCartIcon.addEventListener('click', (e) => {
-                    e.stopPropagation()
-                    if (modalQuickshop.classList.contains('open')) {
-                        modalQuickshop.classList.remove('open')
-                    }
-                })
-            }
-        })
-
-
-
-        const listSizes = document.querySelectorAll('.list-size')
-
-        listSizes.forEach(list => {
-            const sizeItems = list.querySelectorAll('.size-item')
-
-            sizeItems.forEach(size => {
-                size.addEventListener('click', () => {
-                    let parent = size.parentElement
-                    if (!parent.querySelector('.active')) {
-                        size.classList.add('active')
-                    } else {
-                        parent.querySelector('.active').classList.remove('active')
-                        size.classList.add('active')
-                    }
-                })
-            })
-
-            list.addEventListener('click', (e) => {
-                e.stopPropagation()
-                const chooseSizeBlock = list.parentElement
-                const sizeSelected = chooseSizeBlock.querySelector('.size')
-                const activeSize = list.querySelector('.size-item.active')
-
-                if (sizeSelected && activeSize) {
-                    sizeSelected.textContent = activeSize.textContent
-                }
-            })
-        })
-
-
-        const listColors = document.querySelectorAll('.list-color')
-
-        listColors.forEach(list => {
-            const colorItems = list.querySelectorAll('.color-item')
-
-            colorItems.forEach(color => {
-                color.addEventListener('click', () => {
-                    let parent = color.parentElement
-                    if (!parent.querySelector('.active')) {
-                        color.classList.add('active')
-                    } else {
-                        parent.querySelector('.active').classList.remove('active')
-                        color.classList.add('active')
-                    }
-                })
-            })
-
-            list.addEventListener('click', (e) => {
-                e.stopPropagation()
-                const chooseColorBlock = list.parentElement
-                const colorSelected = chooseColorBlock.querySelector('.color')
-                const activeColor = list.querySelector('.color-item.active .tag-action')
-
-                if (colorSelected && activeColor) {
-                    colorSelected.textContent = activeColor.textContent
-                }
-            })
-        })
+        addEventToProductItem()
     })
     .catch(error => console.error('Error loading products:', error));
+
 
 
 // list-testimonial
@@ -608,6 +658,42 @@ var swiperListTestimonial = new Swiper(".swiper-list-testimonial", {
             spaceBetween: 30,
         },
     },
+});
+
+
+// list-testimonial 4
+var swiperListTestimonialFour = new Swiper(".swiper-testimonial-four", {
+    navigation: {
+        prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+    },
+    autoplay: {
+        delay: 3000
+    },
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 0,
+    on: {
+        slideChange: () => {
+            let activeItem = document.querySelector('.list-testimonial .swiper .swiper-slide-active')
+            if (activeItem) {
+                const dataItem = activeItem.querySelector('.testimonial-item').getAttribute('data-item')
+                console.log(dataItem);
+
+                const listAvatar = document.querySelector('.list-avatar')
+                const avatars = document.querySelectorAll('.list-avatar .bg-img')
+
+                avatars.forEach(item => {
+                    if (item.getAttribute('data-item') === dataItem) {
+                        if (listAvatar.querySelector('.active')) {
+                            listAvatar.querySelector('.active').classList.remove('active')
+                        }
+                        item.classList.add('active')
+                    }
+                })
+            }
+        }
+    }
 });
 
 
@@ -640,6 +726,34 @@ var swiperListInstagram = new Swiper(".swiper-list-instagram", {
         },
     },
 });
+
+
+// list-instagram 3
+var swiperListInstagram = new Swiper(".swiper-instagram-three", {
+    loop: true,
+    autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+    },
+    clickable: true,
+    slidesPerView: 2,
+    spaceBetween: 0,
+    breakpoints: {
+        640: {
+            slidesPerView: 3,
+        },
+        768: {
+            slidesPerView: 4,
+        },
+        1024: {
+            slidesPerView: 5,
+        },
+        1280: {
+            slidesPerView: 6,
+        },
+    },
+});
+
 
 // list-brand
 var swiperListBrand = new Swiper(".swiper-list-brand", {
