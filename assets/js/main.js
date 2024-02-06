@@ -236,6 +236,129 @@ if (document.querySelector('.swiper-collection')) {
 }
 
 
+// Collection 6
+if (document.querySelector('.swiper-collection-scroll')) {
+    var swiperCollection = new Swiper(".swiper-collection-scroll", {
+        scrollbar: {
+            el: ".swiper-scrollbar",
+            hide: true,
+        },
+        loop: false,
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            1280: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            },
+        },
+    });
+}
+
+
+// Popular product 6
+if (document.querySelector('.swiper-img-scroll')) {
+    var swiperCollection = new Swiper(".swiper-img-scroll", {
+        scrollbar: {
+            el: ".swiper-scrollbar",
+            hide: true,
+        },
+        loop: false,
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            1024: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+        },
+    });
+}
+
+// Trending 7
+if (document.querySelector('.swiper-list-trending')) {
+    var swiperCollection = new Swiper(".swiper-list-trending", {
+        navigation: {
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
+        },
+        loop: true,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        },
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+            },
+            1280: {
+                slidesPerView: 6,
+                spaceBetween: 30,
+            },
+        },
+    });
+}
+
+
+// Collection 8
+if (document.querySelector('.swiper-collection-eight')) {
+    var swiperCollection = new Swiper(".swiper-collection-eight", {
+        navigation: {
+            prevEl: ".swiper-button-prev",
+            nextEl: ".swiper-button-next",
+        },
+        loop: true,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        },
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            },
+            1280: {
+                slidesPerView: 5,
+                spaceBetween: 30,
+            },
+        },
+    });
+}
+
+
 // list-product
 if (document.querySelector('.swiper-list-product')) {
     var swiperListProduct = new Swiper(".swiper-list-product", {
@@ -374,7 +497,7 @@ const createProductItem = (product) => {
             <div class="product-infor mt-4 lg:mb-7">
                 <div class="product-sold sm:pb-4 pb-2">
                     <div class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
-                        <div class='progress-sold bg-red absolute left-0 top-0 h-full' style="width: ${Math.floor((product.sold / product.quantity) * 100)}">
+                        <div class='progress-sold bg-red absolute left-0 top-0 h-full' style="width: ${Math.floor((product.sold / product.quantity) * 100)}%">
                         </div>
                     </div>
                     <div class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
@@ -575,6 +698,7 @@ addEventToProductItem()
 const listFourProduct = document.querySelector('.list-product.four-product');
 const listSixProduct = document.querySelector('.list-product.six-product .swiper .swiper-wrapper');
 const listEightProduct = document.querySelector('.list-product.eight-product');
+const listThreeProduct = document.querySelectorAll('.list-product.three-product');
 
 // Fetch products from JSON file (assuming products.json)
 fetch('/assets/data/Product.json')
@@ -583,31 +707,39 @@ fetch('/assets/data/Product.json')
         // Display the first 4 products
         if (listFourProduct) {
             const parent = listFourProduct.parentElement
-            const menuItemActive = parent.querySelector('.menu-tab .active').getAttribute('data-item');
-            const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
+            if (parent.querySelector('.menu-tab .active')) {
+                const menuItemActive = parent.querySelector('.menu-tab .active').getAttribute('data-item');
+                const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
 
-            products.filter(product => product.type === menuItemActive).slice(0, 4).forEach(product => {
-                const productElement = createProductItem(product);
-                listFourProduct.appendChild(productElement);
-            })
-
-            menuItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    // remove old product
-                    const productItems = listFourProduct.querySelectorAll('.product-item')
-                    productItems.forEach(prdItem => {
-                        prdItem.remove()
-                    })
-
-                    products.filter(product => product.type === item.getAttribute('data-item')).slice(0, 4).forEach(product => {
-                        // create product
-                        const productElement = createProductItem(product);
-                        listFourProduct.appendChild(productElement);
-                    })
-
-                    addEventToProductItem()
+                products.filter(product => product.type === menuItemActive).slice(0, 4).forEach(product => {
+                    const productElement = createProductItem(product);
+                    listFourProduct.appendChild(productElement);
                 })
-            })
+
+                menuItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        // remove old product
+                        const productItems = listFourProduct.querySelectorAll('.product-item')
+                        productItems.forEach(prdItem => {
+                            prdItem.remove()
+                        })
+
+                        products.filter(product => product.type === item.getAttribute('data-item')).slice(0, 4).forEach(product => {
+                            // create product
+                            const productElement = createProductItem(product);
+                            listFourProduct.appendChild(productElement);
+                        })
+
+                        addEventToProductItem()
+                    })
+                })
+            }
+            else {
+                products.slice(0, 4).forEach(product => {
+                    const productElement = createProductItem(product);
+                    listFourProduct.appendChild(productElement);
+                })
+            }
         }
 
         // Display the first 6 products
@@ -628,6 +760,39 @@ fetch('/assets/data/Product.json')
             })
         }
 
+        // Display 3 products(Home 11)
+        if (listThreeProduct) {
+            listThreeProduct.forEach(list => {
+                const parent = list.parentElement
+                const gender = list.getAttribute('data-gender') 
+                const menuItemActive = parent.querySelector('.menu-tab .active').getAttribute('data-item');
+                const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
+    
+                products.filter(product => product.gender === gender && product.type === menuItemActive).slice(0, 3).forEach(product => {
+                    const productElement = createProductItem(product);
+                    list.appendChild(productElement);
+                })
+    
+                menuItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        // remove old product
+                        const productItems = list.querySelectorAll('.product-item')
+                        productItems.forEach(prdItem => {
+                            prdItem.remove()
+                        })
+    
+                        products.filter(product => product.gender === gender && product.type === item.getAttribute('data-item')).slice(0, 3).forEach(product => {
+                            // create product
+                            const productElement = createProductItem(product);
+                            list.appendChild(productElement);
+                        })
+    
+                        addEventToProductItem()
+                    })
+                })
+            })
+        }
+
         addEventToProductItem()
     })
     .catch(error => console.error('Error loading products:', error));
@@ -635,30 +800,33 @@ fetch('/assets/data/Product.json')
 
 
 // list-testimonial
-var swiperListTestimonial = new Swiper(".swiper-list-testimonial", {
-    pagination: { clickable: true, el: ".swiper-pagination" },
-    loop: true,
-    autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-    },
-    slidesPerView: 1,
-    spaceBetween: 0,
-    breakpoints: {
-        640: {
-            slidesPerView: 2,
-            spaceBetween: 16,
+if (document.querySelector('.swiper-list-testimonial')) {
+    var swiperListTestimonial = new Swiper(".swiper-list-testimonial", {
+        pagination: { clickable: true, el: ".swiper-pagination" },
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
         },
-        768: {
-            slidesPerView: 2,
-            spaceBetween: 16,
+        touchEventsTarget: 'wrapper',
+        slidesPerView: 1,
+        spaceBetween: 0,
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+            },
+            1280: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
         },
-        1280: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-        },
-    },
-});
+    });
+}
 
 
 // list-testimonial 4
