@@ -51,7 +51,6 @@ mobileNavItems.forEach(item => {
 })
 
 const backMenuBtns = document.querySelectorAll('#menu-mobile .list-nav>ul>li .back-btn')
-// console.log(backMenuBtn);
 
 backMenuBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -387,6 +386,21 @@ if (document.querySelector('.swiper-list-product')) {
 }
 
 
+// list-feature-product Underwear
+var swiper = new Swiper(".mySwiper", {
+    spaceBetween: 0,
+    slidesPerView: 1,
+    // freeMode: true,
+    watchSlidesProgress: true,
+});
+var swiper2 = new Swiper(".mySwiper2", {
+    spaceBetween: 0,
+    thumbs: {
+        swiper: swiper,
+    },
+});
+
+
 // Modal Compare
 const modalCompareMain = document.querySelector('.modal-compare-block .modal-compare-main')
 const closeCompareIcon = document.querySelector('.modal-compare-main .close-btn')
@@ -699,6 +713,7 @@ const listFourProduct = document.querySelector('.list-product.four-product');
 const listSixProduct = document.querySelector('.list-product.six-product .swiper .swiper-wrapper');
 const listEightProduct = document.querySelector('.list-product.eight-product');
 const listThreeProduct = document.querySelectorAll('.list-product.three-product');
+const listFourUnderwear = document.querySelector('.list-product.four-product-underwear');
 
 // Fetch products from JSON file (assuming products.json)
 fetch('/assets/data/Product.json')
@@ -716,6 +731,19 @@ fetch('/assets/data/Product.json')
                     listFourProduct.appendChild(productElement);
                 })
 
+                if (listFourProduct.getAttribute('data-type') === 'underwear') {
+                    if (menuItemActive === 'best sellers') {
+                        products.filter((product) => (product.type === 'underwear' || product.type === 'swimwear'))
+                            .sort((a, b) => b.sold - a.sold)
+                            .slice(0, 4)
+                            .forEach(product => {
+                                const productElement = createProductItem(product);
+                                listFourProduct.appendChild(productElement);
+                            })
+                    }
+                } else {
+                }
+
                 menuItems.forEach(item => {
                     item.addEventListener('click', () => {
                         // remove old product
@@ -724,11 +752,42 @@ fetch('/assets/data/Product.json')
                             prdItem.remove()
                         })
 
-                        products.filter(product => product.type === item.getAttribute('data-item')).slice(0, 4).forEach(product => {
-                            // create product
-                            const productElement = createProductItem(product);
-                            listFourProduct.appendChild(productElement);
-                        })
+                        if (listFourProduct.getAttribute('data-type') === 'underwear') {
+                            if (item.getAttribute('data-item') === 'best sellers') {
+                                products.filter((product) => (product.type === 'underwear' || product.type === 'swimwear'))
+                                    .sort((a, b) => b.sold - a.sold)
+                                    .slice(0, 4)
+                                    .forEach(product => {
+                                        const productElement = createProductItem(product);
+                                        listFourProduct.appendChild(productElement);
+                                    })
+                            }
+
+                            if (item.getAttribute('data-item') === 'on sale') {
+                                products.filter((product) => product.sale && (product.type === 'underwear' || product.type === 'swimwear'))
+                                    .slice(0, 4)
+                                    .forEach(product => {
+                                        const productElement = createProductItem(product);
+                                        listFourProduct.appendChild(productElement);
+                                    })
+                            }
+
+                            if (item.getAttribute('data-item') === 'new arrivals') {
+                                products.filter((product) => product.new && (product.type === 'underwear' || product.type === 'swimwear'))
+                                    .slice(0, 4)
+                                    .forEach(product => {
+                                        const productElement = createProductItem(product);
+                                        listFourProduct.appendChild(productElement);
+                                    })
+                            }
+                        }
+                        else {
+                            products.filter(product => product.type === item.getAttribute('data-item')).slice(0, 4).forEach(product => {
+                                // create product
+                                const productElement = createProductItem(product);
+                                listFourProduct.appendChild(productElement);
+                            })
+                        }
 
                         addEventToProductItem()
                     })
@@ -744,35 +803,151 @@ fetch('/assets/data/Product.json')
 
         // Display the first 6 products
         if (listSixProduct) {
-            products.slice(5, 11).forEach(product => {
-                const swiperSlide = document.createElement('div')
-                swiperSlide.classList.add('swiper-slide')
-                swiperSlide.appendChild(createProductItem(product));
-                listSixProduct.appendChild(swiperSlide);
-            })
+            const parent = listSixProduct.parentElement.parentElement.parentElement
+            if (parent.querySelector('.menu-tab .active')) {
+                const menuItemActive = parent.querySelector('.menu-tab .active').getAttribute('data-item');
+                const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
+
+                if (menuItemActive === 'best sellers') {
+                    products.filter((product) => product.category === 'fashion')
+                        .sort((a, b) => b.sold - a.sold)
+                        .slice(0, 6)
+                        .forEach(product => {
+                            const swiperSlide = document.createElement('div')
+                            swiperSlide.classList.add('swiper-slide')
+                            swiperSlide.appendChild(createProductItem(product));
+                            listSixProduct.appendChild(swiperSlide);
+                        })
+                }
+                menuItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        // remove old product
+                        const productItems = listSixProduct.querySelectorAll('.swiper-slide')
+                        productItems.forEach(prdItem => {
+                            prdItem.remove()
+                        })
+
+                        if (item.getAttribute('data-item') === 'best sellers') {
+                            products.filter((product) => product.category === 'fashion')
+                                .sort((a, b) => b.sold - a.sold)
+                                .slice(0, 6)
+                                .forEach(product => {
+                                    const swiperSlide = document.createElement('div')
+                                    swiperSlide.classList.add('swiper-slide')
+                                    swiperSlide.appendChild(createProductItem(product));
+                                    listSixProduct.appendChild(swiperSlide);
+                                })
+                        }
+                        if (item.getAttribute('data-item') === 'on sale') {
+                            products.filter((product) => product.sale && product.category === 'fashion')
+                                .slice(0, 6)
+                                .forEach(product => {
+                                    const swiperSlide = document.createElement('div')
+                                    swiperSlide.classList.add('swiper-slide')
+                                    swiperSlide.appendChild(createProductItem(product));
+                                    listSixProduct.appendChild(swiperSlide);
+                                })
+                        }
+                        if (item.getAttribute('data-item') === 'new arrivals') {
+                            products.filter((product) => product.new && product.category === 'fashion')
+                                .slice(0, 6)
+                                .forEach(product => {
+                                    const swiperSlide = document.createElement('div')
+                                    swiperSlide.classList.add('swiper-slide')
+                                    swiperSlide.appendChild(createProductItem(product));
+                                    listSixProduct.appendChild(swiperSlide);
+                                })
+                        }
+
+                        addEventToProductItem()
+                    })
+                })
+            }
+            else {
+                products.slice(5, 11).forEach(product => {
+                    const swiperSlide = document.createElement('div')
+                    swiperSlide.classList.add('swiper-slide')
+                    swiperSlide.appendChild(createProductItem(product));
+                    listSixProduct.appendChild(swiperSlide);
+                })
+            }
         }
 
         // Display the first 8 products
         if (listEightProduct) {
-            products.slice(11, 19).forEach(product => {
-                const productElement = createProductItem(product);
-                listEightProduct.appendChild(productElement);
-            })
+            const parent = listEightProduct.parentElement
+            if (parent.querySelector('.menu-tab .active')) {
+                const menuItemActive = parent.querySelector('.menu-tab .active').getAttribute('data-item');
+                const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
+
+                if (menuItemActive === 'best sellers') {
+                    products.filter((product) => product.category === 'fashion')
+                        .sort((a, b) => b.sold - a.sold)
+                        .slice(0, 8)
+                        .forEach(product => {
+                            const productElement = createProductItem(product);
+                            listEightProduct.appendChild(productElement);
+                        })
+                }
+                menuItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        // remove old product
+                        const productItems = listEightProduct.querySelectorAll('.product-item')
+                        productItems.forEach(prdItem => {
+                            prdItem.remove()
+                        })
+
+                        if (item.getAttribute('data-item') === 'best sellers') {
+                            products.filter((product) => product.category === 'fashion')
+                                .sort((a, b) => b.sold - a.sold)
+                                .slice(0, 8)
+                                .forEach(product => {
+                                    const productElement = createProductItem(product);
+                                    listEightProduct.appendChild(productElement);
+                                })
+                        }
+                        if (item.getAttribute('data-item') === 'on sale') {
+                            products.filter((product) => product.sale && product.category === 'fashion')
+                                .slice(0, 8)
+                                .forEach(product => {
+                                    const productElement = createProductItem(product);
+                                    listEightProduct.appendChild(productElement);
+                                })
+                        }
+                        if (item.getAttribute('data-item') === 'new arrivals') {
+                            products.filter((product) => product.new && product.category === 'fashion')
+                                .slice(0, 8)
+                                .forEach(product => {
+                                    const productElement = createProductItem(product);
+                                    listEightProduct.appendChild(productElement);
+                                })
+                        }
+
+                        addEventToProductItem()
+                    })
+                })
+            }
+            else {
+                products.slice(11, 19).forEach(product => {
+                    const productElement = createProductItem(product);
+                    listEightProduct.appendChild(productElement);
+                })
+            }
         }
 
         // Display 3 products(Home 11)
         if (listThreeProduct) {
             listThreeProduct.forEach(list => {
                 const parent = list.parentElement
-                const gender = list.getAttribute('data-gender') 
+                const gender = list.getAttribute('data-gender')
                 const menuItemActive = parent.querySelector('.menu-tab .active').getAttribute('data-item');
                 const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
-    
+
                 products.filter(product => product.gender === gender && product.type === menuItemActive).slice(0, 3).forEach(product => {
                     const productElement = createProductItem(product);
                     list.appendChild(productElement);
                 })
-    
+
                 menuItems.forEach(item => {
                     item.addEventListener('click', () => {
                         // remove old product
@@ -780,13 +955,13 @@ fetch('/assets/data/Product.json')
                         productItems.forEach(prdItem => {
                             prdItem.remove()
                         })
-    
+
                         products.filter(product => product.gender === gender && product.type === item.getAttribute('data-item')).slice(0, 3).forEach(product => {
                             // create product
                             const productElement = createProductItem(product);
                             list.appendChild(productElement);
                         })
-    
+
                         addEventToProductItem()
                     })
                 })
@@ -846,7 +1021,6 @@ var swiperListTestimonialFour = new Swiper(".swiper-testimonial-four", {
             let activeItem = document.querySelector('.list-testimonial .swiper .swiper-slide-active')
             if (activeItem) {
                 const dataItem = activeItem.querySelector('.testimonial-item').getAttribute('data-item')
-                console.log(dataItem);
 
                 const listAvatar = document.querySelector('.list-avatar')
                 const avatars = document.querySelectorAll('.list-avatar .bg-img')
