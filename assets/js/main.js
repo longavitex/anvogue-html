@@ -716,7 +716,7 @@ const listThreeProduct = document.querySelectorAll('.list-product.three-product'
 const listFourUnderwear = document.querySelector('.list-product.four-product-underwear');
 
 // Fetch products from JSON file (assuming products.json)
-fetch('/assets/data/Product.json')
+fetch('./assets/data/Product.json')
     .then(response => response.json())
     .then(products => {
         // Display the first 4 products
