@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anvogue - Home Fashion 9</title>
+    <title>Anvogue - Home Pet Store</title>
     <link rel="shortcut icon" href="./assets/images/fav.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/swiper-bundle.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class='top-nav style-eight bg-black md:h-[44px] h-[30px]'>
+    <div class='top-nav style-one bg-black md:h-[44px] h-[30px]'>
         <div class="container mx-auto h-full">
             <div class="top-nav-main flex justify-between max-md:justify-center h-full">
                 <div class="left-content flex items-center gap-5 max-md:hidden">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="text-center text-button-uppercase text-white flex items-center">
-                    New customers save 10% with code GET10
+                    New customers save 10% with the code GET10
                 </div>
                 <div class="right-content flex items-center gap-5 max-md:hidden">
                     <a href='https://www.facebook.com/' target='_blank'>
@@ -59,8 +59,8 @@
         </div>
     </div>
 
-    <div id="header" class='relative w-full style-nine'>
-        <div class='header-menu style-eight relative bg-white w-full md:h-[74px] h-[56px]'>
+    <div id="header" class='relative w-full'>
+        <div class='header-menu style-eight relative bg-surface w-full md:h-[90px] h-[64px]'>
             <div class="container mx-auto h-full">
                 <div class="header-main flex items-center justify-between h-full">
                     <div class="menu-mobile-icon lg:hidden flex items-center">
@@ -69,27 +69,21 @@
                     <a href='/' class='flex items-center'>
                         <div class="heading4">Anvogue</div>
                     </a>
-                    <div class="form-search w-2/3 pl-8 flex items-center h-[44px] max-lg:hidden">
-                        <div class="category-block relative h-full">
-                            <div
-                                class="category-btn bg-black relative flex items-center gap-6 py-2 px-4 h-full rounded-l w-fit cursor-pointer">
-                                <div class="text-button text-white whitespace-nowrap">All Categories</div>
-                                <i class="ph ph-caret-down text-white"></i>
-                            </div>
-                        </div>
+                    <div class="form-search w-[54%] pl-8 flex items-center h-[48px] max-lg:hidden">
                         <div class='w-full flex items-center h-full'>
-                            <input type="text" class="search-input h-full px-4 w-full border border-line"
+                            <input type="text" class="search-input h-full px-4 w-full border border-line rounded-l-2xl"
                                 placeholder="What are you looking for today?" />
                             <button
-                                class="search-button button-main bg-black h-full flex items-center px-7 rounded-none rounded-r">
-                                Search
+                                class="search-button button-main bg-black h-full flex items-center px-3 rounded-l-none rounded-r-2xl">
+                                <i class="ph-bold ph-magnifying-glass text-white text-2xl duration-300"></i>
                             </button>
                         </div>
                     </div>
                     <div class="right flex gap-12">
                         <div class="list-action flex items-center gap-4">
-                            <div class="user-icon flex items-center justify-center cursor-pointer">
+                            <div class="user-icon flex flex-col items-center justify-center cursor-pointer">
                                 <i class="ph-bold ph-user text-2xl"></i>
+                                <div class="caption1">Account</div>
                                 <div class='login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white'>
                                     <a href='login.html' class="button-main w-full text-center">Login</a>
                                     <div class="text-secondary text-center mt-3 pb-4">Don’t have an account?
@@ -100,15 +94,17 @@
                                     <a href='#!' class='body1 hover:underline'>Support</a>
                                 </div>
                             </div>
-                            <div class="max-md:hidden wishlist-icon flex items-center relative cursor-pointer">
+                            <div class="max-md:hidden wishlist-icon flex flex-col items-center relative cursor-pointer">
                                 <i class="ph-bold ph-heart text-2xl"></i>
+                                <div class="caption1">Wishlist</div>
                                 <span
-                                    class="quantity wishlist-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">3</span>
+                                    class="quantity wishlist-quantity absolute right-[6px] -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">3</span>
                             </div>
-                            <div class="max-md:hidden cart-icon flex items-center relative cursor-pointer">
+                            <div class="max-md:hidden cart-icon flex flex-col items-center relative cursor-pointer">
                                 <i class="ph-bold ph-handbag text-2xl"></i>
+                                <div class="caption1">Cart</div>
                                 <span
-                                    class="quantity cart-quantity absolute -right-1.5 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">4</span>
+                                    class="quantity cart-quantity absolute -right-1 -top-1.5 text-xs text-white bg-black w-4 h-4 flex items-center justify-center rounded-full">4</span>
                             </div>
                         </div>
                     </div>
@@ -116,25 +112,27 @@
             </div>
         </div>
 
-        <div class="top-nav-menu relative bg-white border-t border-b border-line h-[44px] max-lg:hidden z-10">
+        <div class="top-nav-menu relative bg-white border-t border-line h-[52px] max-lg:hidden z-10">
             <div class="container h-full">
                 <div class="top-nav-menu-main flex items-center justify-between h-full">
                     <div class="left flex items-center h-full">
                         <div class="menu-department-block relative h-full">
                             <div
-                                class="menu-department-btn bg-black relative flex items-center sm:gap-16 gap-4 px-4 h-full w-fit cursor-pointer">
-                                <div class="text-button-uppercase text-white whitespace-nowrap">Department</div>
-                                <i class="ph ph-caret-down text-xl max-sm:text-base text-white"></i>
+                                class="menu-department-btn bg-black relative flex items-center gap-4 pl-4 pr-16 h-full w-fit cursor-pointer">
+                                <i class="icon-category text-xl max-sm:text-base text-white"></i>
+                                <div class="text-button-uppercase text-white whitespace-nowrap">Shop By</div>
                             </div>
                             <div
-                                class='sub-menu-department absolute top-[44px] left-0 right-0 h-max bg-surface rounded-b-2xl open'>
+                                class='sub-menu-department absolute top-[44px] left-0 right-0 h-max bg-surface rounded-b-2xl'>
                                 <div class="item block">
                                     <a href='/shop-breadcrumb-img.html'
-                                        class='py-1.5 whitespace-nowrap inline-block'>Men’s Clothing</a>
+                                        class='py-1.5 whitespace-nowrap inline-block'>Men’s
+                                        Clothing</a>
                                 </div>
                                 <div class="item block">
                                     <a href='/shop-breadcrumb-img.html'
-                                        class='py-1.5 whitespace-nowrap inline-block'>Women’s Clothing
+                                        class='py-1.5 whitespace-nowrap inline-block'>Women’s
+                                        Clothing
                                     </a>
                                 </div>
                                 <div class="item block">
@@ -143,7 +141,8 @@
                                 </div>
                                 <div class="item block">
                                     <a href='/shop-breadcrumb-img.html'
-                                        class='py-1.5 whitespace-nowrap inline-block'>Bags & Backpacks
+                                        class='py-1.5 whitespace-nowrap inline-block'>Bags &
+                                        Backpacks
                                     </a>
                                 </div>
                                 <div class="item block">
@@ -160,7 +159,8 @@
                                 </div>
                                 <div class="item block">
                                     <a href='/shop-breadcrumb-img.html'
-                                        class='py-1.5 whitespace-nowrap inline-block'>Beauty & Care</a>
+                                        class='py-1.5 whitespace-nowrap inline-block'>Beauty &
+                                        Care</a>
                                 </div>
                                 <div class="item block">
                                     <a href='/shop-breadcrumb-img.html'
@@ -168,7 +168,8 @@
                                 </div>
                                 <div class="item block">
                                     <a href='/shop-breadcrumb-img.html'
-                                        class='py-1.5 whitespace-nowrap inline-block'>Kids & Baby</a>
+                                        class='py-1.5 whitespace-nowrap inline-block'>Kids &
+                                        Baby</a>
                                 </div>
                             </div>
                         </div>
@@ -225,8 +226,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/fashion9.html"
-                                                    class='link text-secondary duration-300 active'>
+                                                <a href="/fashion9.html" class='link text-secondary duration-300'>
                                                     Home Fashion 9
                                                 </a>
                                             </li>
@@ -263,7 +263,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/pet.html" class='link text-secondary duration-300'>
+                                                <a href="/pet.html" class='link text-secondary duration-300 active'>
                                                     Home Pet Store
                                                 </a>
                                             </li>
@@ -461,26 +461,29 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Dresses | Jumpsuits
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     T-shirts | Sweatshirts
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Accessories | Jewelry
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                view-all-btn'>
+                                                                                                        view-all-btn'>
                                                                     View All
                                                                 </a>
                                                             </li>
@@ -490,32 +493,36 @@
                                                         <div class="text-button-uppercase pb-2">For Kid</div>
                                                         <ul>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Kids Bed
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Boy's Toy
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Baby Blanket
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Newborn Clothing
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                view-all-btn'>
+                                                                                                        view-all-btn'>
                                                                     View All
                                                                 </a>
                                                             </li>
@@ -525,32 +532,36 @@
                                                         <div class="text-button-uppercase pb-2">For Home</div>
                                                         <ul>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Furniture | Decor
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Table | Living Room
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Chair | Work Room
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href="/shop-breadcrumb1.html"
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Lighting | Bed Room
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href="/shop-breadcrumb1.html" class='link text-secondary duration-300
-                                                                                                view-all-btn'>
+                                                                                                        view-all-btn'>
                                                                     View All
                                                                 </a>
                                                             </li>
@@ -595,7 +606,7 @@
                                 </li>
                                 <li class='h-full'>
                                     <a href="#!" class='text-button-uppercase duration-300 h-full flex
-                                                                    items-center justify-center'>
+                                                                            items-center justify-center'>
                                         Shop
                                     </a>
                                     <div class="mega-menu absolute top-[44px] left-0 bg-white w-screen">
@@ -608,28 +619,28 @@
                                                             <li>
                                                                 <a href='/shop-breadcrumb-img.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Breadcrumb IMG
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop-breadcrumb1.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Breadcrumb 1
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/breadcrumb2.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Breadcrumb 2
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/collection.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Collection
                                                                 </a>
                                                             </li>
@@ -641,28 +652,28 @@
                                                             <li>
                                                                 <a href='/shop/filter-canvas.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Filter Canvas
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/filter-options.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Filter Options
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/filter-dropdown.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Filter Dropdown
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/sidebar-list.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Sidebar List
                                                                 </a>
                                                             </li>
@@ -674,35 +685,35 @@
                                                             <li>
                                                                 <a href='/shop/default.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Shop Default
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/default-grid.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Shop Default Grid
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/default-list.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Shop Default List
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/fullwidth.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Shop Full Width
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/shop/square.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Shop Square
                                                                 </a>
                                                             </li>
@@ -713,47 +724,47 @@
                                                         <ul>
                                                             <li>
                                                                 <a href='/wishlist.html' class='link text-secondary
-                                                                                                duration-300'>
+                                                                                                        duration-300'>
                                                                     Wish List
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/search-result.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Search Result
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/cart.html' class='link text-secondary
-                                                                                                duration-300'>
+                                                                                                        duration-300'>
                                                                     Shopping Cart
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/login.html' class='link text-secondary
-                                                                                                duration-300'>
+                                                                                                        duration-300'>
                                                                     Login/Register
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/forgot-password.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Forgot Password
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/order-tracking.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Order Tracking
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/my-account.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     My Account
                                                                 </a>
                                                             </li>
@@ -1000,7 +1011,7 @@
                                 </li>
                                 <li class='h-full'>
                                     <a href="#!" class='text-button-uppercase duration-300 h-full flex
-                                                                    items-center justify-center'>
+                                                                            items-center justify-center'>
                                         Product
                                     </a>
                                     <div class="mega-menu absolute top-[44px] left-0 bg-white w-screen">
@@ -1014,49 +1025,49 @@
                                                             <li>
                                                                 <a href='/product-default.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products Defaults
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/sale.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products Sale
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/countdown-timer.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products Countdown Timer
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/grouped.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products Grouped
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/bought-together.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Frequently Bought Together
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/out-of-stock.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products Out Of Stock
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/variable.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products Variable
                                                                 </a>
                                                             </li>
@@ -1069,35 +1080,35 @@
                                                             <li>
                                                                 <a href='/product/external.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products External
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/on-sale.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products On Sale
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/discount.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products With Discount
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/sidebar.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products With Sidebar
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/fixed-price.html'
                                                                     class='link
-                                                                                                text-secondary duration-300'>
+                                                                                                        text-secondary duration-300'>
                                                                     Products Fixed Price
                                                                 </a>
                                                             </li>
@@ -1110,41 +1121,42 @@
                                                             <li>
                                                                 <a href='/product/thumbnail-left.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Products Thumbnails Left
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href='/product/thumbnail-bottom.html' class='link text-secondary duration-300
-                                                                                                cursor-pointer'>
+                                                                <a href='/product/thumbnail-bottom.html'
+                                                                    class='link text-secondary duration-300
+                                                                                                        cursor-pointer'>
                                                                     Products Thumbnails Bottom
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/one-scrolling.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Products Grid 1 Scrolling
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/two-scrolling.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Products Grid 2 Scrolling
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/combined-one.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Products Combined 1
                                                                 </a>
                                                             </li>
                                                             <li>
                                                                 <a href='/product/combined-two.html'
                                                                     class='link
-                                                                                                text-secondary duration-300 cursor-pointer'>
+                                                                                                        text-secondary duration-300 cursor-pointer'>
                                                                     Products Combined 2
                                                                 </a>
                                                             </li>
@@ -1391,7 +1403,7 @@
                                 </li>
                                 <li class='h-full relative'>
                                     <a href="#!" class='text-button-uppercase duration-300 h-full flex
-                                                                    items-center justify-center'>
+                                                                            items-center justify-center'>
                                         Blog
                                     </a>
                                     <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
@@ -1426,7 +1438,7 @@
                                 </li>
                                 <li class='h-full relative'>
                                     <a href="#!" class='text-button-uppercase duration-300 h-full flex
-                                                                    items-center justify-center'>
+                                                                            items-center justify-center'>
                                         Pages
                                     </a>
                                     <div class="sub-menu py-3 px-5 -left-10 absolute bg-white rounded-b-xl">
@@ -1443,13 +1455,13 @@
                                             </li>
                                             <li>
                                                 <a href="/pages/store-list.html" class='link text-secondary
-                                                                                duration-300'>
+                                                                                        duration-300'>
                                                     Store List
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/pages/page-not-found.html" class='link text-secondary
-                                                                                duration-300'>
+                                                                                        duration-300'>
                                                     404
                                                 </a>
                                             </li>
@@ -1460,13 +1472,13 @@
                                             </li>
                                             <li>
                                                 <a href="/pages/coming-soon.html" class='link text-secondary
-                                                                                duration-300'>
+                                                                                        duration-300'>
                                                     Coming Soon
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="/pages/customer-feedbacks.html" class='link text-secondary
-                                                                                duration-300'>
+                                                                                        duration-300'>
                                                     Customer Feedbacks
                                                 </a>
                                             </li>
@@ -1476,14 +1488,14 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="right flex items-center gap-1">
-                        <div class="caption1">Hotline:</div>
-                        <div class="text-button-uppercase">+01 1234 8888</div>
+                    <div class="right flex items-center gap-1 max-[1240px]:hidden">
+                        <div class="text-button">Limited Time Offer: <span class='text-red'>Free shipping</span> on all
+                            orders over
+                            $50</div>
                     </div>
                 </div>
             </div>
         </div>
-
 
         <!-- Menu Mobile -->
         <div id="menu-mobile" class=''>
@@ -1531,56 +1543,56 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="/fashion3.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                    <a href="/fashion3.html"
+                                                        class='nav-item-mobile link text-secondary duration-300'>
                                                         Home Fashion 3
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="/fashion4.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                    <a href="/fashion4.html"
+                                                        class='nav-item-mobile link text-secondary'>
                                                         Home Fashion 4
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/fashion5.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Fashion 5
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/fashion6.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Fashion 6
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/fashion7.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Fashion 7
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/fashion8.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Fashion 8
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/fashion9.html" class='nav-item-mobile link text-secondary
-                                                            duration-300 active'>
+                                                        duration-300'>
                                                         Home Fashion 9
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/fashion10.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Fashion 10
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/fashion11.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Fashion 11
                                                     </a>
                                                 </li>
@@ -1588,31 +1600,31 @@
                                             <ul>
                                                 <li>
                                                     <a href="/underwear.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Underwear
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/cosmetic1.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300 '>
                                                         Home Cosmetic 1
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/cosmetic2.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Cosmetic 2
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/cosmetic3.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Cosmetic 3
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a href="/pet.html"
-                                                        class='nav-item-mobile link text-secondary duration-300'>
+                                                        class='nav-item-mobile link text-secondary duration-300 active'>
                                                         Home Pet Store
                                                     </a>
                                                 </li>
@@ -1624,7 +1636,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="/furniture.html" class='nav-item-mobile link text-secondary
-                                                            duration-300'>
+                                                        duration-300'>
                                                         Home Furniture
                                                     </a>
                                                 </li>
@@ -1671,7 +1683,7 @@
                                         <div class="list-nav-item w-full pt-2 pb-6">
                                             <div class="nav-link grid grid-cols-2 gap-5 gap-y-6">
                                                 <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-1">For Men</div>
+                                                    <div class="text-button-uppercase pb-1">Sale & Offer</div>
                                                     <ul>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
@@ -1679,35 +1691,6 @@
                                                                 Starting From 50% Off
                                                             </a>
                                                         </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Outerwear | Coats
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Sweaters | Cardigans
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Shirt | Sweatshirts
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 view-all-btn'>
-                                                                View All
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-1">Skincare</div>
-                                                    <ul>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
@@ -1728,8 +1711,37 @@
                                                         </li>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
+                                                                class='link text-secondary duration-300 cursor-pointer view-all-btn'>
+                                                                View All
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="nav-item">
+                                                    <div class="text-button-uppercase pb-1">Makeup</div>
+                                                    <ul>
+                                                        <li>
+                                                            <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Hair Care
+                                                                Hair Treatment
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/shop-breadcrumb1.html"
+                                                                class='link text-secondary duration-300 cursor-pointer'>
+                                                                Nail Polish
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/shop-breadcrumb1.html"
+                                                                class='link text-secondary duration-300 cursor-pointer'>
+                                                                Liquid Lipstick
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/shop-breadcrumb1.html"
+                                                                class='link text-secondary duration-300 cursor-pointer'>
+                                                                Face Highlighter
                                                             </a>
                                                         </li>
                                                         <li>
@@ -1741,30 +1753,30 @@
                                                     </ul>
                                                 </div>
                                                 <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-1">Health</div>
+                                                    <div class="text-button-uppercase pb-1">Skincare</div>
                                                     <ul>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Cented Candle
+                                                                Eye Palettes
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Health Drinks
+                                                                Nail Custom
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Yoga Clothes
+                                                                Lip Oil
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Yoga Equipment
+                                                                Hair Serums
                                                             </a>
                                                         </li>
                                                         <li>
@@ -1776,100 +1788,30 @@
                                                     </ul>
                                                 </div>
                                                 <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-1">For Women</div>
+                                                    <div class="text-button-uppercase pb-1">New product</div>
                                                     <ul>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Starting From 60% Off
+                                                                Faces Skin
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Dresses | Jumpsuits
+                                                                Eyes Makeup
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                T-shirts | Sweatshirts
+                                                                Nail Polish
                                                             </a>
                                                         </li>
                                                         <li>
                                                             <a href="/shop-breadcrumb1.html"
                                                                 class='link text-secondary duration-300 cursor-pointer'>
-                                                                Accessories | Jewelry
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 view-all-btn'>
-                                                                View All
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-1">For Kid</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Kids Bed
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Boy's Toy
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Baby Blanket
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Newborn Clothing
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 view-all-btn'>
-                                                                View All
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-item">
-                                                    <div class="text-button-uppercase pb-1">For Home</div>
-                                                    <ul>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Furniture | Decor
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Table | Living Room
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Chair | Work Room
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="/shop-breadcrumb1.html"
-                                                                class='link text-secondary duration-300 cursor-pointer'>
-                                                                Lighting | Bed Room
+                                                                Liquid Lipstick
                                                             </a>
                                                         </li>
                                                         <li>
@@ -1881,6 +1823,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </li>
@@ -2311,134 +2254,192 @@
         </div>
 
         <!-- Slider -->
-        <div class="slider-block style-nine lg:h-[480px] md:h-[400px] sm:h-[320px] h-[280px] w-full">
-            <div class="container lg:pt-5 flex justify-end h-full w-full">
-                <div class="slider-main lg:pl-5 h-full w-full">
-                    <div class="swiper swiper-slider h-full relative rounded-2xl overflow-hidden">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="slider-item h-full w-full flex items-center bg-surface relative">
-                                    <div class="text-content md:pl-16 pl-5 basis-1/2">
+        <div
+            class="slider-block style-one 2xl:h-[780px] xl:h-[740px] lg:h-[680px] md:h-[580px] sm:h-[500px] h-[420px] w-full md:pb-20 pb-10">
+            <div class="slider-main h-full w-full">
+                <div class="swiper swiper-slider h-full relative">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slider-item h-full w-full relative overflow-hidden">
+                                <div class="container w-full h-full flex items-center">
+                                    <div class="text-content sm:w-1/2 w-2/3">
                                         <div class="text-sub-display">Sale! Up To 50% Off!</div>
-                                        <div class="heading1 md:mt-5 mt-2">Step into a World of Style</div>
-                                        <a href='/shop-breadcrumb-img.html' class="button-main md:mt-8 mt-3">Shop Now
-                                        </a>
+                                        <div class="text-display md:mt-5 mt-2">Your pet's Perfect
+                                            Store</div>
+                                        <a href='/shop-breadcrumb-img.html' class="button-main md:mt-8 mt-3">
+                                            Shop Now</a>
                                     </div>
-                                    <div
-                                        class="sub-img absolute xl:w-[33%] sm:w-[38%] w-[60%] xl:right-[100px] sm:right-[20px] -right-5 bottom-0">
-                                        <img src='./assets/images/slider/bg9-1.png' alt='bg9-1' class='w-full' />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="slider-item h-full w-full flex items-center bg-[#F2E9E9] relative">
-                                    <div class="text-content md:pl-16 pl-5 basis-1/2">
-                                        <div class="text-sub-display">Sale! Up To 50% Off!</div>
-                                        <div class="heading1 md:mt-5 mt-2">Unveiling Fashion's Finest
-                                        </div>
-                                        <a href='/shop-breadcrumb-img.html' class="button-main md:mt-8 mt-3">Shop Now
-                                        </a>
-                                    </div>
-                                    <div
-                                        class="sub-img absolute xl:w-[35%] sm:w-[40%] w-[62%] xl:right-[80px] sm:right-[20px] -right-5 bottom-0">
-                                        <img src='./assets/images/slider/bg9-2.png' alt='bg9-2' class='w-full' />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="slider-item h-full w-full flex items-center bg-[#E4EADD] relative">
-                                    <div class="text-content md:pl-16 pl-5 basis-1/2">
-                                        <div class="text-sub-display">Sale! Up To 50% Off!</div>
-                                        <div class="heading1 md:mt-5 mt-2">Unleash Your Unique Style</div>
-                                        <a href='/shop-breadcrumb-img.html' class="button-main md:mt-8 mt-3">Shop Now
-                                        </a>
-                                    </div>
-                                    <div
-                                        class="sub-img absolute xl:w-[29%] sm:w-[33%] w-[46%] xl:right-[80px] sm:right-[20px] -right-3 bottom-0">
-                                        <img src='./assets/images/slider/bg9-3.png' alt='bg9-3' class='w-full' />
+                                    <div class="sub-img absolute left-0 top-0 w-full h-full z-[-1]">
+                                        <img src='./assets/images/slider/bg-pet1-1.png' alt='bg-pet1-1'
+                                            class='w-full h-full object-cover' />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="swiper-pagination"></div> -->
+                        <div class="swiper-slide">
+                            <div class="slider-item h-full w-full relative overflow-hidden">
+                                <div class="container w-full h-full flex items-center">
+                                    <div class="text-content sm:w-1/2 w-2/3">
+                                        <div class="text-sub-display">Sale! Up To 50% Off!</div>
+                                        <div class="text-display md:mt-5 mt-2">Unleash a Happy, Healthy Pet</div>
+                                        <a href='/shop-breadcrumb-img.html' class="button-main md:mt-8 mt-3">
+                                            Shop Now</a>
+                                    </div>
+                                    <div class="sub-img absolute left-0 top-0 w-full h-full z-[-1]">
+                                        <img src='./assets/images/slider/bg-pet1-2.png' alt='bg-pet1-2'
+                                            class='w-full h-full object-cover' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slider-item h-full w-full relative overflow-hidden">
+                                <div class="container w-full h-full flex items-center">
+                                    <div class="text-content sm:w-1/2 w-2/3">
+                                        <div class="text-sub-display">Sale! Up To 50% Off!</div>
+                                        <div class="text-display md:mt-5 mt-2">Feed Your Pet's
+                                            Appetite</div>
+                                        <a href='/shop-breadcrumb-img.html' class="button-main md:mt-8 mt-3">
+                                            Shop Now</a>
+                                    </div>
+                                    <div class="sub-img absolute left-0 top-0 w-full h-full z-[-1]">
+                                        <img src='./assets/images/slider/bg-pet1-3.png' alt='bg-pet1-3'
+                                            class='w-full h-full object-cover' />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- <div class="swiper-pagination"></div> -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="collection-block md:pt-20 pt-10">
+    <div class="banner-block">
         <div class="container">
-            <div class="heading3 text-center">Trending Right Now</div>
+            <div class="list-banner grid lg:grid-cols-3 sm:grid-cols-2 gap-[20px]">
+                <a href='/shop-breadcrumb1.html'
+                    class="banner-item relative block rounded-[20px] overflow-hidden duration-500">
+                    <div class="banner-img w-full h-full">
+                        <img src='./assets/images/banner/24.png' alt='bg-img'
+                            class='w-full h-full object-cover duration-500' />
+                    </div>
+                    <div class="text-content xl:py-0 md:py-4 absolute top-1/2 left-8 -translate-y-1/2 text-white">
+                        <div class="button-upper-case">15 Products</div>
+                        <div class="heading3 mt-3">Dog Food</div>
+                        <div class="heading6 font-normal mt-1">Relax Bamboo Chair</div>
+                        <div class="button-main mt-5">Shop Now</div>
+                    </div>
+                </a>
+                <a href='/shop-breadcrumb1.html'
+                    class="banner-item relative block rounded-[20px] overflow-hidden duration-500">
+                    <div class="banner-img w-full h-full">
+                        <img src='./assets/images/banner/25.png' alt='bg-img'
+                            class='w-full h-full object-cover duration-500' />
+                    </div>
+                    <div class="text-content xl:py-0 md:py-4 absolute top-1/2 left-8 -translate-y-1/2 text-white">
+                        <div class="button-upper-case">15 Products</div>
+                        <div class="heading3 mt-3">Cat Food</div>
+                        <div class="heading6 font-normal mt-1">Relax Bamboo Chair</div>
+                        <div class="button-main mt-5">Shop Now</div>
+                    </div>
+                </a>
+                <a href='/shop-breadcrumb1.html'
+                    class="banner-item relative block rounded-[20px] overflow-hidden duration-500 max-lg:hidden max-sm:block">
+                    <div class="banner-img w-full h-full">
+                        <img src='./assets/images/banner/26.png' alt='bg-img'
+                            class='w-full h-full object-cover duration-500' />
+                    </div>
+                    <div class="text-content xl:py-0 md:py-4 absolute top-1/2 left-8 -translate-y-1/2 text-white">
+                        <div class="button-upper-case">15 Products</div>
+                        <div class="heading3 mt-3">Sale Off 20%</div>
+                        <div class="heading6 font-normal mt-1">Relax Bamboo Chair</div>
+                        <div class="button-main mt-5">Shop Now</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="trending-block style-six md:pt-20 pt-10">
+        <div class="container">
+            <div class="heading3 text-center">Shop By Categories
+            </div>
             <div
-                class="list-collection relative section-swiper-navigation style-outline style-center style-small-border md:mt-10 mt-6">
+                class="list-trending relative section-swiper-navigation style-small-border style-outline md:mt-10 mt-6">
                 <div class="swiper-button-prev"></div>
-                <div class="swiper swiper-collection-eight h-full relative">
+                <div class="swiper swiper-list-trending h-full relative">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <a href="/shop-breadcrumb1.html"
-                                class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
-                                <div class="bg-img">
-                                    <img src='./assets/images/avatar/1.png' alt='1' />
+                            <a href="/shop-breadcrumb1.html" class="trending-item block relative cursor-pointer">
+                                <div class="bg-img rounded-[32px] overflow-hidden">
+                                    <img src='./assets/images/collection/food.png' alt='outerwear' class='w-full' />
                                 </div>
-                                <div
-                                    class="collection-name heading6 text-center sm:bottom-5 bottom-4 lg:w-[140px] md:w-[120px] w-[100px] md:py-2 py-1.5 bg-white rounded-xl duration-500">
-                                    t-shirt</div>
+                                <div class="trending-name text-center mt-5 duration-500">
+                                    <span class='heading6'>Food</span>
+                                </div>
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="/shop-breadcrumb1.html"
-                                class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
-                                <div class="bg-img">
-                                    <img src='./assets/images/avatar/2.png' alt='2' />
+                            <a href="/shop-breadcrumb1.html" class="trending-item block relative cursor-pointer">
+                                <div class="bg-img rounded-[32px] overflow-hidden">
+                                    <img src='./assets/images/collection/outfit.png' alt='swimwear' class='w-full' />
                                 </div>
-                                <div
-                                    class="collection-name heading6 text-center sm:bottom-5 bottom-4 lg:w-[140px] md:w-[120px] w-[100px] md:py-2 py-1.5 bg-white rounded-xl duration-500">
-                                    sweater</div>
+                                <div class="trending-name text-center mt-5 duration-500">
+                                    <span class='heading6'>Outfits</span>
+                                </div>
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="/shop-breadcrumb1.html"
-                                class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
-                                <div class="bg-img">
-                                    <img src='./assets/images/avatar/3.png' alt='3' />
+                            <a href="/shop-breadcrumb1.html" class="trending-item block relative cursor-pointer">
+                                <div class="bg-img rounded-[32px] overflow-hidden">
+                                    <img src='./assets/images/collection/bed.png' alt='clothes' class='w-full' />
                                 </div>
-                                <div
-                                    class="collection-name heading6 text-center sm:bottom-5 bottom-4 lg:w-[140px] md:w-[120px] w-[100px] md:py-2 py-1.5 bg-white rounded-xl duration-500">
-                                    outerwear</div>
+                                <div class="trending-name text-center mt-5 duration-500">
+                                    <span class='heading6'>Beds</span>
+                                </div>
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="/shop-breadcrumb1.html"
-                                class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
-                                <div class="bg-img">
-                                    <img src='./assets/images/avatar/4.png' alt='4' />
+                            <a href="/shop-breadcrumb1.html" class="trending-item block relative cursor-pointer">
+                                <div class="bg-img rounded-[32px] overflow-hidden">
+                                    <img src='./assets/images/collection/toys.png' alt='sets' class='w-full' />
                                 </div>
-                                <div
-                                    class="collection-name heading6 text-center sm:bottom-5 bottom-4 lg:w-[140px] md:w-[120px] w-[100px] md:py-2 py-1.5 bg-white rounded-xl duration-500">
-                                    dress</div>
+                                <div class="trending-name text-center mt-5 duration-500">
+                                    <span class='heading6'>Toys</span>
+                                </div>
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="/shop-breadcrumb1.html"
-                                class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
-                                <div class="bg-img">
-                                    <img src='./assets/images/avatar/5.png' alt='5' />
+                            <a href="/shop-breadcrumb1.html" class="trending-item block relative cursor-pointer">
+                                <div class="bg-img rounded-[32px] overflow-hidden">
+                                    <img src='./assets/images/collection/supplements.png' alt='accessories'
+                                        class='w-full' />
                                 </div>
-                                <div
-                                    class="collection-name heading6 text-center sm:bottom-5 bottom-4 lg:w-[140px] md:w-[120px] w-[100px] md:py-2 py-1.5 bg-white rounded-xl duration-500">
-                                    underwear</div>
+                                <div class="trending-name text-center mt-5 duration-500">
+                                    <span class='heading6'>Supplements</span>
+                                </div>
                             </a>
                         </div>
                         <div class="swiper-slide">
-                            <a href="/shop-breadcrumb1.html"
-                                class="collection-item block relative rounded-2xl overflow-hidden cursor-pointer">
-                                <div class="bg-img">
-                                    <img src='./assets/images/avatar/6.png' alt='6' />
+                            <a href="/shop-breadcrumb1.html" class="trending-item block relative cursor-pointer">
+                                <div class="bg-img rounded-[32px] overflow-hidden">
+                                    <img src='./assets/images/collection/pharmacy.png' alt='lingerie' class='w-full' />
                                 </div>
-                                <div
-                                    class="collection-name heading6 text-center sm:bottom-5 bottom-4 lg:w-[140px] md:w-[120px] w-[100px] md:py-2 py-1.5 bg-white rounded-xl duration-500">
-                                    swimwear</div>
+                                <div class="trending-name text-center mt-5 duration-500">
+                                    <span class='heading6'>Pharmacy</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="/shop-breadcrumb1.html" class="trending-item block relative cursor-pointer">
+                                <div class="bg-img rounded-[32px] overflow-hidden">
+                                    <img src='./assets/images/collection/ring.png' alt='lingerie' class='w-full' />
+                                </div>
+                                <div class="trending-name text-center mt-5 duration-500">
+                                    <span class='heading6'>Ring</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -2448,81 +2449,16 @@
         </div>
     </div>
 
-    <div class="deal-block md:pt-20 pt-10">
-        <div class="container">
-            <div class="heading flex items-center justify-between gap-5 flex-wrap">
-                <div class="left flex items-center gap-6 gap-y-3 flex-wrap">
-                    <div class="heading3">Deals of the day</div>
-                    <div class="deal-time bg-red py-1 px-5 rounded-lg">
-                        <div class="heading6 text-white">
-                            <span class='day'>24</span>
-                            <span>D : </span>
-                            <span class='hour'>14</span>
-                            <span>H : </span>
-                            <span class='minute'>36</span>
-                            <span>M : </span>
-                            <span class='second'>51</span>
-                            <span>S</span>
-                        </div>
-                    </div>
-                </div>
-                <a href='/shop-breadcrumb-img.html' class='text-button pb-1 border-b-2 border-black'>View All Deals
-                </a>
-            </div>
-            <div
-                class="list-product four-product show-product-sold grid lg:grid-cols-4 grid-cols-2 sm:gap-[30px] gap-[20px] md:mt-10 mt-6">
-
-            </div>
+    <div class="tab-features-block style-underwear filter-product-block relative md:pt-20 pt-10 md:mt-20 mt-10">
+        <div class="bg-img">
+            <img src='./assets/images/banner/bg-feature-pet1.png' alt='bg'
+                class='w-full max-lg:h-[400px] max-sm:h-[200px] object-cover absolute top-0 left-0 right-0 z-[-1]' />
         </div>
-    </div>
-
-    <div class="banner-block md:pt-20 pt-10">
         <div class="container">
-            <div class="list-banner grid lg:grid-cols-3 sm:grid-cols-2 lg:gap-[30px] gap-[20px]">
-                <a href='/shop-breadcrumb-img.html' class="banner-item relative block duration-500">
-                    <div class="banner-img w-full rounded-2xl overflow-hidden">
-                        <img src='./assets/images/banner/10.png' class='w-full duration-500' />
-                    </div>
-                    <div class="banner-content absolute left-7 top-1/2 -translate-y-1/2">
-                        <div class="heading6">Women's Fashion <br />Must-Haves</div>
-                        <div
-                            class="text-button text-black relative inline-block pb-1 border-b-2 border-black duration-500 mt-2">
-                            Shop Now</div>
-                    </div>
-                </a>
-                <a href='/shop-breadcrumb-img.html' class="banner-item relative block duration-500">
-                    <div class="banner-img w-full rounded-2xl overflow-hidden">
-                        <img src='./assets/images/banner/11.png' class='w-full duration-500' />
-                    </div>
-                    <div class="banner-content absolute left-7 top-1/2 -translate-y-1/2">
-                        <div class="heading6">Latest Men's <br />Fashion Essentials</div>
-                        <div
-                            class="text-button text-black relative inline-block pb-1 border-b-2 border-black duration-500 mt-2">
-                            Shop Now</div>
-                    </div>
-                </a>
-                <a href='/shop-breadcrumb-img.html'
-                    class="banner-item relative block duration-500 max-lg:hidden max-sm:block">
-                    <div class="banner-img w-full rounded-2xl overflow-hidden">
-                        <img src='./assets/images/banner/12.png' class='w-full duration-500' />
-                    </div>
-                    <div class="banner-content absolute left-7 top-1/2 -translate-y-1/2">
-                        <div class="heading6">Summer Sale <br />collection</div>
-                        <div
-                            class="text-button text-black relative inline-block pb-1 border-b-2 border-black duration-500 mt-2">
-                            Shop Now</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="tab-features-block filter-prodduct-block md:pt-20 pt-10">
-        <div class="container">
-            <div class="heading flex flex-col items-center text-center">
-                <div class="menu-tab bg-surface rounded-2xl">
+            <div class="heading flex items-center justify-center w-full">
+                <div class="menu-tab bg-white rounded-2xl">
                     <div class="menu flex items-center gap-2 p-1">
-                        <div class="indicator absolute top-1 bottom-1 bg-white rounded-full shadow-md duration-300">
+                        <div class="indicator absolute top-1 bottom-1 bg-black rounded-full shadow-md duration-300">
                         </div>
                         <div class="tab-item relative text-secondary heading5 py-2 px-5 cursor-pointer duration-500 hover:text-black active"
                             data-item="best sellers">
@@ -2537,14 +2473,120 @@
                 </div>
             </div>
             <div
-                class="list-product eight-product hide-product-sold grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 relative section-swiper-navigation style-outline style-small-border md:mt-10 mt-6">
-                <!-- List eight product -->
+                class="list-product six-product hide-product-sold relative section-swiper-navigation style-outline style-small-border md:mt-10 mt-6">
+                <div class="swiper-button-prev2 sm:left-10 left-6">
+                    <i class="ph-bold ph-caret-left text-xl"></i>
+                </div>
+                <div class="swiper swiper-list-product h-full relative">
+                    <div class="swiper-wrapper" data-type="pet">
+                        <!-- List six product -->
+                    </div>
+                </div>
+                <div class="swiper-button-next2 sm:right-10 right-6">
+                    <i class="ph-bold ph-caret-right text-xl"></i>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class='benefit-block md:mt-20 mt-10 py-10 px-2.5 bg-surface rounded-3xl'>
+    <div class="choose-us-block md:pt-20 pt-14">
+        <div class="container flex max-lg:flex-col max-lg:gap-y-8 items-center justify-between">
+            <div class="bg-img lg:w-7/12 lg:pr-[45px] md:w-1/2 w-5/6">
+                <img src='./assets/images/banner/bg-choose-us-pet.png' alt='bg-img' class='w-full' />
+            </div>
+            <div class="content lg:w-5/12 lg:pl-[45px]">
+                <div class="heading3">Top Reasons to Choose Us for Your Pet Store Needs</div>
+                <div class="heading6 font-normal text-secondary mt-3">Unleash the Best Care for Your Beloved Pets -
+                    Choose Us for Unmatched Expertise and Exceptional Service.</div>
+                <div class="list-feature lg:mt-10 mt-6">
+                    <div class="item flex items-center gap-5">
+                        <div class="icon bg-[#D1D0F9] rounded-full">
+                            <i
+                                class="icon-foot md:text-3xl text-2xl flex items-center justify-center md:w-[68px] md:h-[68px] w-14 h-14"></i>
+                        </div>
+                        <div class="text-content">
+                            <div class="heading6">High Quality Products</div>
+                            <div class="caption1 text-secondary mt-2">We are committed to providing the highest quality
+                                products for your pets.</div>
+                        </div>
+                    </div>
+                    <div class="item flex items-center gap-5 lg:mt-8 mt-4">
+                        <div class="icon bg-[#D1D0F9] rounded-full">
+                            <i
+                                class="icon-food md:text-3xl text-2xl flex items-center justify-center md:w-[68px] md:h-[68px] w-14 h-14"></i>
+                        </div>
+                        <div class="text-content">
+                            <div class="heading6">Expert Staff</div>
+                            <div class="caption1 text-secondary mt-2">Our passionate team ensures the well-being of your
+                                furry friends.</div>
+                        </div>
+                    </div>
+                    <div class="item flex items-center gap-5 lg:mt-8 mt-4">
+                        <div class="icon bg-[#D1D0F9] rounded-full">
+                            <i
+                                class="icon-comb md:text-3xl text-2xl flex items-center justify-center md:w-[68px] md:h-[68px] w-14 h-14"></i>
+                        </div>
+                        <div class="text-content">
+                            <div class="heading6">Personalized Approach</div>
+                            <div class="caption1 text-secondary mt-2">We understand that every pet is unique, and their
+                                needs may vary.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner-block md:mt-20 mt-10 relative max-xl:h-[400px] max-lg:h-[280px] max-md:h-[240px]">
+        <div class="bg-img h-full w-full">
+            <img src='./assets/images/banner/bg-banner-pet.png' alt='bg-img' class='w-full h-full object-cover' />
+        </div>
+        <div class="text-content w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4">
+            <div class="heading1 text-center">Make Your Pet Happy</div>
+            <div class="heading6 font-normal text-center mt-2">We Offer Quality Pet Services</div>
+            <div class="button-block text-center mt-8">
+                <a href='/shop-breadcrumb-img.html' class='button-main'>
+                    Shop Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-features-block filter-product-block md:pt-20 pt-10">
+        <div class="container">
+            <div class="heading flex items-center justify-center gap-6 flex-wrap w-full">
+                <div class="heading3 text-center w-full">Feature Products</div>
+                <div class="menu-tab flex items-center bg-surface rounded-2xl">
+                    <div class="menu flex items-center gap-2 p-1">
+                        <div class="indicator absolute top-1 bottom-1 bg-white rounded-full shadow-md duration-300">
+                        </div>
+                        <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
+                            data-item="pet">
+                            pet</div>
+                        <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black active"
+                            data-item="food">
+                            food</div>
+                        <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
+                            data-item="bed">
+                            bed</div>
+                        <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
+                            data-item="outfit">
+                            outfit</div>
+                        <div class="tab-item relative text-secondary text-button-uppercase py-2 px-5 cursor-pointer duration-300 hover:text-black"
+                            data-item="ring">
+                            ring</div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="list-product four-product hide-product-sold grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-[30px] gap-4 relative section-swiper-navigation style-outline style-small-border md:mt-10 mt-6">
+                <!-- List four product -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container md:mt-20 mt-10">
+        <div class='benefit-block md:pt-20 pt-10 border-t border-line'>
             <div class="list-benefit grid items-start lg:grid-cols-4 grid-cols-2 gap-[30px]">
                 <div class="benefit-item flex flex-col items-center justify-center">
                     <i class="icon-phone-call lg:text-7xl text-5xl"></i>
@@ -2574,69 +2616,96 @@
         </div>
     </div>
 
-    <div class="news-block md:pt-16 pt-10">
-        <div class="container">
-            <div class="heading3 text-center">News insight</div>
-            <div class="list-blog grid lg:grid-cols-3 sm:grid-cols-2 md:gap-[30px] gap-4 md:mt-10 mt-6">
-                <a href="/blog/detail1.html" class="blog-item style-one h-full cursor-pointer">
-                    <div class="blog-main h-full block">
-                        <div class="blog-thumb rounded-[20px] overflow-hidden">
-                            <img src='./assets/images/blog/1.png' alt='blog-img' class='w-full duration-500' />
+    <div class="instagram-block md:pt-20 pt-10">
+        <div class="">
+            <div class="container">
+                <div class="heading">
+                    <div class="heading3 text-center">Anvogue On Instagram</div>
+                    <div class="text-center mt-3">#Anvougetheme</div>
+                </div>
+            </div>
+            <div class="list-instagram overflow-hidden md:mt-10 mt-6">
+                <div class="swiper swiper-instagram-three">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href='https://www.instagram.com/' target='_blank'
+                                class="item relative block overflow-hidden">
+                                <img src='./assets/images/instagram/pet1.png' alt='0'
+                                    class='h-full w-full duration-500 relative' />
+                                <div
+                                    class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
+                                    <div class="icon-instagram text-2xl text-black"></div>
+                                </div>
+                            </a>
                         </div>
-                        <div class="blog-infor mt-7">
-                            <div class="blog-tag bg-green py-1 px-2.5 rounded-full text-button-uppercase inline-block">
-                                Jean, glasses
-                            </div>
-                            <div class="heading6 blog-title mt-3 duration-300">Fashion Trends to Watch Out for in Summer
-                                2024</div>
-                            <div class="flex items-center gap-2 mt-2">
-                                <div class="blog-author caption1 text-secondary">by Chris Evans</div>
-                                <span class='w-[20px] h-[1px] bg-black'></span>
-                                <div class="blog-date caption1 text-secondary">Dec 20, 2024</div>
-                            </div>
+                        <div class="swiper-slide">
+                            <a href='https://www.instagram.com/' target='_blank'
+                                class="item relative block overflow-hidden">
+                                <img src='./assets/images/instagram/pet5.png' alt='1'
+                                    class='h-full w-full duration-500 relative' />
+                                <div
+                                    class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
+                                    <div class="icon-instagram text-2xl text-black"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href='https://www.instagram.com/' target='_blank'
+                                class="item relative block overflow-hidden">
+                                <img src='./assets/images/instagram/pet2.png' alt='3'
+                                    class='h-full w-full duration-500 relative' />
+                                <div
+                                    class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
+                                    <div class="icon-instagram text-2xl text-black"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href='https://www.instagram.com/' target='_blank'
+                                class="item relative block overflow-hidden">
+                                <img src='./assets/images/instagram/pet3.png' alt='4'
+                                    class='h-full w-full duration-500 relative' />
+                                <div
+                                    class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
+                                    <div class="icon-instagram text-2xl text-black"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href='https://www.instagram.com/' target='_blank'
+                                class="item relative block overflow-hidden">
+                                <img src='./assets/images/instagram/pet4.png' alt='5'
+                                    class='h-full w-full duration-500 relative' />
+                                <div
+                                    class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
+                                    <div class="icon-instagram text-2xl text-black"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href='https://www.instagram.com/' target='_blank'
+                                class="item relative block overflow-hidden">
+                                <img src='./assets/images/instagram/pet6.png' alt='10'
+                                    class='h-full w-full duration-500 relative' />
+                                <div
+                                    class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
+                                    <div class="icon-instagram text-2xl text-black"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href='https://www.instagram.com/' target='_blank'
+                                class="item relative block overflow-hidden">
+                                <img src='./assets/images/instagram/0.png' alt='2'
+                                    class='h-full w-full duration-500 relative' />
+                                <div
+                                    class="icon w-12 h-12 bg-white hover:bg-black duration-500 flex items-center justify-center rounded-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[1]">
+                                    <div class="icon-instagram text-2xl text-black"></div>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </a>
-                <a href="/blog/detail1.html" class="blog-item style-one h-full cursor-pointer">
-                    <div class="blog-main h-full block">
-                        <div class="blog-thumb rounded-[20px] overflow-hidden">
-                            <img src='./assets/images/blog/2.png' alt='blog-img' class='w-full duration-500' />
-                        </div>
-                        <div class="blog-infor mt-7">
-                            <div class="blog-tag bg-green py-1 px-2.5 rounded-full text-button-uppercase inline-block">
-                                Jean, shoes
-                            </div>
-                            <div class="heading6 blog-title mt-3 duration-300">How to Build a Sustainable and Stylish
-                                Wardrobe
-                                2024</div>
-                            <div class="flex items-center gap-2 mt-2">
-                                <div class="blog-author caption1 text-secondary">by Alex Balde</div>
-                                <span class='w-[20px] h-[1px] bg-black'></span>
-                                <div class="blog-date caption1 text-secondary">Dec 12, 2024</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="/blog/detail1.html"
-                    class="blog-item style-one h-full cursor-pointer max-lg:hidden max-sm:block">
-                    <div class="blog-main h-full block">
-                        <div class="blog-thumb rounded-[20px] overflow-hidden">
-                            <img src='./assets/images/blog/3.png' alt='blog-img' class='w-full duration-500' />
-                        </div>
-                        <div class="blog-infor mt-7">
-                            <div class="blog-tag bg-green py-1 px-2.5 rounded-full text-button-uppercase inline-block">
-                                Jean, skirt
-                            </div>
-                            <div class="heading6 blog-title mt-3 duration-300">Fashion and Beauty Tips for Busy
-                                Professionals 2024</div>
-                            <div class="flex items-center gap-2 mt-2">
-                                <div class="blog-author caption1 text-secondary">by Leona Pablo</div>
-                                <span class='w-[20px] h-[1px] bg-black'></span>
-                                <div class="blog-date caption1 text-secondary">Dec 10, 2024</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
@@ -2693,6 +2762,7 @@
             </div>
         </div>
     </div>
+
 
     <div id="footer" class='footer'>
         <div class="footer-main bg-surface">
@@ -2770,8 +2840,7 @@
                         </div>
                         <div class="newsletter basis-1/3 pl-7 max-md:basis-full max-md:pl-0">
                             <div class="text-button-uppercase">Newletter</div>
-                            <div class="caption1 mt-3">Sign up for our newsletter and get 10% off your
-                                first
+                            <div class="caption1 mt-3">Sign up for our newsletter and get 10% off your first
                                 purchase
                             </div>
                             <div class="input-block w-full h-[52px] mt-4">
@@ -2808,8 +2877,7 @@
                 <div
                     class="footer-bottom py-3 flex items-center justify-between gap-5 max-lg:justify-center max-lg:flex-col border-t border-line">
                     <div class="left flex items-center gap-8">
-                        <div class="copyright caption1 text-secondary">©2024 Anvogue. All Rights
-                            Reserved.</div>
+                        <div class="copyright caption1 text-secondary">©2024 Anvogue. All Rights Reserved.</div>
                         <div class="select-block flex items-center gap-5 max-md:hidden">
                             <div class="choose-language flex items-center gap-1.5">
                                 <select name="language" id="chooseLanguageFooter" class='caption2 bg-transparent'>
@@ -3669,8 +3737,7 @@
                                 </div>
                             </div>
                             <div class="mt-3">
-                                <label htmlFor='select-code' class="caption1 text-secondary">Postal/Zip
-                                    Code</label>
+                                <label htmlFor='select-code' class="caption1 text-secondary">Postal/Zip Code</label>
                                 <input class="border-line px-5 py-3 w-full rounded-xl mt-3" id="select-code" type="text"
                                     placeholder="Postal/Zip Code" />
                             </div>
@@ -3691,8 +3758,7 @@
                         </div>
                         <div class="form pt-4 px-6">
                             <div class="">
-                                <label htmlFor='select-discount' class="caption1 text-secondary">Enter
-                                    Code</label>
+                                <label htmlFor='select-discount' class="caption1 text-secondary">Enter Code</label>
                                 <input class="border-line px-5 py-3 w-full rounded-xl mt-3" id="select-discount"
                                     type="text" placeholder="Discount code" />
                             </div>
@@ -3847,8 +3913,7 @@
                                 class="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
                                 -19%
                             </div>
-                            <div class='desc text-secondary mt-3'>Keep your clothes organized, yet
-                                elegant with storage
+                            <div class='desc text-secondary mt-3'>Keep your clothes organized, yet elegant with storage
                                 cabinets by Onita Patio Furniture. Traditionally designed, they are
                                 perfect to be used in the any place where you need to store.</div>
                         </div>
@@ -3960,8 +4025,7 @@
                                 <div class="flex items-center flex-wrap gap-1 mt-3">
                                     <i class="ph ph-eye cursor-pointer body1"></i>
                                     <span class="text-title">38</span>
-                                    <span class="text-secondary">people viewing this product right
-                                        now!</span>
+                                    <span class="text-secondary">people viewing this product right now!</span>
                                 </div>
                                 <div class="flex items-center gap-1 mt-3">
                                     <div class="text-title">SKU:</div>

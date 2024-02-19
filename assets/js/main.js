@@ -385,6 +385,33 @@ if (document.querySelector('.swiper-list-product')) {
     });
 }
 
+// list-three-product
+if (document.querySelector('.swiper-list-three-product')) {
+    var swiperListProduct = new Swiper(".swiper-list-three-product", {
+        navigation: {
+            prevEl: ".swiper-button-prev2",
+            nextEl: ".swiper-button-next2",
+        },
+        loop: true,
+        slidesPerView: 2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 3,
+                spaceBetween: 16,
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+            1280: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+        },
+    });
+}
+
 
 // list-feature-product Underwear
 var swiper = new Swiper(".mySwiper", {
@@ -591,58 +618,71 @@ const addEventToProductItem = () => {
     // Product item
     const productItems = document.querySelectorAll('.product-item')
 
-    productItems.forEach(product => {
-        const compareIcon = product.querySelector('.compare-btn')
-        const addWishlistIcon = product.querySelector('.add-wishlist-btn')
-        const addCartIcon = product.querySelector('.add-cart-btn')
-        const quickviewIcon = product.querySelector('.quick-view-btn')
-        const quickshopIcon = product.querySelector('.quick-shop-btn')
-        const modalQuickshop = product.querySelector('.quick-shop-block')
+    if (productItems) {
+        productItems.forEach(product => {
+            const compareIcon = product.querySelector('.compare-btn')
+            const addWishlistIcon = product.querySelector('.add-wishlist-btn')
+            const addCartIcon = product.querySelector('.add-cart-btn')
+            const quickviewIcon = product.querySelector('.quick-view-btn')
+            const quickshopIcon = product.querySelector('.quick-shop-btn')
+            const modalQuickshop = product.querySelector('.quick-shop-block')
 
-        addWishlistIcon.addEventListener('click', (e) => {
-            e.stopPropagation()
-            addWishlistIcon.classList.toggle('active')
+            if (addWishlistIcon) {
+                addWishlistIcon.addEventListener('click', (e) => {
+                    e.stopPropagation()
+                    addWishlistIcon.classList.toggle('active')
 
-            if (addWishlistIcon.classList.contains('active')) {
-                addWishlistIcon.querySelector('i').classList.remove('ph')
-                addWishlistIcon.querySelector('i').classList.add('ph-fill')
-                openModalWishlist()
-            } else {
-                addWishlistIcon.querySelector('i').classList.add('ph')
-                addWishlistIcon.querySelector('i').classList.remove('ph-fill')
+                    if (addWishlistIcon.classList.contains('active')) {
+                        addWishlistIcon.querySelector('i').classList.remove('ph')
+                        addWishlistIcon.querySelector('i').classList.add('ph-fill')
+                        openModalWishlist()
+                    } else {
+                        addWishlistIcon.querySelector('i').classList.add('ph')
+                        addWishlistIcon.querySelector('i').classList.remove('ph-fill')
+                    }
+                })
+            }
+
+            if (compareIcon) {
+                compareIcon.addEventListener('click', (e) => {
+                    compareIcon.classList.toggle('active')
+                    e.stopPropagation()
+                    openModalCompare()
+                })
+            }
+
+            if (quickviewIcon) {
+                quickviewIcon.addEventListener('click', (e) => {
+                    e.stopPropagation()
+                    openModalQuickview()
+                })
+            }
+
+            if (addCartIcon) {
+                addCartIcon.addEventListener('click', (e) => {
+                    e.stopPropagation()
+                    openModalCart()
+                })
+            }
+
+            if (quickshopIcon) {
+                quickshopIcon.addEventListener('click', (e) => {
+                    e.stopPropagation()
+                    modalQuickshop.classList.add('open')
+                })
+
+                if (addCartIcon) {
+                    addCartIcon.addEventListener('click', (e) => {
+                        e.stopPropagation()
+                        if (modalQuickshop.classList.contains('open')) {
+                            modalQuickshop.classList.remove('open')
+                        }
+                        openModalCart()
+                    })
+                }
             }
         })
-
-        compareIcon.addEventListener('click', (e) => {
-            e.stopPropagation()
-            openModalCompare()
-            compareIcon.classList.toggle('active')
-        })
-
-        quickviewIcon.addEventListener('click', (e) => {
-            e.stopPropagation()
-            openModalQuickview()
-        })
-
-        addCartIcon.addEventListener('click', (e) => {
-            e.stopPropagation()
-            openModalCart()
-        })
-
-        if (quickshopIcon) {
-            quickshopIcon.addEventListener('click', (e) => {
-                e.stopPropagation()
-                modalQuickshop.classList.add('open')
-            })
-
-            addCartIcon.addEventListener('click', (e) => {
-                e.stopPropagation()
-                if (modalQuickshop.classList.contains('open')) {
-                    modalQuickshop.classList.remove('open')
-                }
-            })
-        }
-    })
+    }
 
 
     const listSizes = document.querySelectorAll('.list-size')
@@ -713,7 +753,6 @@ const listFourProduct = document.querySelector('.list-product.four-product');
 const listSixProduct = document.querySelector('.list-product.six-product .swiper .swiper-wrapper');
 const listEightProduct = document.querySelector('.list-product.eight-product');
 const listThreeProduct = document.querySelectorAll('.list-product.three-product');
-const listFourUnderwear = document.querySelector('.list-product.four-product-underwear');
 
 // Fetch products from JSON file (assuming products.json)
 fetch('./assets/data/Product.json')
@@ -741,7 +780,8 @@ fetch('./assets/data/Product.json')
                                 listFourProduct.appendChild(productElement);
                             })
                     }
-                } else {
+                }
+                else {
                 }
 
                 menuItems.forEach(item => {
@@ -809,16 +849,41 @@ fetch('./assets/data/Product.json')
                 const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
 
                 if (menuItemActive === 'best sellers') {
-                    products.filter((product) => product.category === 'fashion')
-                        .sort((a, b) => b.sold - a.sold)
-                        .slice(0, 6)
-                        .forEach(product => {
-                            const swiperSlide = document.createElement('div')
-                            swiperSlide.classList.add('swiper-slide')
-                            swiperSlide.appendChild(createProductItem(product));
-                            listSixProduct.appendChild(swiperSlide);
-                        })
+                    if (listSixProduct.getAttribute('data-type') === 'cosmetic') {
+                        products.filter((product) => product.category === 'cosmetic')
+                            .sort((a, b) => b.sold - a.sold)
+                            .slice(0, 6)
+                            .forEach(product => {
+                                const swiperSlide = document.createElement('div')
+                                swiperSlide.classList.add('swiper-slide')
+                                swiperSlide.appendChild(createProductItem(product));
+                                listSixProduct.appendChild(swiperSlide);
+                            })
+                    }
+                    else if (listSixProduct.getAttribute('data-type') === 'pet') {
+                        products.filter((product) => product.category === 'pet')
+                            .sort((a, b) => b.sold - a.sold)
+                            .slice(0, 6)
+                            .forEach(product => {
+                                const swiperSlide = document.createElement('div')
+                                swiperSlide.classList.add('swiper-slide')
+                                swiperSlide.appendChild(createProductItem(product));
+                                listSixProduct.appendChild(swiperSlide);
+                            })
+                    }
+                    else {
+                        products.filter((product) => product.category === 'fashion')
+                            .sort((a, b) => b.sold - a.sold)
+                            .slice(0, 6)
+                            .forEach(product => {
+                                const swiperSlide = document.createElement('div')
+                                swiperSlide.classList.add('swiper-slide')
+                                swiperSlide.appendChild(createProductItem(product));
+                                listSixProduct.appendChild(swiperSlide);
+                            })
+                    }
                 }
+
                 menuItems.forEach(item => {
                     item.addEventListener('click', () => {
                         // remove old product
@@ -827,36 +892,104 @@ fetch('./assets/data/Product.json')
                             prdItem.remove()
                         })
 
-                        if (item.getAttribute('data-item') === 'best sellers') {
-                            products.filter((product) => product.category === 'fashion')
-                                .sort((a, b) => b.sold - a.sold)
-                                .slice(0, 6)
-                                .forEach(product => {
-                                    const swiperSlide = document.createElement('div')
-                                    swiperSlide.classList.add('swiper-slide')
-                                    swiperSlide.appendChild(createProductItem(product));
-                                    listSixProduct.appendChild(swiperSlide);
-                                })
+                        if (listSixProduct.getAttribute('data-type') === 'cosmetic') {
+                            if (item.getAttribute('data-item') === 'best sellers') {
+                                products.filter((product) => product.category === 'cosmetic')
+                                    .sort((a, b) => b.sold - a.sold)
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'on sale') {
+                                products.filter((product) => product.sale && product.category === 'cosmetic')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'new arrivals') {
+                                products.filter((product) => product.new && product.category === 'cosmetic')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
                         }
-                        if (item.getAttribute('data-item') === 'on sale') {
-                            products.filter((product) => product.sale && product.category === 'fashion')
-                                .slice(0, 6)
-                                .forEach(product => {
-                                    const swiperSlide = document.createElement('div')
-                                    swiperSlide.classList.add('swiper-slide')
-                                    swiperSlide.appendChild(createProductItem(product));
-                                    listSixProduct.appendChild(swiperSlide);
-                                })
+                        else if (listSixProduct.getAttribute('data-type') === 'pet') {
+                            if (item.getAttribute('data-item') === 'best sellers') {
+                                products.filter((product) => product.category === 'pet')
+                                    .sort((a, b) => b.sold - a.sold)
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'on sale') {
+                                products.filter((product) => product.sale && product.category === 'pet')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'new arrivals') {
+                                products.filter((product) => product.new && product.category === 'pet')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
                         }
-                        if (item.getAttribute('data-item') === 'new arrivals') {
-                            products.filter((product) => product.new && product.category === 'fashion')
-                                .slice(0, 6)
-                                .forEach(product => {
-                                    const swiperSlide = document.createElement('div')
-                                    swiperSlide.classList.add('swiper-slide')
-                                    swiperSlide.appendChild(createProductItem(product));
-                                    listSixProduct.appendChild(swiperSlide);
-                                })
+                        else {
+                            if (item.getAttribute('data-item') === 'best sellers') {
+                                products.filter((product) => product.category === 'fashion')
+                                    .sort((a, b) => b.sold - a.sold)
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'on sale') {
+                                products.filter((product) => product.sale && product.category === 'fashion')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'new arrivals') {
+                                products.filter((product) => product.new && product.category === 'fashion')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
                         }
 
                         addEventToProductItem()
@@ -864,12 +997,22 @@ fetch('./assets/data/Product.json')
                 })
             }
             else {
-                products.slice(5, 11).forEach(product => {
-                    const swiperSlide = document.createElement('div')
-                    swiperSlide.classList.add('swiper-slide')
-                    swiperSlide.appendChild(createProductItem(product));
-                    listSixProduct.appendChild(swiperSlide);
-                })
+                if (listSixProduct.getAttribute('data-type') === 'cosmetic') {
+                    products.filter(product => product.category === 'cosmetic').slice(0, 6).forEach(product => {
+                        const swiperSlide = document.createElement('div')
+                        swiperSlide.classList.add('swiper-slide')
+                        swiperSlide.appendChild(createProductItem(product));
+                        listSixProduct.appendChild(swiperSlide);
+                    })
+                }
+                else {
+                    products.slice(5, 11).forEach(product => {
+                        const swiperSlide = document.createElement('div')
+                        swiperSlide.classList.add('swiper-slide')
+                        swiperSlide.appendChild(createProductItem(product));
+                        listSixProduct.appendChild(swiperSlide);
+                    })
+                }
             }
         }
 
@@ -1126,3 +1269,78 @@ var swiperListBrand = new Swiper(".swiper-list-brand", {
         },
     },
 });
+
+
+// list-five-brand
+var swiperListBrand = new Swiper(".swiper-list-five-brand", {
+    pagination: { clickable: true, el: ".swiper-pagination" },
+    loop: true,
+    autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+    },
+    slidesPerView: 2,
+    spaceBetween: 12,
+    breakpoints: {
+        640: {
+            slidesPerView: 3,
+            spaceBetween: 12,
+        },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 16,
+        },
+        1024: {
+            slidesPerView: 4,
+            spaceBetween: 16,
+        },
+        1280: {
+            slidesPerView: 5,
+            spaceBetween: 16,
+        },
+    },
+});
+
+
+// Change active video cosmetic2
+const listCategory = document.querySelector('.list-category')
+const categoryItems = document.querySelectorAll('.list-category .item')
+const listItem = document.querySelector('.list-filter')
+const filterItems = document.querySelectorAll('.list-filter .item')
+
+if (categoryItems) {
+    categoryItems.forEach(category => {
+        category.addEventListener('click', () => {
+            filterItems.forEach(item => {
+                if (item.getAttribute('data-item') === category.getAttribute('data-item')) {
+                    listCategory.querySelector('.active').classList.remove('active')
+                    category.classList.add('active')
+                    listItem.querySelector('.active').classList.remove('active')
+                    item.classList.add('active')
+                }
+            })
+        })
+    })
+}
+
+
+// Modal Video
+const playIcons = document.querySelectorAll('.btn-play')
+const modalVideo = document.querySelector('.modal-video-block')
+const modalVideoMain = document.querySelector('.modal-video-block .modal-video-main')
+
+if (playIcons) {
+    playIcons.forEach(playIcon => {
+        playIcon.addEventListener('click', () => {
+            modalVideoMain.classList.add('open')
+        })
+    })
+
+    modalVideo.addEventListener('click', () => {
+        modalVideoMain.classList.remove('open')
+    })
+
+    modalVideoMain.addEventListener('click', (e) => {
+        e.stopPropagation()
+    })
+}
