@@ -165,6 +165,17 @@ modalCartMain.addEventListener('click', (e) => {
 })
 
 
+// sub-menu-department
+const menuDepartmentBtn = document.querySelector('.menu-department-btn')
+const subMenuDepartment = document.querySelector('.sub-menu-department')
+
+if (menuDepartmentBtn) {
+    menuDepartmentBtn.addEventListener('click', () => {
+        subMenuDepartment.classList.toggle('open')  
+    })
+}
+
+
 // Slider
 var swiper = new Swiper(".swiper-slider", {
     spaceBetween: 0,
@@ -870,6 +881,16 @@ fetch('./assets/data/Product.json')
                                 swiperSlide.appendChild(createProductItem(product));
                                 listSixProduct.appendChild(swiperSlide);
                             })
+                    } else if (listSixProduct.getAttribute('data-type') === 'jewelry') {
+                        products.filter((product) => product.category === 'jewelry')
+                            .sort((a, b) => b.sold - a.sold)
+                            .slice(0, 6)
+                            .forEach(product => {
+                                const swiperSlide = document.createElement('div')
+                                swiperSlide.classList.add('swiper-slide')
+                                swiperSlide.appendChild(createProductItem(product));
+                                listSixProduct.appendChild(swiperSlide);
+                            })
                     }
                     else {
                         products.filter((product) => product.category === 'fashion')
@@ -949,6 +970,38 @@ fetch('./assets/data/Product.json')
                             }
                             if (item.getAttribute('data-item') === 'new arrivals') {
                                 products.filter((product) => product.new && product.category === 'pet')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                        } else if (listSixProduct.getAttribute('data-type') === 'jewelry') {
+                            if (item.getAttribute('data-item') === 'best sellers') {
+                                products.filter((product) => product.category === 'jewelry')
+                                    .sort((a, b) => b.sold - a.sold)
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'on sale') {
+                                products.filter((product) => product.sale && product.category === 'jewelry')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'new arrivals') {
+                                products.filter((product) => product.new && product.category === 'jewelry')
                                     .slice(0, 6)
                                     .forEach(product => {
                                         const swiperSlide = document.createElement('div')
