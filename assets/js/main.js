@@ -825,8 +825,6 @@ fetch('./assets/data/Product.json')
                             })
                     }
                 }
-                else {
-                }
 
                 menuItems.forEach(item => {
                     item.addEventListener('click', () => {
@@ -893,49 +891,8 @@ fetch('./assets/data/Product.json')
                 const menuItems = parent.querySelectorAll('.menu-tab .tab-item');
 
                 if (menuItemActive === 'best sellers') {
-                    if (listSixProduct.getAttribute('data-type') === 'cosmetic') {
-                        products.filter((product) => product.category === 'cosmetic')
-                            .sort((a, b) => b.sold - a.sold)
-                            .slice(0, 6)
-                            .forEach(product => {
-                                const swiperSlide = document.createElement('div')
-                                swiperSlide.classList.add('swiper-slide')
-                                swiperSlide.appendChild(createProductItem(product));
-                                listSixProduct.appendChild(swiperSlide);
-                            })
-                    }
-                    else if (listSixProduct.getAttribute('data-type') === 'pet') {
-                        products.filter((product) => product.category === 'pet')
-                            .sort((a, b) => b.sold - a.sold)
-                            .slice(0, 6)
-                            .forEach(product => {
-                                const swiperSlide = document.createElement('div')
-                                swiperSlide.classList.add('swiper-slide')
-                                swiperSlide.appendChild(createProductItem(product));
-                                listSixProduct.appendChild(swiperSlide);
-                            })
-                    } else if (listSixProduct.getAttribute('data-type') === 'jewelry') {
-                        products.filter((product) => product.category === 'jewelry')
-                            .sort((a, b) => b.sold - a.sold)
-                            .slice(0, 6)
-                            .forEach(product => {
-                                const swiperSlide = document.createElement('div')
-                                swiperSlide.classList.add('swiper-slide')
-                                swiperSlide.appendChild(createProductItem(product));
-                                listSixProduct.appendChild(swiperSlide);
-                            })
-                    } else if (listSixProduct.getAttribute('data-type') === 'furniture') {
-                        products.filter((product) => product.category === 'furniture')
-                            .sort((a, b) => b.sold - a.sold)
-                            .slice(0, 6)
-                            .forEach(product => {
-                                const swiperSlide = document.createElement('div')
-                                swiperSlide.classList.add('swiper-slide')
-                                swiperSlide.appendChild(createProductItem(product));
-                                listSixProduct.appendChild(swiperSlide);
-                            })
-                    } else if (listSixProduct.getAttribute('data-type') === 'toys-kid') {
-                        products.filter((product) => product.category === 'toys-kid')
+                    if (listSixProduct.getAttribute('data-type')) {
+                        products.filter((product) => product.category === listSixProduct.getAttribute('data-type'))
                             .sort((a, b) => b.sold - a.sold)
                             .slice(0, 6)
                             .forEach(product => {
@@ -966,9 +923,9 @@ fetch('./assets/data/Product.json')
                             prdItem.remove()
                         })
 
-                        if (listSixProduct.getAttribute('data-type') === 'cosmetic') {
+                        if (listSixProduct.getAttribute('data-type')) {
                             if (item.getAttribute('data-item') === 'best sellers') {
-                                products.filter((product) => product.category === 'cosmetic')
+                                products.filter((product) => product.category === listSixProduct.getAttribute('data-type'))
                                     .sort((a, b) => b.sold - a.sold)
                                     .slice(0, 6)
                                     .forEach(product => {
@@ -979,7 +936,7 @@ fetch('./assets/data/Product.json')
                                     })
                             }
                             if (item.getAttribute('data-item') === 'on sale') {
-                                products.filter((product) => product.sale && product.category === 'cosmetic')
+                                products.filter((product) => product.sale && product.category === listSixProduct.getAttribute('data-type'))
                                     .slice(0, 6)
                                     .forEach(product => {
                                         const swiperSlide = document.createElement('div')
@@ -989,7 +946,7 @@ fetch('./assets/data/Product.json')
                                     })
                             }
                             if (item.getAttribute('data-item') === 'new arrivals') {
-                                products.filter((product) => product.new && product.category === 'cosmetic')
+                                products.filter((product) => product.new && product.category === listSixProduct.getAttribute('data-type'))
                                     .slice(0, 6)
                                     .forEach(product => {
                                         const swiperSlide = document.createElement('div')
@@ -998,137 +955,7 @@ fetch('./assets/data/Product.json')
                                         listSixProduct.appendChild(swiperSlide);
                                     })
                             }
-                        }
-                        else if (listSixProduct.getAttribute('data-type') === 'pet') {
-                            if (item.getAttribute('data-item') === 'best sellers') {
-                                products.filter((product) => product.category === 'pet')
-                                    .sort((a, b) => b.sold - a.sold)
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'on sale') {
-                                products.filter((product) => product.sale && product.category === 'pet')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'new arrivals') {
-                                products.filter((product) => product.new && product.category === 'pet')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                        } else if (listSixProduct.getAttribute('data-type') === 'jewelry') {
-                            if (item.getAttribute('data-item') === 'best sellers') {
-                                products.filter((product) => product.category === 'jewelry')
-                                    .sort((a, b) => b.sold - a.sold)
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'on sale') {
-                                products.filter((product) => product.sale && product.category === 'jewelry')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'new arrivals') {
-                                products.filter((product) => product.new && product.category === 'jewelry')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                        } else if (listSixProduct.getAttribute('data-type') === 'furniture') {
-                            if (item.getAttribute('data-item') === 'best sellers') {
-                                products.filter((product) => product.category === 'furniture')
-                                    .sort((a, b) => b.sold - a.sold)
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'on sale') {
-                                products.filter((product) => product.sale && product.category === 'furniture')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'new arrivals') {
-                                products.filter((product) => product.new && product.category === 'furniture')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                        } else if (listSixProduct.getAttribute('data-type') === 'toys-kid') {
-                            if (item.getAttribute('data-item') === 'best sellers') {
-                                products.filter((product) => product.category === 'toys-kid')
-                                    .sort((a, b) => b.sold - a.sold)
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'on sale') {
-                                products.filter((product) => product.sale && product.category === 'toys-kid')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                            if (item.getAttribute('data-item') === 'new arrivals') {
-                                products.filter((product) => product.new && product.category === 'toys-kid')
-                                    .slice(0, 6)
-                                    .forEach(product => {
-                                        const swiperSlide = document.createElement('div')
-                                        swiperSlide.classList.add('swiper-slide')
-                                        swiperSlide.appendChild(createProductItem(product));
-                                        listSixProduct.appendChild(swiperSlide);
-                                    })
-                            }
-                        }
-                        else {
+                        } else {
                             if (item.getAttribute('data-item') === 'best sellers') {
                                 products.filter((product) => product.category === 'fashion')
                                     .sort((a, b) => b.sold - a.sold)
@@ -1167,15 +994,8 @@ fetch('./assets/data/Product.json')
                 })
             }
             else {
-                if (listSixProduct.getAttribute('data-type') === 'cosmetic') {
-                    products.filter(product => product.category === 'cosmetic').slice(0, 6).forEach(product => {
-                        const swiperSlide = document.createElement('div')
-                        swiperSlide.classList.add('swiper-slide')
-                        swiperSlide.appendChild(createProductItem(product));
-                        listSixProduct.appendChild(swiperSlide);
-                    })
-                } else if (listSixProduct.getAttribute('data-type') === 'yoga') {
-                    products.filter(product => product.category === 'yoga').slice(0, 6).forEach(product => {
+                if (listSixProduct.getAttribute('data-type')) {
+                    products.filter(product => product.category === listSixProduct.getAttribute('data-type')).slice(0, 6).forEach(product => {
                         const swiperSlide = document.createElement('div')
                         swiperSlide.classList.add('swiper-slide')
                         swiperSlide.appendChild(createProductItem(product));
@@ -1248,10 +1068,17 @@ fetch('./assets/data/Product.json')
                 })
             }
             else {
-                products.slice(11, 19).forEach(product => {
-                    const productElement = createProductItem(product);
-                    listEightProduct.appendChild(productElement);
-                })
+                if (listEightProduct.getAttribute('data-type')) {
+                    products.filter(product => product.category === listEightProduct.getAttribute('data-type')).slice(0, 8).forEach(product => {
+                        const productElement = createProductItem(product);
+                        listEightProduct.appendChild(productElement);
+                    })
+                } else {
+                    products.slice(11, 19).forEach(product => {
+                        const productElement = createProductItem(product);
+                        listEightProduct.appendChild(productElement);
+                    })
+                }
             }
         }
 
