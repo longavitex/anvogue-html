@@ -28,22 +28,22 @@
         transition: opacity ease 1s;
         position: absolute;
         top: 0;
-    
+
         .bg-img {
             position: absolute;
             height: 0;
         }
-    
+
         &.active {
             opacity: 1;
             visibility: visible;
-    
+
             .bg-img {
                 position: relative;
                 height: 100%;
             }
         }
-    
+
         @media (max-width: 640px) {
             position: relative;
         }
@@ -78,6 +78,8 @@
 
 .featured-product.toys-kid .left .bg-img {
     height: 0;
+    opacity: 0;
+    transition: 0.5s;
 
     img {
         height: 0;
@@ -85,6 +87,7 @@
 
     &.active {
         height: 100%;
+        opacity: 1;
 
         img {
             height: 100%;
@@ -103,7 +106,7 @@
         }
     }
 
-    &.yoga {
+    &.list-testimonial-yoga {
         .slick-list {
             margin-left: -16px;
             margin-right: -16px;

@@ -2044,6 +2044,7 @@ textarea:focus {
   padding: 0 16px;
   outline: none !important;
   border: none !important;
+  display: flex;
 }
 .slider-toys-kid .slick-list .slick-track .slick-slide > div {
   height: 100%;
@@ -3140,12 +3141,15 @@ textarea:focus {
 
 .featured-product.toys-kid .left .bg-img {
   height: 0;
+  opacity: 0;
+  transition: 0.5s;
 }
 .featured-product.toys-kid .left .bg-img img {
   height: 0;
 }
 .featured-product.toys-kid .left .bg-img.active {
   height: 100%;
+  opacity: 1;
 }
 .featured-product.toys-kid .left .bg-img.active img {
   height: 100%;
@@ -3159,26 +3163,26 @@ textarea:focus {
     bottom: -50px;
   }
 }
-.list-testimonial.yoga .slick-list {
+.list-testimonial.list-testimonial-yoga .slick-list {
   margin-left: -16px;
   margin-right: -16px;
 }
-.list-testimonial.yoga .slick-list .slick-track {
+.list-testimonial.list-testimonial-yoga .slick-list .slick-track {
   display: flex !important;
   cursor: grab;
 }
-.list-testimonial.yoga .slick-list .slick-track .slick-slide {
+.list-testimonial.list-testimonial-yoga .slick-list .slick-track .slick-slide {
   height: inherit !important;
   padding-left: 16px;
   padding-right: 16px;
 }
-.list-testimonial.yoga .slick-list .slick-track .slick-slide > div {
+.list-testimonial.list-testimonial-yoga .slick-list .slick-track .slick-slide > div {
   height: 100% !important;
 }
-.list-testimonial.yoga .slick-dots li {
+.list-testimonial.list-testimonial-yoga .slick-dots li {
   transition: all ease 0.5s;
 }
-.list-testimonial.yoga .slick-dots li button {
+.list-testimonial.list-testimonial-yoga .slick-dots li button {
   border-radius: 50%;
   border: 1px solid transparent;
   padding: 4px;
@@ -3187,7 +3191,7 @@ textarea:focus {
   height: 16px;
   position: relative;
 }
-.list-testimonial.yoga .slick-dots li button::before {
+.list-testimonial.list-testimonial-yoga .slick-dots li button::before {
   font-size: 8px;
   line-height: 16px;
   width: 8px;
@@ -3201,10 +3205,10 @@ textarea:focus {
   transform: translate(-50%, -50%);
   transition: all ease 0.5s;
 }
-.list-testimonial.yoga .slick-dots li.slick-active button {
+.list-testimonial.list-testimonial-yoga .slick-dots li.slick-active button {
   border-color: var(--black);
 }
-.list-testimonial.yoga .slick-dots li.slick-active button::before {
+.list-testimonial.list-testimonial-yoga .slick-dots li.slick-active button::before {
   background-color: var(--black);
 }
 

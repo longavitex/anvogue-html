@@ -171,7 +171,7 @@ const subMenuDepartment = document.querySelector('.sub-menu-department')
 
 if (menuDepartmentBtn) {
     menuDepartmentBtn.addEventListener('click', () => {
-        subMenuDepartment.classList.toggle('open')  
+        subMenuDepartment.classList.toggle('open')
     })
 }
 
@@ -206,6 +206,23 @@ var swiper = new Swiper(".swiper-slider", {
         disableOnInteraction: false,
     },
 });
+
+// Slider Toys kid
+if (document.querySelector('.slider-toys-kid')) {
+    $('.slider-toys-kid').slick({
+        dots: false,
+        arrows: false,
+        infinite: true,
+        speed: 300,
+        autoplay: false,
+        autoplaySpeed: 4000,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        touchThreshold: 100,
+        draggable: true,
+        useTransform: false,
+    });
+}
 
 
 // Change active menu tab
@@ -907,6 +924,26 @@ fetch('./assets/data/Product.json')
                                 swiperSlide.appendChild(createProductItem(product));
                                 listSixProduct.appendChild(swiperSlide);
                             })
+                    } else if (listSixProduct.getAttribute('data-type') === 'furniture') {
+                        products.filter((product) => product.category === 'furniture')
+                            .sort((a, b) => b.sold - a.sold)
+                            .slice(0, 6)
+                            .forEach(product => {
+                                const swiperSlide = document.createElement('div')
+                                swiperSlide.classList.add('swiper-slide')
+                                swiperSlide.appendChild(createProductItem(product));
+                                listSixProduct.appendChild(swiperSlide);
+                            })
+                    } else if (listSixProduct.getAttribute('data-type') === 'toys-kid') {
+                        products.filter((product) => product.category === 'toys-kid')
+                            .sort((a, b) => b.sold - a.sold)
+                            .slice(0, 6)
+                            .forEach(product => {
+                                const swiperSlide = document.createElement('div')
+                                swiperSlide.classList.add('swiper-slide')
+                                swiperSlide.appendChild(createProductItem(product));
+                                listSixProduct.appendChild(swiperSlide);
+                            })
                     }
                     else {
                         products.filter((product) => product.category === 'fashion')
@@ -1026,6 +1063,70 @@ fetch('./assets/data/Product.json')
                                         listSixProduct.appendChild(swiperSlide);
                                     })
                             }
+                        } else if (listSixProduct.getAttribute('data-type') === 'furniture') {
+                            if (item.getAttribute('data-item') === 'best sellers') {
+                                products.filter((product) => product.category === 'furniture')
+                                    .sort((a, b) => b.sold - a.sold)
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'on sale') {
+                                products.filter((product) => product.sale && product.category === 'furniture')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'new arrivals') {
+                                products.filter((product) => product.new && product.category === 'furniture')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                        } else if (listSixProduct.getAttribute('data-type') === 'toys-kid') {
+                            if (item.getAttribute('data-item') === 'best sellers') {
+                                products.filter((product) => product.category === 'toys-kid')
+                                    .sort((a, b) => b.sold - a.sold)
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'on sale') {
+                                products.filter((product) => product.sale && product.category === 'toys-kid')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
+                            if (item.getAttribute('data-item') === 'new arrivals') {
+                                products.filter((product) => product.new && product.category === 'toys-kid')
+                                    .slice(0, 6)
+                                    .forEach(product => {
+                                        const swiperSlide = document.createElement('div')
+                                        swiperSlide.classList.add('swiper-slide')
+                                        swiperSlide.appendChild(createProductItem(product));
+                                        listSixProduct.appendChild(swiperSlide);
+                                    })
+                            }
                         }
                         else {
                             if (item.getAttribute('data-item') === 'best sellers') {
@@ -1068,6 +1169,13 @@ fetch('./assets/data/Product.json')
             else {
                 if (listSixProduct.getAttribute('data-type') === 'cosmetic') {
                     products.filter(product => product.category === 'cosmetic').slice(0, 6).forEach(product => {
+                        const swiperSlide = document.createElement('div')
+                        swiperSlide.classList.add('swiper-slide')
+                        swiperSlide.appendChild(createProductItem(product));
+                        listSixProduct.appendChild(swiperSlide);
+                    })
+                } else if (listSixProduct.getAttribute('data-type') === 'yoga') {
+                    products.filter(product => product.category === 'yoga').slice(0, 6).forEach(product => {
                         const swiperSlide = document.createElement('div')
                         swiperSlide.classList.add('swiper-slide')
                         swiperSlide.appendChild(createProductItem(product));
@@ -1216,6 +1324,27 @@ if (document.querySelector('.swiper-list-testimonial')) {
 }
 
 
+const handleSlideActive = () => {
+    let activeItem = document.querySelector('.list-testimonial .swiper .swiper-slide-active')
+    if (activeItem) {
+        const dataItem = activeItem.getAttribute('data-item')
+
+        const listAvatar = document.querySelector('.list-avatar')
+        const avatars = document.querySelectorAll('.list-avatar .bg-img')
+
+        avatars.forEach(item => {
+            if (item.getAttribute('data-item') === dataItem) {
+                if (listAvatar.querySelector('.active')) {
+                    listAvatar.querySelector('.active').classList.remove('active')
+                }
+                item.classList.add('active')
+            }
+        })
+    }
+}
+
+handleSlideActive()
+
 // list-testimonial 4
 var swiperListTestimonialFour = new Swiper(".swiper-testimonial-four", {
     navigation: {
@@ -1230,25 +1359,65 @@ var swiperListTestimonialFour = new Swiper(".swiper-testimonial-four", {
     spaceBetween: 0,
     on: {
         slideChange: () => {
-            let activeItem = document.querySelector('.list-testimonial .swiper .swiper-slide-active')
-            if (activeItem) {
-                const dataItem = activeItem.querySelector('.testimonial-item').getAttribute('data-item')
-
-                const listAvatar = document.querySelector('.list-avatar')
-                const avatars = document.querySelectorAll('.list-avatar .bg-img')
-
-                avatars.forEach(item => {
-                    if (item.getAttribute('data-item') === dataItem) {
-                        if (listAvatar.querySelector('.active')) {
-                            listAvatar.querySelector('.active').classList.remove('active')
-                        }
-                        item.classList.add('active')
-                    }
-                })
-            }
+            handleSlideActive()
         }
     }
 });
+
+// list-testimonial yoga
+if (document.querySelector('.list-testimonial-yoga')) {
+    $('.list-testimonial-yoga').slick({
+        dots: false,
+        arrows: false,
+        infinite: true,
+        centerMode: true,
+        centerPadding: '220px',
+        speed: 300,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        touchThreshold: 100,
+        swipe: true,
+        swipeToSlide: true,
+        draggable: true,
+        useTransform: false,
+        responsive: [
+            {
+                breakpoint: 1600,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    centerPadding: '120px',
+                }
+            },
+            {
+                breakpoint: 1400,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    centerPadding: '160px',
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerPadding: '160px',
+                }
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    centerPadding: '16px',
+                }
+            },
+        ]
+    });
+}
 
 
 // list-instagram
@@ -1398,7 +1567,7 @@ const playIcons = document.querySelectorAll('.btn-play')
 const modalVideo = document.querySelector('.modal-video-block')
 const modalVideoMain = document.querySelector('.modal-video-block .modal-video-main')
 
-if (playIcons) {
+if (playIcons && modalVideo) {
     playIcons.forEach(playIcon => {
         playIcon.addEventListener('click', () => {
             modalVideoMain.classList.add('open')
