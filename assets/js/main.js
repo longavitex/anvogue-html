@@ -176,6 +176,22 @@ if (menuDepartmentBtn) {
 }
 
 
+// Banner top
+var swiper = new Swiper(".swiper-banner-top", {
+    spaceBetween: 0,
+    slidesPerView: 1,
+    navigation: {
+        prevEl: ".swiper-button-custom-prev",
+        nextEl: ".swiper-button-custom-next",
+    },
+    loop: true,
+    autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+    },
+});
+
+
 // Slider
 var swiper = new Swiper(".swiper-slider", {
     spaceBetween: 0,
