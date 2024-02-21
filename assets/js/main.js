@@ -231,15 +231,19 @@ const itemActive = document.querySelectorAll('.menu-tab .tab-item.active')
 
 itemActive.forEach(item => {
     let indicator = item.parentElement.querySelector('.indicator')
-    indicator.style.width = item.getBoundingClientRect().width + 'px'
-    indicator.style.left = item.getBoundingClientRect().left - item.parentElement.getBoundingClientRect().left + 'px'
+    if (indicator) {
+        indicator.style.width = item.getBoundingClientRect().width + 'px'
+        indicator.style.left = item.getBoundingClientRect().left - item.parentElement.getBoundingClientRect().left + 'px'
+    }
 })
 
 tabItems.forEach(item => {
     item.addEventListener('click', () => {
         let indicator = item.parentElement.querySelector('.indicator')
-        indicator.style.width = item.getBoundingClientRect().width + 'px'
-        indicator.style.left = item.getBoundingClientRect().left - item.parentElement.getBoundingClientRect().left + 'px'
+        if (indicator) {
+            indicator.style.width = item.getBoundingClientRect().width + 'px'
+            indicator.style.left = item.getBoundingClientRect().left - item.parentElement.getBoundingClientRect().left + 'px'
+        }
 
         item.parentElement.querySelector('.active').classList.remove('active')
         item.classList.add('active')
@@ -664,6 +668,10 @@ const addEventToProductItem = () => {
 
     if (productItems) {
         productItems.forEach(product => {
+            product.addEventListener('click', () => {
+                window.location.href = 'product-default.html';
+            })
+
             const compareIcon = product.querySelector('.compare-btn')
             const addWishlistIcon = product.querySelector('.add-wishlist-btn')
             const addCartIcon = product.querySelector('.add-cart-btn')
@@ -1407,5 +1415,61 @@ if (playIcons && modalVideo) {
 
     modalVideoMain.addEventListener('click', (e) => {
         e.stopPropagation()
+    })
+}
+
+
+// Scroll to top
+const scrollTopBtn = document.querySelector('.scroll-to-top-btn')
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 800) {
+        scrollTopBtn.classList.add('active')
+    } else {
+        scrollTopBtn.classList.remove('active')
+    }
+})
+
+
+// faqs
+const menuTab = document.querySelector('.menu-tab')
+const listQuestion = document.querySelector('.list-question')
+const tabQuestions = document.querySelectorAll('.tab-question')
+const questionItems = document.querySelectorAll('.question-item')
+
+if (tabItems) {
+    tabItems.forEach(tabItem => {
+        tabQuestions.forEach(tabQuestion => {
+            let activeMenuTab = menuTab.querySelector('.active')
+
+            if (activeMenuTab.getAttribute('data-item') === tabQuestion.getAttribute('data-item')) {
+                tabQuestion.classList.add('active')
+            }
+
+            tabItem.addEventListener('click', () => {
+                if (tabItem.getAttribute('data-item') === tabQuestion.getAttribute('data-item')) {
+                    listQuestion.querySelector('.active').classList.remove('active')
+                    tabQuestion.classList.add('active')
+                }
+            })
+        })
+    })
+}
+
+if (questionItems) {
+    questionItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('open');
+
+            removeOpen(index)
+        })
+    })
+}
+
+function removeOpen(index1) {
+    questionItems.forEach((item2, index2) => {
+        if (index1 != index2) {
+            item2.classList.remove('open')
+        }
     })
 }

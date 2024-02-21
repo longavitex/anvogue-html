@@ -244,23 +244,6 @@
   justify-content: center;
 }
 
-.loading {
-  overflow: hidden;
-}
-.loading .loading-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: white;
-  z-index: 9999;
-}
-
 /* Main color */
 :root {
   --green: #D2EF9A;
@@ -2706,41 +2689,27 @@ textarea:focus {
   opacity: 1;
 }
 
-.list-pagination .pagination {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.list-pagination .pagination li {
+.list-pagination button {
   width: 44px;
   height: 44px;
-  border-radius: 6px;
-  border: 1px solid var(--line);
-  transition: all ease 0.3s;
-}
-.list-pagination .pagination li a {
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 500;
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  transition: all ease 0.4s;
 }
-.list-pagination .pagination li:hover, .list-pagination .pagination li.active {
+.list-pagination button:hover, .list-pagination button.active {
   background-color: var(--black);
   color: var(--white);
 }
-.list-pagination .pagination li.disabled {
+.list-pagination button.disabled {
   display: none;
 }
 @media (max-width: 767.99px) {
-  .list-pagination .pagination li {
+  .list-pagination li {
     width: 36px;
     height: 36px;
-  }
-  .list-pagination .pagination li a {
     font-size: 14px;
     line-height: 24px;
   }
@@ -2782,25 +2751,30 @@ textarea:focus {
 .faqs-block .tab-question.active {
   display: flex;
 }
-.faqs-block .tab-question .question-item {
+.faqs-block .tab-question .question-item .heading i {
+  transform: rotate(0);
   transition: all ease 0.5s;
+}
+@media (max-width: 575.99px) {
+  .faqs-block .tab-question .question-item .heading i {
+    font-size: 16px;
+  }
 }
 .faqs-block .tab-question .question-item .content {
-  opacity: 0;
-  visibility: hidden;
+  transition: all ease-in-out 0.6s;
   max-height: 0;
-  transform: scaleY(0);
-  transform-origin: top center;
-  transition: all ease 0.5s;
+  overflow-x: hidden;
 }
-.faqs-block .tab-question .question-item.open {
-  padding-bottom: 44px;
+.faqs-block .tab-question .question-item .content::-webkit-scrollbar {
+  transition-delay: 0.6s;
+  opacity: 0;
+}
+.faqs-block .tab-question .question-item.open .heading i {
+  transform: rotate(90deg);
 }
 .faqs-block .tab-question .question-item.open .content {
-  max-height: max-content;
-  opacity: 1;
-  visibility: visible;
-  transform: scaleY(1) translateY(24px);
+  max-height: 250px;
+  margin-top: 16px;
 }
 
 .cart-block .heading.banner .tow-bar-block {
@@ -2909,6 +2883,40 @@ textarea:focus {
     width: 700px;
     overflow-x: auto;
   }
+}
+
+.scroll-to-top-btn {
+  background-color: var(--black);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0px;
+  right: 30px;
+  transition: all ease 0.3s;
+  box-shadow: 0px 5px 25px rgba(58, 64, 67, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  z-index: 100;
+}
+.scroll-to-top-btn i {
+  color: var(--white);
+  transition: all ease 0.3s;
+}
+.scroll-to-top-btn:hover {
+  background-color: var(--green);
+}
+.scroll-to-top-btn:hover i {
+  color: var(--black);
+}
+.scroll-to-top-btn.active {
+  bottom: 30px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .menu-tab {
