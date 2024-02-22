@@ -245,7 +245,9 @@ tabItems.forEach(item => {
             indicator.style.left = item.getBoundingClientRect().left - item.parentElement.getBoundingClientRect().left + 'px'
         }
 
-        item.parentElement.querySelector('.active').classList.remove('active')
+        if (item.parentElement.querySelector('.active')) {
+            item.parentElement.querySelector('.active').classList.remove('active')
+        }
         item.classList.add('active')
     })
 })
@@ -1128,6 +1130,16 @@ fetch('./assets/data/Product.json')
     .catch(error => console.error('Error loading products:', error));
 
 
+const blogItems = document.querySelectorAll('.blog-item')
+
+blogItems.forEach(blog => {
+    // redirect to detail
+    blog.addEventListener('click', () => {
+        const blogId = blog.getAttribute('data-item')
+        window.location.href = `blog-detail1.html?id=${blogId}`;
+    })
+})
+
 
 // list-testimonial
 if (document.querySelector('.swiper-list-testimonial')) {
@@ -1423,7 +1435,7 @@ if (playIcons && modalVideo) {
 const scrollTopBtn = document.querySelector('.scroll-to-top-btn')
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 800) {
+    if (window.scrollY > 600) {
         scrollTopBtn.classList.add('active')
     } else {
         scrollTopBtn.classList.remove('active')
