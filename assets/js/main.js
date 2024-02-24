@@ -520,6 +520,7 @@ modalQuickviewMain.addEventListener('click', (e) => {
 const createProductItem = (product) => {
     const productItem = document.createElement('div')
     productItem.classList.add('product-item', 'grid-type');
+    productItem.setAttribute('data-item', product.id);
 
     let productTags = '';
     if (product.new) {
@@ -535,7 +536,7 @@ const createProductItem = (product) => {
     });
 
     productItem.innerHTML = `
-        <div class="product-main cursor-pointer block">
+        <div class="product-main cursor-pointer block" data-item="${product.id}">
             <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
                 ${productTags}
                 <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
@@ -671,7 +672,8 @@ const addEventToProductItem = () => {
     if (productItems) {
         productItems.forEach(product => {
             product.addEventListener('click', () => {
-                window.location.href = 'product-default.html';
+                const productId = product.getAttribute('data-item')
+                window.location.href = `product-default.html?id=${productId}`;
             })
 
             const compareIcon = product.querySelector('.compare-btn')
