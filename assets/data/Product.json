@@ -167,7 +167,6 @@
     "quantity": 100,
     "quantityPurchase": 1,
     "sizes": [
-      "S",
       "M",
       "L",
       "XL"
@@ -684,7 +683,6 @@
     "quantityPurchase": 1,
     "sizes": [
       "S",
-      "M",
       "L",
       "XL"
     ],
@@ -927,7 +925,6 @@
     "quantityPurchase": 1,
     "sizes": [
       "S",
-      "M",
       "L",
       "XL",
       "2XL"
@@ -1425,8 +1422,8 @@
     ],
     "variation": [
       {
-        "color": "yellow",
-        "colorCode": "#ECB018",
+        "color": "white",
+        "colorCode": "#F6EFDD",
         "colorImage": "./assets/images/product/color/yellow.png",
         "image": "./assets/images/product/fashion/21-6.png"
       },

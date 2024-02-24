@@ -665,7 +665,7 @@ const createProductItem = (product) => {
 }
 
 
-const addEventToProductItem = () => {
+function addEventToProductItem() {
     // Product item
     const productItems = document.querySelectorAll('.product-item')
 

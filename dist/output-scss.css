@@ -2968,7 +2968,7 @@ textarea:focus {
 }
 @media (max-width: 767.98px) {
   .menu-tab {
-    max-width: max-content;
+    max-width: 100%;
     width: 100%;
     overflow-x: auto;
   }

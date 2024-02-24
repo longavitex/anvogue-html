@@ -515,7 +515,7 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href='/shop/breadcrumb2.html' class='link
+                                                                <a href='/shop-breadcrumb2.html' class='link
                                                                     text-secondary duration-300'>
                                                                     Shop Breadcrumb 2
                                                                 </a>
@@ -532,7 +532,7 @@
                                                         <div class="text-button-uppercase pb-2">Shop Features</div>
                                                         <ul>
                                                             <li>
-                                                                <a href='/shop/filter-canvas.html' class='link
+                                                                <a href='/shop-filter-canvas.html' class='link
                                                                     text-secondary duration-300'>
                                                                     Shop Filter Canvas
                                                                 </a>
@@ -544,13 +544,13 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href='/shop/filter-dropdown.html' class='link
+                                                                <a href='/shop-filter-dropdown.html' class='link
                                                                     text-secondary duration-300'>
                                                                     Shop Filter Dropdown
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href='/shop/sidebar-list.html' class='link
+                                                                <a href='/shop-sidebar-list.html' class='link
                                                                     text-secondary duration-300'>
                                                                     Shop Sidebar List
                                                                 </a>
@@ -573,7 +573,7 @@
                                                                 </a>
                                                             </li>
                                                             <li>
-                                                                <a href='/shop/default-list.html' class='link
+                                                                <a href='/shop-sidebar-list.html' class='link
                                                                     text-secondary duration-300 cursor-pointer'>
                                                                     Shop Default List
                                                                 </a>
@@ -1803,7 +1803,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href='/shop/breadcrumb2.html'
+                                                            <a href='/shop-breadcrumb2.html'
                                                                 class='link text-secondary duration-300'>
                                                                 Shop Breadcrumb 2
                                                             </a>
@@ -1820,7 +1820,7 @@
                                                     <div class="text-button-uppercase pb-1">Shop Features</div>
                                                     <ul>
                                                         <li>
-                                                            <a href='/shop/filter-canvas.html'
+                                                            <a href='/shop-filter-canvas.html'
                                                                 class='link text-secondary duration-300'>
                                                                 Shop Filter Canvas
                                                             </a>
@@ -1832,13 +1832,13 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href='/shop/filter-dropdown.html'
+                                                            <a href='/shop-filter-dropdown.html'
                                                                 class='link text-secondary duration-300'>
                                                                 Shop Filter Dropdown
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href='/shop/sidebar-list.html'
+                                                            <a href='/shop-sidebar-list.html'
                                                                 class='link text-secondary duration-300'>
                                                                 Shop Sidebar List
                                                             </a>
@@ -1861,7 +1861,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href='/shop/default-list.html'
+                                                            <a href='/shop-sidebar-list.html'
                                                                 class='link text-secondary duration-300 cursor-pointer'>
                                                                 Shop Default List
                                                             </a>
@@ -2197,19 +2197,24 @@
                     </div>
                     <div
                         class="filter-type menu-tab flex flex-wrap items-center justify-center gap-y-5 gap-8 lg:mt-[70px] mt-12 overflow-hidden">
-                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px" data-item="t-shirt">
+                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px"
+                            data-item="t-shirt">
                             t-shirt
                         </div>
-                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px" data-item="dress">
+                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px"
+                            data-item="dress">
                             dress
                         </div>
-                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px" data-item="top">
+                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px"
+                            data-item="top">
                             top
                         </div>
-                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px" data-item="swimwear">
+                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px"
+                            data-item="swimwear">
                             swimwear
                         </div>
-                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px" data-item="shirt">
+                        <div class="item tab-item text-button-uppercase cursor-pointer has-line-before line-2px"
+                            data-item="shirt">
                             shirt
                         </div>
                     </div>
@@ -2261,7 +2266,7 @@
                                 </div>
                             </div>
                             <div class='item tab-item four-col p-2 border border-line rounded flex items-center
-                                justify-center cursor-pointer'>
+                                justify-center cursor-pointer active'>
                                 <div class='flex items-center gap-0.5'>
                                     <span class='w-[3px] h-4 bg-secondary2 rounded-sm'></span>
                                     <span class='w-[3px] h-4 bg-secondary2 rounded-sm'></span>
@@ -2286,7 +2291,7 @@
                                 sale</label>
                         </div>
                     </div>
-                    <div class="right flex items-center gap-3">
+                    <div class="sort-product right flex items-center gap-3">
                         <label for='select-filter' class="caption1 capitalize">Sort by</label>
                         <div class="select-block relative">
                             <select id="select-filter" name="select-filter"
@@ -2303,54 +2308,69 @@
                     </div>
                 </div>
 
-                <div class='sidebar style-dropdown bg-white grid grid-cols-4 gap-[30px]'>
+                <div class='sidebar style-dropdown bg-white grid md:grid-cols-4 grid-cols-2 md:gap-[30px] gap-6'>
                     <div class="filter-type-block">
                         <div class="heading6">Products Type</div>
                         <div class="list-type filter-type menu-tab mt-4">
-                            <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="t-shirt">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>t-shirt</div>
+                            <div class='item tab-item flex items-center justify-between cursor-pointer'
+                                data-item="t-shirt">
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>
+                                    t-shirt</div>
                                 <div class='text-secondary2 number'>
                                     6
                                 </div>
                             </div>
-                            <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="dress">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>dress</div>
+                            <div class='item tab-item flex items-center justify-between cursor-pointer'
+                                data-item="dress">
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>dress
+                                </div>
                                 <div class='text-secondary2 number'>
                                     6
                                 </div>
                             </div>
                             <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="top">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>top</div>
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>top
+                                </div>
                                 <div class='text-secondary2 number'>
                                     6
                                 </div>
                             </div>
-                            <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="swimwear">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>swimwear</div>
+                            <div class='item tab-item flex items-center justify-between cursor-pointer'
+                                data-item="swimwear">
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>
+                                    swimwear</div>
                                 <div class='text-secondary2 number'>
                                     6
                                 </div>
                             </div>
-                            <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="shirt">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>shirt</div>
+                            <div class='item tab-item flex items-center justify-between cursor-pointer'
+                                data-item="shirt">
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>shirt
+                                </div>
                                 <div class='text-secondary2 number'>
                                     6
                                 </div>
                             </div>
-                            <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="underwear">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>underwear</div>
+                            <div class='item tab-item flex items-center justify-between cursor-pointer'
+                                data-item="underwear">
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>
+                                    underwear</div>
                                 <div class='text-secondary2 number'>
                                     6
                                 </div>
                             </div>
-                            <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="sets">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>sets</div>
+                            <div class='item tab-item flex items-center justify-between cursor-pointer'
+                                data-item="sets">
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>sets
+                                </div>
                                 <div class='text-secondary2 number'>
                                     6
                                 </div>
                             </div>
-                            <div class='item tab-item flex items-center justify-between cursor-pointer' data-item="accessories">
-                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>accessories
+                            <div class='item tab-item flex items-center justify-between cursor-pointer'
+                                data-item="accessories">
+                                <div class='type-name text-secondary has-line-before hover:text-black capitalize'>
+                                    accessories
                                 </div>
                                 <div class='text-secondary2 number'>
                                     6
@@ -2362,32 +2382,32 @@
                         <div class="filter-size">
                             <div class="heading6">Size</div>
                             <div class="list-size flex items-center flex-wrap gap-3 gap-y-4 mt-4">
-                                <div
-                                    class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line' data-item="XS">
+                                <div class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line'
+                                    data-item="XS">
                                     XS
                                 </div>
-                                <div
-                                    class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line' data-item="S">
+                                <div class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line'
+                                    data-item="S">
                                     S
                                 </div>
-                                <div
-                                    class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line' data-item="M">
+                                <div class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line'
+                                    data-item="M">
                                     M
                                 </div>
-                                <div
-                                    class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line' data-item="L">
+                                <div class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line'
+                                    data-item="L">
                                     L
                                 </div>
-                                <div
-                                    class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line' data-item="XL">
+                                <div class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line'
+                                    data-item="XL">
                                     XL
                                 </div>
-                                <div
-                                    class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line' data-item="2XL">
+                                <div class='size-item text-button w-[44px] h-[44px] flex items-center justify-center rounded-full border border-line'
+                                    data-item="2XL">
                                     2XL
                                 </div>
-                                <div
-                                    class='size-item text-button px-4 py-2 flex items-center justify-center rounded-full border border-line'>
+                                <div class='size-item text-button px-4 py-2 flex items-center justify-center rounded-full border border-line'
+                                    data-item="freesize">
                                     Freesize
                                 </div>
                             </div>
@@ -2398,8 +2418,8 @@
                                 <div class="progress"></div>
                             </div>
                             <div class="range-input">
-                                <input class="range-min" type="range" min="0" max="500" value="0">
-                                <input class="range-max" type="range" min="0" max="500" value="500">
+                                <input class="range-min" type="range" min="0" max="300" value="0">
+                                <input class="range-max" type="range" min="0" max="300" value="300">
                             </div>
                             <div class="price-block flex items-center justify-between flex-wrap mt-4">
                                 <div class="min flex items-center gap-1">
@@ -2411,7 +2431,7 @@
                                 <div class="min flex items-center gap-1">
                                     <div>Max price:</div>
                                     <div class='max-price'>
-                                        $500
+                                        $300
                                     </div>
                                 </div>
                             </div>
@@ -2421,37 +2441,37 @@
                         <div class="heading6">colors</div>
                         <div class="list-color flex items-center flex-wrap gap-3 gap-y-4 mt-4">
                             <div class='color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border
-                                border-line'>
+                                border-line' data-item="pink">
                                 <div class="color bg-[#F4C5BF] w-5 h-5 rounded-full"></div>
                                 <div class="caption1 capitalize">pink</div>
                             </div>
                             <div class='color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border
-                                border-line'>
+                                border-line' data-item="red">
                                 <div class="color bg-red w-5 h-5 rounded-full"></div>
                                 <div class="caption1 capitalize">red</div>
                             </div>
                             <div class='color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border
-                                border-line'>
+                                border-line' data-item="green">
                                 <div class="color bg-green w-5 h-5 rounded-full"></div>
                                 <div class="caption1 capitalize">green</div>
                             </div>
                             <div class='color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border
-                                border-line'>
+                                border-line' data-item="yellow">
                                 <div class="color bg-yellow w-5 h-5 rounded-full"></div>
                                 <div class="caption1 capitalize">yellow</div>
                             </div>
                             <div class='color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border
-                                border-line'>
+                                border-line' data-item="purple">
                                 <div class="color bg-purple w-5 h-5 rounded-full"></div>
                                 <div class="caption1 capitalize">purple</div>
                             </div>
                             <div class='color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border
-                                border-line'>
+                                border-line' data-item="black">
                                 <div class="color bg-black w-5 h-5 rounded-full"></div>
                                 <div class="caption1 capitalize">black</div>
                             </div>
                             <div class='color-item px-3 py-[5px] flex items-center justify-center gap-2 rounded-full border
-                                border-line'>
+                                border-line' data-item="white">
                                 <div class="color bg-[#F6EFDD] w-5 h-5 rounded-full"></div>
                                 <div class="caption1 capitalize">white</div>
                             </div>
@@ -2524,7 +2544,7 @@
                     </div>
                 </div>
 
-                <div class='list-product hide-product-sold grid lg:grid-cols-4 sm:grid-cols-3
+                <div class='list-product hide-product-sold grid sm:grid-cols-3
                     grid-cols-2 sm:gap-[30px] gap-[20px] mt-7' list-product="12">
 
                 </div>
