@@ -2753,7 +2753,7 @@ textarea:focus {
 }
 
 .shop-square .product-item .product-thumb .product-img {
-  aspect-ratio: unset;
+  aspect-ratio: 1/1;
 }
 
 .list-product-block:has(.active.five-col) .list-product .product-item .product-thumb .list-action {

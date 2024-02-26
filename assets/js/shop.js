@@ -135,17 +135,46 @@ function fetchProducts() {
                     size: Array.from(document.querySelectorAll('.filter-size .size-item.active')).map(item => item.getAttribute('data-item')),
                     color: Array.from(document.querySelectorAll('.filter-color .color-item.active')).map(item => item.getAttribute('data-item')),
                     brand: Array.from(document.querySelectorAll('.filter-brand .brand-item input[type="checkbox"]:checked')).map(item => item.getAttribute('name')),
-                    minPrice: parseInt(rangeInput[0].value),
-                    maxPrice: parseInt(rangeInput[1].value),
+                    minPrice: 0, //default
+                    maxPrice: 300, //default
                     sale: document.querySelector('.check-sale input[type="checkbox"]:checked')
                 };
+
+                console.log(selectedFilters.type);
+
+                // Filter options
+                if (document.querySelector('.filter-type select')) {
+                    const typeValue = document.querySelector('.filter-type select').value;
+                    selectedFilters.type = typeValue !== "null" ? typeValue : null;
+                }
+                console.log(selectedFilters.type);
+                
+                if (document.querySelector('.filter-size select')) {
+                    const sizeValue = document.querySelector('.filter-size select').value;
+                    selectedFilters.size = sizeValue !== "null" ? sizeValue : null;
+                }
+
+                if (document.querySelector('.filter-color select')) {
+                    const colorValue = document.querySelector('.filter-color select').value;
+                    selectedFilters.color = colorValue !== "null" ? colorValue : null;
+                }
+
+                if (document.querySelector('.filter-brand select')) {
+                    const brandValue = document.querySelector('.filter-brand select').value;
+                    selectedFilters.brand = brandValue !== "null" ? brandValue : null;
+                }
+
+                if (rangeInput && rangeInput.length > 1) {
+                    selectedFilters.minPrice = parseInt(rangeInput[0].value);
+                    selectedFilters.maxPrice = parseInt(rangeInput[1].value);
+                }
 
                 // filter product base on items filtered
                 let filteredProducts = productsData.filter(product => {
                     if (selectedFilters.type && product.type !== selectedFilters.type) return false;
-                    if (selectedFilters.size.length > 0 && !product.sizes.some(size => selectedFilters.size.includes(size))) return false;
-                    if (selectedFilters.color.length > 0 && !product.variation.some(variant => selectedFilters.color.includes(variant.color))) return false;
-                    if (selectedFilters.brand.length > 0 && !selectedFilters.brand.includes(product.brand)) return false;
+                    if (selectedFilters.size && selectedFilters.size.length > 0 && !product.sizes.some(size => selectedFilters.size.includes(size))) return false;
+                    if (selectedFilters.color && selectedFilters.color.length > 0 && !product.variation.some(variant => selectedFilters.color.includes(variant.color))) return false;
+                    if (selectedFilters.brand && selectedFilters.brand.length > 0 && !selectedFilters.brand.includes(product.brand)) return false;
                     if (selectedFilters.minPrice && product.price < selectedFilters.minPrice) return false;
                     if (selectedFilters.maxPrice && product.price > selectedFilters.maxPrice) return false;
                     if (selectedFilters.sale && product.sale !== true) return false;
@@ -211,17 +240,28 @@ function fetchProducts() {
                 }
             });
 
+            // Filter options
+            if (document.querySelector('.filter-type select')) {
+                document.querySelector('.filter-type select').addEventListener('change', handleFiltersChange)
+            }
+
             sizeItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    handleFiltersChange();
-                });
+                item.addEventListener('click', handleFiltersChange);
             });
 
+            // Filter options
+            if (document.querySelector('.filter-size select')) {
+                document.querySelector('.filter-size select').addEventListener('change', handleFiltersChange)
+            }
+
             colorItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    handleFiltersChange();
-                });
+                item.addEventListener('click', handleFiltersChange);
             });
+
+            // Filter options
+            if (document.querySelector('.filter-color select')) {
+                document.querySelector('.filter-color select').addEventListener('change', handleFiltersChange)
+            }
 
             brandItems.forEach(item => {
                 if (item.querySelector('.number')) {
@@ -230,20 +270,21 @@ function fetchProducts() {
             })
 
             checkboxBrandItems.forEach(item => {
-                item.addEventListener('change', () => {
-                    handleFiltersChange();
-                });
+                item.addEventListener('change', handleFiltersChange);
             })
+
+            // Filter options
+            if (document.querySelector('.filter-brand select')) {
+                document.querySelector('.filter-brand select').addEventListener('change', handleFiltersChange)
+            }
 
             rangeInput.forEach(input => {
-                input.addEventListener('input', () => {
-                    handleFiltersChange();
-                })
+                input.addEventListener('input', handleFiltersChange)
             })
 
-            checkSale.addEventListener('change', () => {
-                handleFiltersChange();
-            })
+            if (checkSale) {
+                checkSale.addEventListener('change', handleFiltersChange)
+            }
 
             sortSelect.addEventListener('change', () => {
                 sortOption = sortSelect.value
