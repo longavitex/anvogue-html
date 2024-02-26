@@ -249,9 +249,19 @@
     padding-bottom: 24px;
 }
 
+.swiper-product-scroll {
+    padding-bottom: 6px;
+}
+
 .best-sale-prd .swiper-scrollbar,
 .collection-block.style-six .swiper-scrollbar {
     height: 6px;
+    bottom: 0;
+    opacity: 1 !important;
+}
+
+.swiper-product-scroll .swiper-scrollbar {
+    height: 4px;
     bottom: 0;
     opacity: 1 !important;
 }

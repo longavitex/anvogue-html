@@ -29,6 +29,8 @@
     &.style-underwear {
         .menu-tab {
             .tab-item {
+                border-radius: 16px;
+
                 &.active {
                     background-color: var(--black);
                     color: var(--white);
@@ -40,6 +42,8 @@
     &.style-watch {
         .menu-tab {
             .tab-item {
+                border-radius: 16px;
+
                 &.active {
                     background: var(--surface1);
                     color: var(--white);

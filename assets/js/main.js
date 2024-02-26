@@ -475,6 +475,20 @@ var swiper2 = new Swiper(".mySwiper2", {
     thumbs: {
         swiper: swiper,
     },
+    on: {
+        slideChange: function () {
+            // Lấy index của slide hiện tại trong swiper 1
+            let activeIndex = this.activeIndex;
+
+            // Xóa lớp 'swiper-slide-thumb-active' từ tất cả các slide trong swiper 2
+            document.querySelectorAll('.mySwiper .swiper-slide').forEach((slide) => {
+                slide.classList.remove('swiper-slide-thumb-active');
+            });
+
+            // Thêm lớp 'swiper-slide-thumb-active' vào slide tương ứng trong swiper 2
+            document.querySelectorAll('.mySwiper .swiper-slide')[activeIndex].classList.add('swiper-slide-thumb-active');
+        },
+    },
 });
 
 
@@ -740,7 +754,7 @@ function addEventToProductItem() {
         })
     }
 
-
+    // List size
     const listSizes = document.querySelectorAll('.list-size')
 
     listSizes.forEach(list => {
@@ -770,7 +784,7 @@ function addEventToProductItem() {
         })
     })
 
-
+    // List color
     const listColors = document.querySelectorAll('.list-color')
 
     listColors.forEach(list => {
@@ -1130,6 +1144,39 @@ fetch('./assets/data/Product.json')
         addEventToProductItem()
     })
     .catch(error => console.error('Error loading products:', error));
+
+
+
+// Featured product underwear
+const quantityBlock = document.querySelectorAll('.quantity-block')
+
+quantityBlock.forEach(item => {
+    const minus = item.querySelector('.ph-minus')
+    const plus = item.querySelector('.ph-plus')
+    const quantity = item.querySelector('.quantity')
+
+    if (Number(quantity.textContent) < 2) {
+        minus.classList.add('disabled')
+    }
+
+    minus.addEventListener('click', () => {
+        if (Number(quantity.textContent) > 2) {
+            quantity.innerHTML = Number(quantity.innerHTML) - 1
+            minus.classList.remove('disabled')
+        }
+        else {
+            quantity.innerHTML = '1'
+            minus.classList.add('disabled')
+        }
+    })
+
+    plus.addEventListener('click', () => {
+        quantity.innerHTML = Number(quantity.innerHTML) + 1
+        if (Number(quantity.textContent) >= 2) {
+            minus.classList.remove('disabled')
+        }
+    })
+})
 
 
 const blogItems = document.querySelectorAll('.blog-item')
