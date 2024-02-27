@@ -393,14 +393,14 @@
 
 
 // Detail
-.product-detail {
-    .quantity-block {
-        .disabled {
-            color: var(--secondary2);
-            cursor: default;
-        }
+.quantity-block {
+    .disabled {
+        color: var(--secondary2);
+        cursor: default;
     }
+}
 
+.product-detail {
     .desc-tab {
         .desc-block {
             .tab-item {
@@ -543,6 +543,18 @@
             }
         }
     }
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 90px;
+}
+
+.sticky:before,
+.sticky:after {
+    content: '';
+    display: table;
 }
 
 .style-discount {

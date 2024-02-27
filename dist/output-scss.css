@@ -292,6 +292,10 @@ body {
   font-family: "Instrument Sans", sans-serif;
 }
 
+body.overflow-unset {
+  overflow-x: unset;
+}
+
 div,
 span,
 p {
@@ -1555,6 +1559,10 @@ textarea:focus {
   z-index: 103;
 }
 
+.modal-sizeguide-block {
+  z-index: 103;
+}
+
 .modal-compare-block {
   position: fixed;
   left: 0;
@@ -2387,10 +2395,11 @@ textarea:focus {
   background-color: var(--white);
 }
 
-.product-detail .quantity-block .disabled {
+.quantity-block .disabled {
   color: var(--secondary2);
   cursor: default;
 }
+
 .product-detail .desc-tab .desc-block .tab-item svg {
   transition: all ease 0.3s;
 }
@@ -2484,6 +2493,18 @@ textarea:focus {
 }
 .product-detail.sidebar .featured-product.underwear .mySwiper .swiper-wrapper .swiper-slide {
   width: 100% !important;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 90px;
+}
+
+.sticky:before,
+.sticky:after {
+  content: "";
+  display: table;
 }
 
 .style-discount .breadcrumb-product .main {
@@ -3432,6 +3453,10 @@ textarea:focus {
   color: var(--secondary2);
   opacity: 0.8;
   cursor: default;
+}
+
+.size-guide {
+  cursor: pointer;
 }
 
 .best-sale-prd .quantity-block .disabled {

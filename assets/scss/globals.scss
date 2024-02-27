@@ -40,6 +40,10 @@ body {
   font-family: 'Instrument Sans', sans-serif;
 }
 
+body.overflow-unset {
+  overflow-x: unset;
+}
+
 div,
 span,
 p {

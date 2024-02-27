@@ -1,4 +1,4 @@
-// List scroll product 6
+// List scroll you'll love this to
 if (document.querySelector('.swiper-product-scroll')) {
     var swiperCollection = new Swiper(".swiper-product-scroll", {
         scrollbar: {
@@ -27,38 +27,89 @@ const pathname = new URL(window.location.href)
 const productId = pathname.searchParams.get('id') === null ? '1' : pathname.searchParams.get('id')
 const productDetail = document.querySelector('.product-detail')
 
+// Href
+let classes = productDetail.className.split(' ');
+let typePage = classes[1];
+
 
 if (productDetail) {
     fetch('./assets/data/Product.json')
         .then(response => response.json())
         .then(data => {
-            const productMain = data[Number(productId) - 1]
+            let productMain = data[Number(productId) - 1]
+
+            // Next, Prev products
+            const prevBtn = document.querySelector('.breadcrumb-product .prev-btn')
+            const nextBtn = document.querySelector('.breadcrumb-product .next-btn')
+
+            if (productId === '1') {
+                prevBtn.remove()
+                nextBtn.addEventListener('click', () => {
+                    window.location.href = `product-${typePage}.html?id=${data[Number(productId)].id}`
+                })
+            } else {
+                prevBtn.addEventListener('click', () => {
+                    window.location.href = `product-${typePage}.html?id=${data[Number(productId) - 2].id}`
+                })
+
+                nextBtn.addEventListener('click', () => {
+                    window.location.href = `product-${typePage}.html?id=${data[Number(productId)].id}`
+                })
+            }
 
             // list-img
             const listImg2 = productDetail.querySelector('.featured-product .list-img .mySwiper2 .swiper-wrapper')
             const listImg = productDetail.querySelector('.featured-product .list-img .mySwiper .swiper-wrapper')
 
-            productMain.images.map(item => {
-                const imgItem = document.createElement('div')
-                imgItem.classList.add('swiper-slide')
-                imgItem.innerHTML = `
-                    <img src=${item} alt='img' class='w-full aspect-[3/4] object-cover' />
-                `
-                const imgItemClone = imgItem.cloneNode(true); // Copy imgItem
+            if (listImg2 && listImg) {
+                productMain.images.map(item => {
+                    const imgItem = document.createElement('div')
+                    imgItem.classList.add('swiper-slide')
+                    imgItem.innerHTML = `
+                        <img src=${item} alt='img' class='w-full aspect-[3/4] object-cover' />
+                    `
+                    const imgItemClone = imgItem.cloneNode(true); // Copy imgItem
 
-                listImg2.appendChild(imgItem)
-                listImg.appendChild(imgItemClone)
+                    listImg2.appendChild(imgItem)
+                    listImg.appendChild(imgItemClone)
 
-                const slides = document.querySelectorAll('.mySwiper .swiper-slide')
-                slides[0].classList.add('swiper-slide-thumb-active')
+                    const slides = document.querySelectorAll('.mySwiper .swiper-slide')
+                    slides[0].classList.add('swiper-slide-thumb-active')
 
-                slides.forEach((img, index) => {
-                    img.addEventListener('click', () => {
-                        // Chuyển swiper 2 đến vị trí tương ứng với ảnh được click trong swiper 1
-                        swiper2.slideTo(index);
+                    slides.forEach((img, index) => {
+                        img.addEventListener('click', () => {
+                            // Chuyển swiper 2 đến vị trí tương ứng với ảnh được click trong swiper 1
+                            swiper2.slideTo(index);
+                        });
                     });
-                });
-            })
+                })
+            }
+
+            // list-img countdown timer
+            const listImg3 = productDetail.querySelector('.featured-product.countdown-timer .list-img>div')
+            if (listImg3) {
+                productMain.images.map(item => {
+                    const imgItem = document.createElement('div')
+                    imgItem.innerHTML = `
+                        <img src=${item} alt='img' class='w-full aspect-[3/4] object-cover rounded-[20px]' />
+                    `
+
+                    listImg3.appendChild(imgItem)
+                })
+            }
+
+
+            // product sale
+            const productSale = productDetail.querySelector('.sold-block')
+            if (productSale) {
+                const percentSold = productSale.querySelector('.percent-sold')
+                const percentSoldNumber = productSale.querySelector('.percent-sold-number')
+                const remainingNumber = productSale.querySelector('.remaining-number')
+
+                percentSold.style.width = Math.floor((productMain.sold / productMain.quantity) * 100) + '%'
+                percentSoldNumber.innerHTML = Math.floor((productMain.sold / productMain.quantity) * 100) + '% Sold -'
+                remainingNumber.innerHTML = productMain.quantity - productMain.sold
+            }
 
             // infor
             productDetail.querySelector('.product-category').innerHTML = productMain.category
@@ -80,7 +131,7 @@ if (productDetail) {
                         </div>
                     `
 
-                productDetail.querySelector('.choose-color .list-color').appendChild(colorItem)
+                productDetail.querySelector('.choose-color .list-color') && productDetail.querySelector('.choose-color .list-color').appendChild(colorItem)
             })
 
             productMain.sizes.map((item) => {
@@ -92,12 +143,36 @@ if (productDetail) {
                 }
                 sizeItem.innerHTML = item
 
-                productDetail.querySelector('.choose-size .list-size').appendChild(sizeItem)
+                productDetail.querySelector('.choose-size .list-size') && productDetail.querySelector('.choose-size .list-size').appendChild(sizeItem)
             })
         })
         .catch(error => console.error('Error fetching products:', error));
 }
 
+
+// desc-tab
+const descTabItem = document.querySelectorAll('.desc-tab .tab-item')
+const descItem = document.querySelectorAll('.desc-tab .desc-block .desc-item')
+
+descTabItem.forEach(tabItems => {
+    const handleOpen = () => {
+        let dataItem = tabItems.innerHTML.replace(/\s+/g, '')
+
+        descItem.forEach(item => {
+            if (item.getAttribute('data-item') === dataItem) {
+                item.classList.add('open')
+            } else {
+                item.classList.remove('open')
+            }
+        })
+    }
+
+    if (tabItems.classList.contains('active')) {
+        handleOpen()
+    }
+
+    tabItems.addEventListener('click', handleOpen)
+})
 
 
 // list-img review

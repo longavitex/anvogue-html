@@ -477,15 +477,15 @@ var swiper2 = new Swiper(".mySwiper2", {
     },
     on: {
         slideChange: function () {
-            // Lấy index của slide hiện tại trong swiper 1
+            // Get index of current slide in swiper 1
             let activeIndex = this.activeIndex;
 
-            // Xóa lớp 'swiper-slide-thumb-active' từ tất cả các slide trong swiper 2
+            // Remove class 'swiper-slide-thumb-active' from all slide in swiper 2
             document.querySelectorAll('.mySwiper .swiper-slide').forEach((slide) => {
                 slide.classList.remove('swiper-slide-thumb-active');
             });
 
-            // Thêm lớp 'swiper-slide-thumb-active' vào slide tương ứng trong swiper 2
+            // Add class 'swiper-slide-thumb-active' to slide in swiper 2
             document.querySelectorAll('.mySwiper .swiper-slide')[activeIndex].classList.add('swiper-slide-thumb-active');
         },
     },
@@ -528,6 +528,97 @@ closeQuickviewIcon.addEventListener('click', closeModalQuickview)
 modalQuickviewMain.addEventListener('click', (e) => {
     e.stopPropagation()
 })
+
+// Modal SizeGuide
+const openModalSizeGuideBtn = document.querySelectorAll('.size-guide')
+const modalSizeGuide = document.querySelector('.modal-sizeguide-block')
+const modalSizeGuideMain = document.querySelector('.modal-sizeguide-block .modal-sizeguide-main')
+const closeSizeGuideIcon = document.querySelector('.modal-sizeguide-main .close-btn')
+
+if (modalSizeGuide) {
+    const openModalSizeGuide = () => {
+        modalSizeGuideMain.classList.add('open')
+    }
+
+    const closeModalSizeGuide = () => {
+        modalSizeGuideMain.classList.remove('open')
+    }
+
+    openModalSizeGuideBtn.forEach(btn => {
+        btn.addEventListener('click', openModalSizeGuide)
+    })
+
+    modalSizeGuide.addEventListener('click', closeModalSizeGuide)
+    closeSizeGuideIcon.addEventListener('click', closeModalSizeGuide)
+
+    modalSizeGuideMain.addEventListener('click', (e) => {
+        e.stopPropagation()
+    })
+
+    // Tow bar filter weight height
+    const rangeInputSizeguide = document.querySelectorAll('.modal-sizeguide-block .range-input input')
+    const progressHeight = document.querySelector('.filter-height .tow-bar-block .progress')
+    const progressWeight = document.querySelector('.filter-weight .tow-bar-block .progress')
+    const height = document.querySelector('.modal-sizeguide-block .height')
+    const weight = document.querySelector('.modal-sizeguide-block .weight')
+
+    rangeInputSizeguide.forEach(input => {
+        input.addEventListener('input', (e) => {
+            // set weight, height
+            let heightValue = parseInt(rangeInputSizeguide[0].value)
+            let weightValue = parseInt(rangeInputSizeguide[1].value)
+
+            height.innerHTML = heightValue
+            weight.innerHTML = weightValue
+
+            progressHeight.style.right = 100 - (heightValue / 200) * 100 + "%";
+            progressWeight.style.right = 100 - (weightValue / 90) * 100 + "%";
+
+            // Change active weight, height
+            let sizeItems = document.querySelectorAll('.modal-sizeguide-block .list-size .size-item')
+
+            sizeItems.forEach(size => {
+                if (heightValue > 180 || weightValue > 70) {
+                    if (size.innerHTML.replace(/\s+/g, '') === '2XL') {
+                        size.classList.add('active')
+                    } else {
+                        size.classList.remove('active')
+                    }
+                } else if (heightValue > 170 || weightValue > 60) {
+                    if (size.innerHTML.replace(/\s+/g, '') === 'XL') {
+                        size.classList.add('active')
+                    } else {
+                        size.classList.remove('active')
+                    }
+                } else if (heightValue > 160 || weightValue > 50) {
+                    if (size.innerHTML.replace(/\s+/g, '') === 'L') {
+                        size.classList.add('active')
+                    } else {
+                        size.classList.remove('active')
+                    }
+                } else if (heightValue > 155 || weightValue > 45) {
+                    if (size.innerHTML.replace(/\s+/g, '') === 'M') {
+                        size.classList.add('active')
+                    } else {
+                        size.classList.remove('active')
+                    }
+                } else if (heightValue > 150 || weightValue > 40) {
+                    if (size.innerHTML.replace(/\s+/g, '') === 'S') {
+                        size.classList.add('active')
+                    } else {
+                        size.classList.remove('active')
+                    }
+                } else {
+                    if (size.innerHTML.replace(/\s+/g, '') === 'XS') {
+                        size.classList.add('active')
+                    } else {
+                        size.classList.remove('active')
+                    }
+                }
+            })
+        })
+    })
+}
 
 
 // Create product item
