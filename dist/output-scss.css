@@ -2398,6 +2398,7 @@ textarea:focus {
 .quantity-block .disabled {
   color: var(--secondary2);
   cursor: default;
+  pointer-events: none;
 }
 
 .product-detail .desc-tab .desc-block .tab-item svg {
@@ -2433,23 +2434,23 @@ textarea:focus {
   margin-top: 20px;
 }
 @media (min-width: 640px) {
-  .product-detail.grouped .list-img .mySwiper2 {
+  .product-detail.style-grouped .list-img .mySwiper2 {
     margin-left: 130px;
   }
 }
 @media (min-width: 640px) and (max-width: 1023.98px) {
-  .product-detail.grouped .list-img .mySwiper2 {
+  .product-detail.style-grouped .list-img .mySwiper2 {
     margin-left: 74px;
   }
 }
 @media (min-width: 640px) {
-  .product-detail.grouped .list-img .mySwiper .swiper-wrapper {
+  .product-detail.style-grouped .list-img .mySwiper .swiper-wrapper {
     top: 0;
     left: 0;
   }
 }
 @media (max-width: 640px) {
-  .product-detail.grouped .product-infor {
+  .product-detail.style-grouped .product-infor {
     padding-top: 0;
   }
 }
@@ -2459,6 +2460,7 @@ textarea:focus {
   overflow: hidden;
   border: none;
   cursor: default;
+  pointer-events: none;
 }
 .product-detail.out-of-stock .product-infor.style-out-of-stock .color-item::before, .product-detail.out-of-stock .product-infor.style-out-of-stock .color-item::after,
 .product-detail.out-of-stock .product-infor.style-out-of-stock .size-item::before,

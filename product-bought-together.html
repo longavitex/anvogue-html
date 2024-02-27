@@ -2191,7 +2191,7 @@
                         <i class='ph ph-caret-right text-xs text-secondary2'></i>
                         <div class='caption1 text-secondary2'>Product</div>
                         <i class='ph ph-caret-right text-xs text-secondary2'></i>
-                        <div class='caption1 capitalize'>Product Countdown Timer</div>
+                        <div class='caption1 capitalize'>Product Bought Together</div>
                     </div>
                     <div class="right flex items-center gap-3">
                         <div
@@ -2210,16 +2210,18 @@
         </div>
     </div>
 
-    <div class="product-detail countdown-timer">
+    <div class="product-detail bought-together">
         <div class="featured-product countdown-timer underwear md:py-20 py-14">
             <div class="container flex justify-between gap-y-6 flex-wrap">
                 <div class="list-img md:w-1/2 md:pr-4 w-full flex-shrink-0">
-                    <div class="flex flex-col gap-[30px]">
-                        <!-- list img -->
+                    <div class="sticky">
+                        <div class="list grid grid-cols-2 gap-5">
+                            <!-- list img -->
+                        </div>
                     </div>
                 </div>
                 <div class="product-infor md:w-1/2 w-full lg:pl-16 md:pl-6">
-                    <div class="sticky">
+                    <div class="">
                         <div class="flex justify-between">
                             <div>
                                 <div class="product-category caption2 text-secondary font-semibold uppercase">fashion
@@ -2257,50 +2259,6 @@
                                 perfect to be used in the any place where you need to store.</div>
                         </div>
                         <div class="list-action mt-6">
-                            <div class="countdown-block flex items-center justify-between flex-wrap gap-y-4">
-                                <div class="text-title">Hurry Up!<br />
-                                    Offer ends in:</div>
-                                <div
-                                    class="countdown-time flex items-center lg:gap-5 gap-3 max-[400px]:justify-between max-[400px]:w-full">
-                                    <div
-                                        class="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
-                                        <div class="days heading6 text-center">12</div>
-                                        <div class="caption1 text-center">Days</div>
-                                    </div>
-                                    <div class="heading5">:</div>
-                                    <div
-                                        class="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
-                                        <div class="hours heading6 text-center">23</div>
-                                        <div class="caption1 text-center">Hours</div>
-                                    </div>
-                                    <div class="heading5">:</div>
-                                    <div
-                                        class="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
-                                        <div class="mins heading6 text-center">46</div>
-                                        <div class="caption1 text-center">Mins</div>
-                                    </div>
-                                    <div class="heading5">:</div>
-                                    <div
-                                        class="item w-[60px] h-[60px] flex flex-col items-center justify-center border border-red rounded-lg">
-                                        <div class="secs heading6 text-center">32</div>
-                                        <div class="caption1 text-center">Secs</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sold-block flex justify-between flex-wrap gap-4 mt-5">
-                                <div class="text-title">sold It:</div>
-                                <div class="right sm:w-3/4">
-                                    <div class="progress h-2 rounded-full overflow-hidden bg-line relative">
-                                        <div class='percent-sold absolute top-0 left-0 h-full bg-red'></div>
-                                    </div>
-                                    <div class="flex items-center gap-1 mt-2">
-                                        <span class="percent-sold-number">% Sold -</span>
-                                        <span class='text-secondary'>Only <span class="remaining-number"></span> item(s)
-                                            left in
-                                            stock!</span>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="choose-color mt-5">
                                 <div class="text-title">Colors: <span class='text-title color'></span>
                                 </div>
@@ -2431,6 +2389,84 @@
                                         hearts.</div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="list-bought-together mt-6">
+                            <div class="heading5">Frequently bought together</div>
+                            <div class="list-product-img flex gap-3 mt-4">
+                                <img src='./assets/images/product/fashion/16-1.png' alt='img'
+                                    class='w-[100px] aspect-[3/4] object-cover rounded-lg' />
+                                <img src='./assets/images/product/fashion/15-1.png' alt='img'
+                                    class='w-[100px] aspect-[3/4] object-cover rounded-lg' />
+                                <img src='./assets/images/product/fashion/12-1.png' alt='img'
+                                    class='w-[100px] aspect-[3/4] object-cover rounded-lg' />
+                            </div>
+                            <div class="list-infor mt-2">
+                                <div class="item flex items-center gap-3 mt-4">
+                                    <div class="flex items-center gap-2">
+                                        <input type="checkbox" name='item1' id='item1' />
+                                        <label for='item1' class='text-title'>Message cotton sweatshirt</label>
+                                    </div>
+                                    <div class="select-block relative w-fit">
+                                        <select class='caption1 py-1 pl-2 pr-8 rounded-lg bg-white border border-line'>
+                                            <option value="S - Green">S - Green</option>
+                                            <option value="M - Yellow">M - Yellow</option>
+                                            <option value="L - Red">L - Red</option>
+                                            <option value="XL - Purple">XL - Purple</option>
+                                        </select>
+                                        <i
+                                            class='ph ph-caret-down text-xs absolute top-1/2 -translate-y-1/2 md:right-4 right-2'></i>
+                                    </div>
+                                    <div class="price text-title">$32.00</div>
+                                </div>
+                                <div class="item flex items-center gap-3 mt-4">
+                                    <div class="flex items-center gap-2">
+                                        <input type="checkbox" name='item2' id='item2' />
+                                        <label for='item2' class='text-title'>Contrasting sheepskin sweatshirt</label>
+                                    </div>
+                                    <div class="select-block relative w-fit">
+                                        <select class='caption1 py-1 pl-2 pr-8 rounded-lg bg-white border border-line'>
+                                            <option value="S - Green">S - Green</option>
+                                            <option value="M - Yellow">M - Yellow</option>
+                                            <option value="L - Red">L - Red</option>
+                                            <option value="XL - Purple">XL - Purple</option>
+                                        </select>
+                                        <i
+                                            class='ph ph-caret-down text-xs absolute top-1/2 -translate-y-1/2 md:right-4 right-2'></i>
+                                    </div>
+                                    <div class="price text-title">$28.00</div>
+                                </div>
+                                <div class="item flex items-center gap-3 mt-4">
+                                    <div class="flex items-center gap-2">
+                                        <input type="checkbox" name='item3' id='item3' />
+                                        <label for='item3' class='text-title'>Leather boots with tall leg</label>
+                                    </div>
+                                    <div class="select-block relative w-fit">
+                                        <select class='caption1 py-1 pl-2 pr-8 rounded-lg bg-white border border-line'>
+                                            <option value="S - Green">S - Green</option>
+                                            <option value="M - Yellow">M - Yellow</option>
+                                            <option value="L - Red">L - Red</option>
+                                            <option value="XL - Purple">XL - Purple</option>
+                                        </select>
+                                        <i
+                                            class='ph ph-caret-down text-xs absolute top-1/2 -translate-y-1/2 md:right-4 right-2'></i>
+                                    </div>
+                                    <div class="price text-title">$30.00</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 flex-wrap mt-4">
+                                <div class="text-title">Total Price:</div>
+                                <div class="product-total-price heading3">$105.00</div>
+                                <div class='w-px h-4 bg-line'></div>
+                                <div class="product-origin-price font-normal text-secondary2">
+                                    <del>$135.00</del>
+                                </div>
+                                <div
+                                    class="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
+                                    -24%
+                                </div>
+                            </div>
+                            <div class="add-cart-btn button-main whitespace-nowrap text-center bg-black mt-6">
+                                Add Both To Cart</div>
                         </div>
                     </div>
                 </div>
@@ -2712,7 +2748,7 @@
                             <div class="heading flex items-center justify-between flex-wrap gap-4">
                                 <div class="heading4">03 Comments</div>
                                 <div class="right flex items-center gap-3">
-                                    <label htmlFor='select-filter' class="uppercase">Sort by:</label>
+                                    <label for='select-filter' class="uppercase">Sort by:</label>
                                     <div class="select-block relative">
                                         <select id="select-filter" name="select-filter"
                                             class='text-button py-2 pl-3 md:pr-14 pr-10 rounded-lg bg-white border border-line'

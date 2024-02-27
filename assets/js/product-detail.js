@@ -86,7 +86,7 @@ if (productDetail) {
             }
 
             // list-img countdown timer
-            const listImg3 = productDetail.querySelector('.featured-product.countdown-timer .list-img>div')
+            const listImg3 = productDetail.querySelector('.featured-product.countdown-timer .list-img .list')
             if (listImg3) {
                 productMain.images.map(item => {
                     const imgItem = document.createElement('div')
@@ -95,6 +95,26 @@ if (productDetail) {
                     `
 
                     listImg3.appendChild(imgItem)
+                })
+            }
+
+            // list-img variable
+            const listImg4 = productDetail.querySelector('.featured-product.variable .list-img .list')
+            // const subListImg4 = productDetail.querySelector('.featured-product.variable .list-img .list .sub-list')
+
+            if (listImg4) {
+                productMain.images.forEach((item, index) => {
+                    const imgItem = document.createElement('div');
+                    imgItem.innerHTML = `
+                        <img src=${item} alt='img' class='w-full aspect-[3/4] object-cover rounded-[20px]' />
+                    `;
+
+                    // Add img 1st and 4th,... to listImg4
+                    if (index === 0 || index === 3) {
+                        imgItem.classList.add('col-span-2')
+                    }
+
+                    listImg4.appendChild(imgItem);
                 })
             }
 

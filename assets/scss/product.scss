@@ -397,6 +397,7 @@
     .disabled {
         color: var(--secondary2);
         cursor: default;
+        pointer-events: none;
     }
 }
 
@@ -461,7 +462,7 @@
         }
     }
 
-    &.grouped {
+    &.style-grouped {
         .list-img {
             @media (min-width: 640px) {
                 .mySwiper2 {
@@ -500,6 +501,7 @@
                     overflow: hidden;
                     border: none;
                     cursor: default;
+                    pointer-events: none;
 
                     &::before,
                     &::after {
