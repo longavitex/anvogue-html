@@ -534,6 +534,28 @@
         }
     }
 
+    &.fixed-price {
+        .list-img {
+            .list {
+                @media (min-width: 768px) {
+                    .md\:col-span-1 {
+                        grid-column: span 1 / span 1;
+                    }
+
+                    .md\:row-span-2 {
+                        grid-row: span 2/span 2;
+                    }
+                }
+
+                @media not all and (min-width: 768px) {
+                    .max-md\:aspect-\[3\/4\] {
+                        aspect-ratio: 3/4;
+                    }
+                }
+            }
+        }
+    }
+
     &.sidebar {
         .featured-product.underwear .mySwiper .swiper-wrapper {
             display: grid;
@@ -545,6 +567,22 @@
             }
         }
     }
+}
+
+.aspect-\[5\/3\] {
+    aspect-ratio: 5/3;
+}
+
+.row-span-1 {
+    grid-row: span 1 / span 1;
+}
+
+.col-span-1 {
+    grid-column: span 1/span 1;
+}
+
+.col-span-2 {
+    grid-column: span 2 / span 2;
 }
 
 .sticky {

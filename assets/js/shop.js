@@ -140,15 +140,13 @@ function fetchProducts() {
                     sale: document.querySelector('.check-sale input[type="checkbox"]:checked')
                 };
 
-                console.log(selectedFilters.type);
 
                 // Filter options
                 if (document.querySelector('.filter-type select')) {
                     const typeValue = document.querySelector('.filter-type select').value;
                     selectedFilters.type = typeValue !== "null" ? typeValue : null;
                 }
-                console.log(selectedFilters.type);
-                
+
                 if (document.querySelector('.filter-size select')) {
                     const sizeValue = document.querySelector('.filter-size select').value;
                     selectedFilters.size = sizeValue !== "null" ? sizeValue : null;
@@ -219,6 +217,23 @@ function fetchProducts() {
             // sort product
             const sortSelect = document.querySelector('.sort-product select')
             let sortOption = sortSelect.value
+
+            // 
+            const pathname = new URL(window.location.href)
+            const typeUrl = pathname.searchParams.get('type') === null ? '' : pathname.searchParams.get('type')
+
+            if (typeUrl !== '') {
+                localStorage.setItem('selectedType', typeUrl)
+                typeItems.forEach(item => {
+                    if (item.getAttribute('data-item') === localStorage.getItem('selectedType')) {
+                        item.classList.add('active')
+                    } else {
+                        item.classList.remove('active')
+                    }
+
+                    handleFiltersChange();
+                });
+            }
 
             // handle events when user change filter
             typeItems.forEach(item => {

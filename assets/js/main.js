@@ -252,6 +252,90 @@ tabItems.forEach(item => {
     })
 })
 
+// Countdown time
+const countDown = new Date("June 05, 2024 00:00:00").getTime()
+const setCountDown = setInterval(function () {
+    let now = new Date().getTime()
+    let distance = countDown - now
+
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24))
+    if (days / 10 < 1) {
+        days = `0${days}`
+    }
+
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    if (hours / 10 < 1) {
+        hours = `0${hours}`
+    }
+
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+    if (minutes / 10 < 1) {
+        minutes = `0${minutes}`
+    }
+
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000)
+    if (seconds / 10 < 1) {
+        seconds = `0${seconds}`
+    }
+
+    const dayTime = document.querySelectorAll('.countdown-day')
+    const hourTime = document.querySelectorAll('.countdown-hour')
+    const minuteTime = document.querySelectorAll('.countdown-minute')
+    const secondTime = document.querySelectorAll('.countdown-second')
+
+    if (dayTime) {
+        dayTime.forEach(time => {
+            time.innerHTML = days
+        })
+    }
+    if (hourTime) {
+        hourTime.forEach(time => {
+            time.innerHTML = hours
+        })
+    }
+    if (minuteTime) {
+        minuteTime.forEach(time => {
+            time.innerHTML = minutes
+        })
+    }
+    if (secondTime) {
+        secondTime.forEach(time => {
+            time.innerHTML = seconds
+        })
+    }
+    // if(document.querySelector('.countdown-hour')) document.querySelector('.countdown-hour').innerHTML = hours;
+    // if(document.querySelector('.countdown-minute')) document.querySelector('.countdown-minute').innerHTML = minutes;
+    // if(document.querySelector('.countdown-second')) document.querySelector('.countdown-second').innerHTML = seconds;
+
+    if (distance < 0) {
+        clearInterval(x)
+        if (dayTime) {
+            dayTime.forEach(time => {
+                time.innerHTML = '00'
+            })
+        }
+        if (hourTime) {
+            hourTime.forEach(time => {
+                time.innerHTML = '00'
+            })
+        }
+        if (minuteTime) {
+            minuteTime.forEach(time => {
+                time.innerHTML = '00'
+            })
+        }
+        if (secondTime) {
+            secondTime.forEach(time => {
+                time.innerHTML = '00'
+            })
+        }
+        // if(document.querySelector('.countdown-day')) document.querySelector('.countdown-day').innerHTML = "00";
+        // if(document.querySelector('.countdown-hour')) document.querySelector('.countdown-hour').innerHTML = "00";
+        // if(document.querySelector('.countdown-minute')) document.querySelector('.countdown-minute').innerHTML = "00";
+        // if(document.querySelector('.countdown-second')) document.querySelector('.countdown-second').innerHTML = "00";
+    }
+}, 1000)
+
 
 // Collection
 if (document.querySelector('.swiper-collection')) {

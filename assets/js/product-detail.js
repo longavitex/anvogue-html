@@ -26,6 +26,7 @@ if (document.querySelector('.swiper-product-scroll')) {
 const pathname = new URL(window.location.href)
 const productId = pathname.searchParams.get('id') === null ? '1' : pathname.searchParams.get('id')
 const productDetail = document.querySelector('.product-detail')
+let currentIndex;
 
 // Href
 let classes = productDetail.className.split(' ');
@@ -36,24 +37,28 @@ if (productDetail) {
     fetch('./assets/data/Product.json')
         .then(response => response.json())
         .then(data => {
-            let productMain = data[Number(productId) - 1]
+            let productMain = data.find(product => product.id === productId);
+
+            // find location of current product in array
+            currentIndex = data.findIndex(product => product.id === productId);
 
             // Next, Prev products
             const prevBtn = document.querySelector('.breadcrumb-product .prev-btn')
             const nextBtn = document.querySelector('.breadcrumb-product .next-btn')
 
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % data.length;
+                const nextProduct = data[currentIndex];
+                window.location.href = `product-${typePage}.html?id=${nextProduct.id}`
+            })
+
             if (productId === '1') {
                 prevBtn.remove()
-                nextBtn.addEventListener('click', () => {
-                    window.location.href = `product-${typePage}.html?id=${data[Number(productId)].id}`
-                })
             } else {
                 prevBtn.addEventListener('click', () => {
-                    window.location.href = `product-${typePage}.html?id=${data[Number(productId) - 2].id}`
-                })
-
-                nextBtn.addEventListener('click', () => {
-                    window.location.href = `product-${typePage}.html?id=${data[Number(productId)].id}`
+                    currentIndex = (currentIndex - 1) % data.length;
+                    const nextProduct = data[currentIndex];
+                    window.location.href = `product-${typePage}.html?id=${nextProduct.id}`
                 })
             }
 
@@ -100,7 +105,6 @@ if (productDetail) {
 
             // list-img variable
             const listImg4 = productDetail.querySelector('.featured-product.variable .list-img .list')
-            // const subListImg4 = productDetail.querySelector('.featured-product.variable .list-img .list .sub-list')
 
             if (listImg4) {
                 productMain.images.forEach((item, index) => {
@@ -115,6 +119,52 @@ if (productDetail) {
                     }
 
                     listImg4.appendChild(imgItem);
+                })
+            }
+
+            // list-img on-sale
+            const listImg5 = productDetail.querySelector('.featured-product.on-sale .list-img .swiper .swiper-wrapper')
+
+            if (listImg5) {
+                productMain.images.map(item => {
+                    const imgItem = document.createElement('div')
+                    imgItem.classList.add('swiper-slide')
+                    imgItem.innerHTML = `
+                        <img src=${item} alt='img' class='w-full aspect-[3/4] object-cover' />
+                    `
+                    listImg5.appendChild(imgItem)
+                })
+            }
+
+            // list-img fixed-price
+            const listImg6 = productDetail.querySelector('.featured-product.fixed-price .list-img .list')
+
+            if (listImg6) {
+                productMain.images.forEach((item, index) => {
+                    const imgItem = document.createElement('div');
+                    imgItem.innerHTML = `
+                        <img src=${item} alt='img' class='w-full h-full object-cover' />
+                    `;
+
+                    // Add img 1st and 2nd,... to listImg6
+                    if (index === 0 || index === 1) {
+                        imgItem.classList.add('md:row-span-2', 'row-span-1', 'col-span-1', 'max-md:aspect-[3/4]', 'lg:rounded-[20px]', 'rounded-xl', 'overflow-hidden')
+                    }
+
+                    // Add img 3rd and 4th,... to listImg6
+                    if (productMain.images.length < 4) {
+                        console.log(false);
+                        if (index === 2) {
+                            imgItem.classList.add('md:row-span-2', 'row-span-1', 'col-span-1', 'max-md:aspect-[3/4]', 'lg:rounded-[20px]', 'rounded-xl', 'overflow-hidden')
+                        }
+                    } else {
+                        console.log(true);
+                        if (index === 2 || index === 3) {
+                            imgItem.classList.add('row-span-1', 'md:col-span-1', 'col-span-2', 'aspect-[5/3]', 'lg:rounded-[20px]', 'rounded-xl', 'overflow-hidden')
+                        }
+                    }
+
+                    listImg6.appendChild(imgItem);
                 })
             }
 
@@ -195,8 +245,8 @@ descTabItem.forEach(tabItems => {
 })
 
 
-// list-img review
-var swiperListInstagram = new Swiper(".swiper-img-review", {
+// list-img on-sale
+var swiperListImgOnSale = new Swiper(".swiper-img-on-sale", {
     loop: true,
     autoplay: {
         delay: 4000,
@@ -205,6 +255,39 @@ var swiperListInstagram = new Swiper(".swiper-img-review", {
     clickable: true,
     slidesPerView: 2,
     spaceBetween: 0,
+    breakpoints: {
+        576: {
+            slidesPerView: 2,
+        },
+        640: {
+            slidesPerView: 2,
+        },
+        768: {
+            slidesPerView: 2,
+        },
+        992: {
+            slidesPerView: 3,
+        },
+        1290: {
+            slidesPerView: 3,
+        },
+        2000: {
+            slidesPerView: 4,
+        },
+    },
+});
+
+
+// list-img review
+var swiperImgReview = new Swiper(".swiper-img-review", {
+    loop: true,
+    autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+    },
+    clickable: true,
+    slidesPerView: 3,
+    spaceBetween: 12,
     breakpoints: {
         576: {
             slidesPerView: 4,
@@ -232,3 +315,14 @@ var swiperListInstagram = new Swiper(".swiper-img-review", {
         },
     },
 });
+
+
+// Redirect filter type product-sidebar
+const typeItems = document.querySelectorAll('.product-detail.sidebar .list-type .item')
+
+typeItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const type = item.getAttribute('data-item');
+        window.location.href = `shop-breadcrumb1.html?type=${type}`
+    })
+})

@@ -666,7 +666,7 @@
                                                 <div class="text-button-uppercase pb-2">Recent Products</div>
                                                 <div
                                                     class="list-product hide-product-sold  grid grid-cols-2 gap-5 mt-3">
-                                                    <div class="product-item grid-type">
+                                                    <div class="product-item grid-type" data-item="1">
                                                         <div class="product-main cursor-pointer block">
                                                             <div
                                                                 class="product-thumb bg-white relative overflow-hidden rounded-2xl">
@@ -780,7 +780,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="product-item grid-type">
+                                                    <div class="product-item grid-type" data-item="3">
                                                         <div class="product-main cursor-pointer block">
                                                             <div
                                                                 class="product-thumb bg-white relative overflow-hidden rounded-2xl">
@@ -1045,7 +1045,7 @@
                                                 <div class="text-button-uppercase pb-2">Recent Products</div>
                                                 <div
                                                     class="list-product hide-product-sold  grid grid-cols-2 gap-5 mt-3">
-                                                    <div class="product-item grid-type">
+                                                    <div class="product-item grid-type" data-item="1">
                                                         <div class="product-main cursor-pointer block">
                                                             <div
                                                                 class="product-thumb bg-white relative overflow-hidden rounded-2xl">
@@ -1159,7 +1159,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="product-item grid-type">
+                                                    <div class="product-item grid-type" data-item="3">
                                                         <div class="product-main cursor-pointer block">
                                                             <div
                                                                 class="product-thumb bg-white relative overflow-hidden rounded-2xl">
@@ -1367,7 +1367,7 @@
                     </div>
                     <div class="right flex gap-12">
                         <div class="list-action flex items-center gap-4">
-                            <div class="user-icon flex items-center justify-center cursor-pointer">
+                            <div class="user-icon flex items-center justify-center cursor-pointer z-[1]">
                                 <i class="ph-bold ph-user text-2xl"></i>
                                 <div
                                     class='login-popup absolute top-[74px] w-[320px] p-7 rounded-xl bg-white box-shadow-small'>
@@ -2367,22 +2367,22 @@
                 <div class="body1 mt-3">Get 20% off if you spend 120$ or more!</div>
                 <div class="countdown-time flex items-center gap-5 max-sm:gap-[14px] lg:mt-9 md:mt-6 mt-4">
                     <div class="item flex flex-col items-center">
-                        <div class="days time heading1">49</div>
+                        <div class="countdown-day time heading1">49</div>
                         <div class='text-button-uppercase font-medium'>Days</div>
                     </div>
                     <span class='heading4'>:</span>
                     <div class="item flex flex-col items-center">
-                        <div class="hours time heading1">18</div>
+                        <div class="countdown-hour time heading1">18</div>
                         <div class='text-button-uppercase font-medium'>Hours</div>
                     </div>
                     <span class='heading4'>:</span>
                     <div class="item flex flex-col items-center">
-                        <div class="minutes time heading1">56</div>
+                        <div class="countdown-minute time heading1">56</div>
                         <div class='text-button-uppercase font-medium'>Minutes</div>
                     </div>
                     <span class='heading4'>:</span>
                     <div class="item flex flex-col items-center">
-                        <div class="seconds time heading1">25</div>
+                        <div class="countdown-second time heading1">25</div>
                         <div class='text-button-uppercase font-medium'>Seconds</div>
                     </div>
                 </div>
@@ -3372,7 +3372,8 @@
                     <div class=" flex items-center gap-3 px-5 py-3 bg-green rounded-lg">
                         <p class='text-3xl'>🔥</p>
                         <div class="caption1">Your cart will expire in <span
-                                class='text-red caption1 font-semibold'>04:59</span>
+                                class='text-red caption1 font-semibold'><span class="countdown-minute">04</span>:<span
+                                    class="countdown-second">59</span></span>
                             minutes!<br />
                             Please checkout now before your items sell out!</div>
                     </div>
