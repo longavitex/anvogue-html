@@ -1,3 +1,25 @@
+// Table of contents
+/**** Sidebar ****/
+/**** List product ****/
+/**** Handle layout cols in list product ****/
+/**** Filer product by type(in breadcrumb and sidebar) ****/
+/**** Tow bar filter product by price ****/
+/**** Function to fetch products from JSON file ****/
+/*****----- handle event when user change filter -----************/
+/*****----- Filter options -----************/
+/*****----- filter product base on items filtered -----************/
+/*****----- Handle sort product -----************/
+/*****----- Rerender product base on items filtered -----************/
+/*****----- filter product -----************/
+/*****----- sort product -----************/
+/*****----- handle events when user change filter -----************/
+/*****----- Filter options -----************/
+/**** Function to render products for a specific page ****/
+/**** Function to render pagination buttons ****/
+/**** Initial fetch of products ****/
+
+
+
 // Sidebar
 const filterSidebarBtn = document.querySelector('.filter-sidebar-btn')
 const sidebar = document.querySelector('.sidebar')

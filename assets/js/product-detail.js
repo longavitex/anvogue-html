@@ -1,3 +1,22 @@
+// Table of contents
+/**** List scroll you'll love this to ****/
+/**** detail infor by fetch data ****/
+/*****----- Next, Prev products when click button -----************/
+/*****----- list-img -----************/
+/*****----- list-img countdown timer -----************/
+/*****----- list-img variable -----************/
+/*****----- list-img on-sale -----************/
+/*****----- list-img fixed-price -----************/
+/*****----- product sale -----************/
+/*****----- infor -----************/
+/**** detail ****/
+/**** desc-tab ****/
+/**** list-img on-sale ****/
+/**** list-img review ****/
+/**** Redirect filter type product-sidebar ****/
+
+
+
 // List scroll you'll love this to
 if (document.querySelector('.swiper-product-scroll')) {
     var swiperCollection = new Swiper(".swiper-product-scroll", {
@@ -22,7 +41,7 @@ if (document.querySelector('.swiper-product-scroll')) {
 }
 
 
-// detail infor
+// detail infor by fetch data
 const pathname = new URL(window.location.href)
 const productId = pathname.searchParams.get('id') === null ? '1' : pathname.searchParams.get('id')
 const productDetail = document.querySelector('.product-detail')
@@ -42,7 +61,7 @@ if (productDetail) {
             // find location of current product in array
             currentIndex = data.findIndex(product => product.id === productId);
 
-            // Next, Prev products
+            // Next, Prev products when click button
             const prevBtn = document.querySelector('.breadcrumb-product .prev-btn')
             const nextBtn = document.querySelector('.breadcrumb-product .next-btn')
 

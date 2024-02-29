@@ -1,3 +1,40 @@
+// Table of contents
+/**** Add fixed header ****/
+/**** Marquee banner top ****/
+/**** Menu mobile ****/
+/**** Modal Search ****/
+/**** Modal login ****/
+/**** Modal Wishlist ****/
+/**** Modal Cart ****/
+/**** sub-menu-department ****/
+/**** Banner top ****/
+/**** Slider ****/
+/**** Slider Toys kid ****/
+/**** Change active menu tab ****/
+/**** Countdown time ****/
+/**** Collection, Trending ****/
+/**** list-product ****/
+/**** list-three-product ****/
+/**** list-feature-product Underwear ****/
+/**** Modal Compare ****/
+/**** Modal Quickview ****/
+/**** Modal SizeGuide ****/
+/**** Create product item ****/
+/**** addEventToProductItem ****/
+/**** Change product img when active color in list color ****/
+/**** Fetch products from JSON file (assuming products.json) ****/
+/**** Featured product underwear ****/
+/**** redirect to blog detail ****/
+/**** list-testimonial ****/
+/**** list-instagram ****/
+/**** list-brand ****/
+/**** Change active video cosmetic2 ****/
+/**** Modal Video ****/
+/**** Scroll to top ****/
+/**** faqs ****/
+
+
+
 // Add fixed header
 const headerMain = document.querySelector('.header-menu')
 
@@ -163,6 +200,57 @@ continueCartIcon.addEventListener('click', closeModalCart)
 modalCartMain.addEventListener('click', (e) => {
     e.stopPropagation()
 })
+
+
+// Open note, shipping, coupon popup
+const noteBtn = modalCart.querySelector('.note-btn')
+const shippingBtn = modalCart.querySelector('.shipping-btn')
+const couponBtn = modalCart.querySelector('.coupon-btn')
+const notePopup = modalCart.querySelector('.note-block')
+const shippingPopup = modalCart.querySelector('.shipping-block')
+const couponPopup = modalCart.querySelector('.coupon-block')
+
+if (modalCart) {
+    // note block
+    noteBtn.addEventListener('click', () => {
+        notePopup.classList.toggle('active')
+    })
+
+    notePopup.querySelector('.button-main').addEventListener('click', () => {
+        notePopup.classList.remove('active')
+    })
+
+    notePopup.querySelector('.cancel-btn').addEventListener('click', () => {
+        notePopup.classList.remove('active')
+    })
+
+    // shipping block
+    shippingBtn.addEventListener('click', () => {
+        shippingPopup.classList.toggle('active')
+    })
+
+    shippingPopup.querySelector('.button-main').addEventListener('click', () => {
+        shippingPopup.classList.remove('active')
+    })
+
+    shippingPopup.querySelector('.cancel-btn').addEventListener('click', () => {
+        shippingPopup.classList.remove('active')
+    })
+
+    // coupon block
+    couponBtn.addEventListener('click', () => {
+        couponPopup.classList.toggle('active')
+    })
+
+    couponPopup.querySelector('.button-main').addEventListener('click', () => {
+        couponPopup.classList.remove('active')
+    })
+
+    couponPopup.querySelector('.cancel-btn').addEventListener('click', () => {
+        couponPopup.classList.remove('active')
+    })
+}
+
 
 
 // sub-menu-department

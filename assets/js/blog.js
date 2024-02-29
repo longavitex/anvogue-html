@@ -1,3 +1,14 @@
+// Table of contents
+/**** Common ****/
+/**** Function to fetch blogs from JSON file ****/
+/**** Function to render blogs for a specific page ****/
+/**** Function to render pagination buttons ****/
+/**** Initial fetch of blogs ****/
+/**** Filter blog by category ****/
+/**** Blog Detail ****/
+
+
+// Common
 const blogContainer = document.querySelector('.blog');
 const blogList = document.querySelector('.list-blog');
 const listPagination = document.querySelector('.list-pagination');
