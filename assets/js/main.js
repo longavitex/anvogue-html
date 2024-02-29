@@ -2,11 +2,14 @@
 /**** Add fixed header ****/
 /**** Marquee banner top ****/
 /**** Menu mobile ****/
+/**** Redirect to search-results when enter or click form search ****/
 /**** Modal Search ****/
 /**** Modal login ****/
 /**** Modal Wishlist ****/
+/**** Remove item from wishlist, cart ****/
 /**** Modal Cart ****/
 /**** sub-menu-department ****/
+/**** Open note, shipping, coupon popup ****/
 /**** Banner top ****/
 /**** Slider ****/
 /**** Slider Toys kid ****/
@@ -98,6 +101,36 @@ backMenuBtns.forEach(btn => {
 })
 
 
+// Redirect to search-results when enter or click form search
+const formSearch = document.querySelectorAll('.form-search')
+
+if (formSearch) {
+    formSearch.forEach(form => {
+        const formInput = form.querySelector('input')
+        const searchIcon = form.querySelector('i')
+        const searchBtn = form.querySelector('button')
+
+        formInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                window.location.href = `search-result.html?query=${formInput.value}`
+            }
+        })
+
+        if (searchIcon) {
+            searchIcon.addEventListener('click', (e) => {
+                window.location.href = `search-result.html?query=${formInput.value}`
+            })
+        }
+
+        if (searchBtn) {
+            searchBtn.addEventListener('click', (e) => {
+                window.location.href = `search-result.html?query=${formInput.value}`
+            })
+        }
+    })
+}
+
+
 // Modal Search
 const searchIcon = document.querySelector('.search-icon')
 const modalSearch = document.querySelector('.modal-search-block')
@@ -168,6 +201,18 @@ continueWishlistIcon.addEventListener('click', closeModalWishlist)
 modalWishlistMain.addEventListener('click', (e) => {
     e.stopPropagation()
 })
+
+
+// Remove item from wishlist, cart
+const removeBtns = document.querySelectorAll('.remove-btn')
+
+if (removeBtns) {
+    removeBtns.forEach(removeBtn => {
+        removeBtn.addEventListener('click', () => {
+            removeBtn.closest('.item').remove()
+        })
+    })
+}
 
 
 // Modal Cart
@@ -391,9 +436,6 @@ const setCountDown = setInterval(function () {
             time.innerHTML = seconds
         })
     }
-    // if(document.querySelector('.countdown-hour')) document.querySelector('.countdown-hour').innerHTML = hours;
-    // if(document.querySelector('.countdown-minute')) document.querySelector('.countdown-minute').innerHTML = minutes;
-    // if(document.querySelector('.countdown-second')) document.querySelector('.countdown-second').innerHTML = seconds;
 
     if (distance < 0) {
         clearInterval(x)
@@ -417,10 +459,6 @@ const setCountDown = setInterval(function () {
                 time.innerHTML = '00'
             })
         }
-        // if(document.querySelector('.countdown-day')) document.querySelector('.countdown-day').innerHTML = "00";
-        // if(document.querySelector('.countdown-hour')) document.querySelector('.countdown-hour').innerHTML = "00";
-        // if(document.querySelector('.countdown-minute')) document.querySelector('.countdown-minute').innerHTML = "00";
-        // if(document.querySelector('.countdown-second')) document.querySelector('.countdown-second').innerHTML = "00";
     }
 }, 1000)
 
@@ -1094,7 +1132,7 @@ const handleActiveImgWhenColorChange = (products) => {
                 const productMain = color.closest('.product-main');
                 const dataItem = productMain.getAttribute('data-item');
                 const product = products.find(item => item.id === dataItem)
-                const imgActive = product.variation.find(item => item.color === activeColor).image;
+                const imgActive = product?.variation.find(item => item.color === activeColor).image;
                 if (imgActive) {
                     productMain.querySelector('.product-img img').remove()
                     productMain.querySelector('.product-img').innerHTML = `
@@ -1233,7 +1271,7 @@ fetch('./assets/data/Product.json')
                 menuItems.forEach(item => {
                     item.addEventListener('click', () => {
                         const productItems = listSixProduct.querySelectorAll('.swiper-slide')
-                        
+
                         if (listSixProduct.getAttribute('data-type')) {
                             if (item.getAttribute('data-item') === 'best sellers') {
                                 products.filter((product) => product.category === listSixProduct.getAttribute('data-type'))
