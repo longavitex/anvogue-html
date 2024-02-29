@@ -215,6 +215,52 @@ if (removeBtns) {
 }
 
 
+
+// Handle layout cols in list product wishlist, shop
+const layoutProductList = document.querySelector('.list-product-block .list-product');
+const chooseLayoutItems = document.querySelectorAll('.choose-layout .item')
+
+if (layoutProductList && chooseLayoutItems) {
+    chooseLayoutItems.forEach(item => {
+        if (item.classList.contains('active')) {
+            if (item.classList.contains('three-col')) {
+                layoutProductList.classList.add('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('four-col')) {
+                layoutProductList.classList.add('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('five-col')) {
+                layoutProductList.classList.add('lg:grid-cols-5')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+            }
+        }
+
+        item.addEventListener('click', () => {
+            if (item.classList.contains('three-col')) {
+                layoutProductList.classList.add('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('four-col')) {
+                layoutProductList.classList.add('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('five-col')) {
+                layoutProductList.classList.add('lg:grid-cols-5')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+            }
+        })
+    })
+}
+
+
 // Modal Cart
 const cartIcon = document.querySelector('.cart-icon')
 const modalCart = document.querySelector('.modal-cart-block')

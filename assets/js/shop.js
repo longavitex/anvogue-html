@@ -57,47 +57,6 @@ const productsPerPage = productList ? Number(productList.getAttribute('list-prod
 let productsData = [];
 
 
-// Handle layout cols in list product
-const chooseLayoutItems = document.querySelectorAll('.choose-layout .item')
-
-chooseLayoutItems.forEach(item => {
-    if (item.classList.contains('active')) {
-        if (item.classList.contains('three-col')) {
-            productList.classList.add('lg:grid-cols-3')
-            productList.classList.remove('lg:grid-cols-4')
-            productList.classList.remove('lg:grid-cols-5')
-        }
-        else if (item.classList.contains('four-col')) {
-            productList.classList.add('lg:grid-cols-4')
-            productList.classList.remove('lg:grid-cols-3')
-            productList.classList.remove('lg:grid-cols-5')
-        }
-        else if (item.classList.contains('five-col')) {
-            productList.classList.add('lg:grid-cols-5')
-            productList.classList.remove('lg:grid-cols-3')
-            productList.classList.remove('lg:grid-cols-4')
-        }
-    }
-
-    item.addEventListener('click', () => {
-        if (item.classList.contains('three-col')) {
-            productList.classList.add('lg:grid-cols-3')
-            productList.classList.remove('lg:grid-cols-4')
-            productList.classList.remove('lg:grid-cols-5')
-        }
-        else if (item.classList.contains('four-col')) {
-            productList.classList.add('lg:grid-cols-4')
-            productList.classList.remove('lg:grid-cols-3')
-            productList.classList.remove('lg:grid-cols-5')
-        }
-        else if (item.classList.contains('five-col')) {
-            productList.classList.add('lg:grid-cols-5')
-            productList.classList.remove('lg:grid-cols-3')
-            productList.classList.remove('lg:grid-cols-4')
-        }
-    })
-})
-
 // Filer product by type(in breadcrumb and sidebar)
 let selectedType = localStorage.getItem('selectedType');
 localStorage.setItem('selectedType', '')
