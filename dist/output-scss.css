@@ -2114,7 +2114,7 @@ textarea:focus {
 /* Product Item */
 .product-item {
   display: block;
-  animation: showProduct 0.6s ease-out;
+  animation: showProduct 0.4s linear;
 }
 .product-item .product-thumb .list-action-right {
   transform: translateX(60px);

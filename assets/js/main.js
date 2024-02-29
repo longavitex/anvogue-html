@@ -993,6 +993,31 @@ function addEventToProductItem() {
 addEventToProductItem()
 
 
+// Change product img when active color in list color
+const handleActiveImgWhenColorChange = (products) => {
+    const listColors = document.querySelectorAll('.list-color')
+
+    listColors.forEach(list => {
+        const colorItems = list.querySelectorAll('.color-item')
+
+        colorItems.forEach(color => {
+            color.addEventListener('click', () => {
+                const activeColor = color.querySelector('.tag-action').textContent
+                const productMain = color.closest('.product-main');
+                const dataItem = productMain.getAttribute('data-item');
+                const product = products.find(item => item.id === dataItem)
+                const imgActive = product.variation.find(item => item.color === activeColor).image;
+                if (imgActive) {
+                    productMain.querySelector('.product-img img').remove()
+                    productMain.querySelector('.product-img').innerHTML = `
+                            <img src="${imgActive}" alt="img" class="w-full h-full object-cover duration-700" />
+                        `
+                }
+            })
+        })
+    })
+}
+
 // Append child
 const listFourProduct = document.querySelector('.list-product.four-product');
 const listSixProduct = document.querySelector('.list-product.six-product .swiper .swiper-wrapper');
@@ -1072,6 +1097,7 @@ fetch('./assets/data/Product.json')
                             })
                         }
 
+                        handleActiveImgWhenColorChange(products)
                         addEventToProductItem()
                     })
                 })
@@ -1118,12 +1144,8 @@ fetch('./assets/data/Product.json')
 
                 menuItems.forEach(item => {
                     item.addEventListener('click', () => {
-                        // remove old product
                         const productItems = listSixProduct.querySelectorAll('.swiper-slide')
-                        productItems.forEach(prdItem => {
-                            prdItem.remove()
-                        })
-
+                        
                         if (listSixProduct.getAttribute('data-type')) {
                             if (item.getAttribute('data-item') === 'best sellers') {
                                 products.filter((product) => product.category === listSixProduct.getAttribute('data-type'))
@@ -1190,6 +1212,12 @@ fetch('./assets/data/Product.json')
                             }
                         }
 
+                        // remove old product
+                        productItems.forEach(prdItem => {
+                            prdItem.remove()
+                        })
+
+                        handleActiveImgWhenColorChange(products)
                         addEventToProductItem()
                     })
                 })
@@ -1264,6 +1292,7 @@ fetch('./assets/data/Product.json')
                                 })
                         }
 
+                        handleActiveImgWhenColorChange(products)
                         addEventToProductItem()
                     })
                 })
@@ -1310,12 +1339,14 @@ fetch('./assets/data/Product.json')
                             list.appendChild(productElement);
                         })
 
+                        handleActiveImgWhenColorChange(products)
                         addEventToProductItem()
                     })
                 })
             })
         }
 
+        handleActiveImgWhenColorChange(products)
         addEventToProductItem()
     })
     .catch(error => console.error('Error loading products:', error));
