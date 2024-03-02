@@ -1069,7 +1069,27 @@ const createProductItem = (product) => {
 }
 
 
-function addEventToProductItem() {
+// initialize the variable in local storage
+let cartStore = localStorage.getItem('cartStore');
+if (cartStore === null) {
+    localStorage.setItem('cartStore', '')
+}
+
+let wishlistStore = localStorage.getItem('wishlistStore');
+if (wishlistStore === null) {
+    localStorage.setItem('wishlistStore', '')
+}
+
+let compareStore = localStorage.getItem('compareStore');
+if (compareStore === null) {
+    localStorage.setItem('compareStore', '')
+}
+
+// Add to wishlist
+
+
+
+function addEventToProductItem(products) {
     // Product item
     const productItems = document.querySelectorAll('.product-item')
 
@@ -1090,7 +1110,30 @@ function addEventToProductItem() {
             if (addWishlistIcon) {
                 addWishlistIcon.addEventListener('click', (e) => {
                     e.stopPropagation()
-                    addWishlistIcon.classList.toggle('active')
+                    // addWishlistIcon.classList.toggle('active')
+
+                    // save prd to wishlist in local storage
+                    const productId = addWishlistIcon.closest('.product-item').getAttribute('data-item')
+                    let wishlistStore = localStorage.getItem('wishlistStore')
+                    wishlistStore = wishlistStore ? JSON.parse(wishlistStore) : []
+
+                    const existingIndex = wishlistStore.findIndex(item => item.id === productId);
+
+                    if (existingIndex > -1) {
+                        // If prd đã existed in wishlist, remove it from wishlist
+                        wishlistStore.splice(existingIndex, 1);
+                        addWishlistIcon.classList.remove('active')
+                    } else {
+                        // If prd not exist in wishlist, add it to wishlist
+                        const productToAdd = products.find(item => item.id === productId);
+                        if (productToAdd) {
+                            wishlistStore.push(productToAdd);
+                            addWishlistIcon.classList.add('active')
+                        }
+                    }
+
+                    // Save wishlist to localStorage
+                    localStorage.setItem('wishlistStore', JSON.stringify(wishlistStore));
 
                     if (addWishlistIcon.classList.contains('active')) {
                         addWishlistIcon.querySelector('i').classList.remove('ph')
@@ -1205,8 +1248,6 @@ function addEventToProductItem() {
     })
 }
 
-addEventToProductItem()
-
 
 // Change product img when active color in list color
 const handleActiveImgWhenColorChange = (products) => {
@@ -1232,6 +1273,7 @@ const handleActiveImgWhenColorChange = (products) => {
         })
     })
 }
+
 
 // Append child
 const listFourProduct = document.querySelector('.list-product.four-product');
@@ -1313,7 +1355,7 @@ fetch('./assets/data/Product.json')
                         }
 
                         handleActiveImgWhenColorChange(products)
-                        addEventToProductItem()
+                        addEventToProductItem(products)
                     })
                 })
             }
@@ -1433,7 +1475,7 @@ fetch('./assets/data/Product.json')
                         })
 
                         handleActiveImgWhenColorChange(products)
-                        addEventToProductItem()
+                        addEventToProductItem(products)
                     })
                 })
             }
@@ -1508,7 +1550,7 @@ fetch('./assets/data/Product.json')
                         }
 
                         handleActiveImgWhenColorChange(products)
-                        addEventToProductItem()
+                        addEventToProductItem(products)
                     })
                 })
             }
@@ -1555,14 +1597,36 @@ fetch('./assets/data/Product.json')
                         })
 
                         handleActiveImgWhenColorChange(products)
-                        addEventToProductItem()
+                        addEventToProductItem(products)
                     })
                 })
             })
         }
 
+        // const productItems = document.querySelectorAll('.product-item')
+
+        // productItems.forEach(product => {
+        //     const compareIcon = product.querySelector('.compare-btn')
+        //     const addWishlistIcon = product.querySelector('.add-wishlist-btn')
+        //     const addCartIcon = product.querySelector('.add-cart-btn')
+
+        //     addWishlistIcon.addEventListener('click', () => {
+        //         const productId = product.closest('.product-item').getAttribute('data-item')
+        //         let wishlistStore = localStorage.getItem('wishlistStore')
+        //         wishlistStore = wishlistStore ? JSON.parse(wishlistStore) : []
+
+        //         // Find prd in data base on ID
+        //         const item = products.find(item => item.id === productId);
+        //         if (item) {
+        //             wishlistStore.push(item)
+        //         }
+        //         // Save wishlist to localStorage
+        //         localStorage.setItem('wishlistStore', JSON.stringify(wishlistStore));
+        //     })
+        // })
+
         handleActiveImgWhenColorChange(products)
-        addEventToProductItem()
+        addEventToProductItem(products)
     })
     .catch(error => console.error('Error loading products:', error));
 
