@@ -1085,8 +1085,6 @@ if (compareStore === null) {
     localStorage.setItem('compareStore', '')
 }
 
-// Add to wishlist
-
 
 
 function addEventToProductItem(products) {
@@ -1095,6 +1093,8 @@ function addEventToProductItem(products) {
 
     if (productItems) {
         productItems.forEach(product => {
+            const productId = product.getAttribute('data-item')
+
             product.addEventListener('click', () => {
                 const productId = product.getAttribute('data-item')
                 window.location.href = `product-default.html?id=${productId}`;
@@ -1108,9 +1108,18 @@ function addEventToProductItem(products) {
             const modalQuickshop = product.querySelector('.quick-shop-block')
 
             if (addWishlistIcon) {
+                let wishlistStore = localStorage.getItem('wishlistStore')
+                wishlistStore = wishlistStore ? JSON.parse(wishlistStore) : []
+                wishlistStore.forEach(prd => {
+                    if (prd.id === productId) {
+                        addWishlistIcon.classList.add('active')
+                        addWishlistIcon.querySelector('i').classList.remove('ph')
+                        addWishlistIcon.querySelector('i').classList.add('ph-fill')
+                    }
+                })
+
                 addWishlistIcon.addEventListener('click', (e) => {
                     e.stopPropagation()
-                    // addWishlistIcon.classList.toggle('active')
 
                     // save prd to wishlist in local storage
                     const productId = addWishlistIcon.closest('.product-item').getAttribute('data-item')
@@ -1123,26 +1132,22 @@ function addEventToProductItem(products) {
                         // If prd đã existed in wishlist, remove it from wishlist
                         wishlistStore.splice(existingIndex, 1);
                         addWishlistIcon.classList.remove('active')
+                        addWishlistIcon.querySelector('i').classList.add('ph')
+                        addWishlistIcon.querySelector('i').classList.remove('ph-fill')
                     } else {
                         // If prd not exist in wishlist, add it to wishlist
                         const productToAdd = products.find(item => item.id === productId);
                         if (productToAdd) {
                             wishlistStore.push(productToAdd);
                             addWishlistIcon.classList.add('active')
+                            addWishlistIcon.querySelector('i').classList.remove('ph')
+                            addWishlistIcon.querySelector('i').classList.add('ph-fill')
+                            openModalWishlist()
                         }
                     }
 
                     // Save wishlist to localStorage
                     localStorage.setItem('wishlistStore', JSON.stringify(wishlistStore));
-
-                    if (addWishlistIcon.classList.contains('active')) {
-                        addWishlistIcon.querySelector('i').classList.remove('ph')
-                        addWishlistIcon.querySelector('i').classList.add('ph-fill')
-                        openModalWishlist()
-                    } else {
-                        addWishlistIcon.querySelector('i').classList.add('ph')
-                        addWishlistIcon.querySelector('i').classList.remove('ph-fill')
-                    }
                 })
             }
 
