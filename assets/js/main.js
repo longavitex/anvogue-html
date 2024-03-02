@@ -222,13 +222,17 @@ modalWishlistMain.addEventListener('click', (e) => {
 
 // Set wishlist length
 const handleItemModalWishlist = () => {
+    wishlistStore = localStorage.getItem('wishlistStore')
+
     if (wishlistStore) {
         wishlistIcon.querySelector('span').innerHTML = JSON.parse(wishlistStore).length
     }
-    
+
     // Set wishlist item
     const listItemWishlist = document.querySelector('.modal-wishlist-block .list-product')
-    
+
+    listItemWishlist.innerHTML = ''
+
     if (JSON.parse(wishlistStore).length === 0) {
         listItemWishlist.innerHTML = `<p>No product in wishlist</p>`
     } else {
@@ -257,21 +261,22 @@ const handleItemModalWishlist = () => {
                     Remove
                 </div>
             `
-    
+
             listItemWishlist.appendChild(prdItem)
         })
-    
-        const prdItems = listItemWishlist.querySelectorAll('.item')
-        prdItems.forEach(prd => {
-            const removeWishlistBtn = prd.querySelector('.remove-wishlist-btn')
-            removeWishlistBtn.addEventListener('click', () => {
-                const prdId = removeWishlistBtn.closest('.item').getAttribute('data-item')
-                // JSON.parse(wishlistStore)
-                const newArray = JSON.parse(wishlistStore).filter(item => item.id !== prdId);
-                localStorage.setItem('wishlistStore', JSON.stringify(newArray))
-            })
-        })
     }
+
+    const prdItems = listItemWishlist.querySelectorAll('.item')
+    prdItems.forEach(prd => {
+        const removeWishlistBtn = prd.querySelector('.remove-wishlist-btn')
+        removeWishlistBtn.addEventListener('click', () => {
+            const prdId = removeWishlistBtn.closest('.item').getAttribute('data-item')
+            // JSON.parse(wishlistStore)
+            const newArray = JSON.parse(wishlistStore).filter(item => item.id !== prdId);
+            localStorage.setItem('wishlistStore', JSON.stringify(newArray))
+            handleItemModalWishlist()
+        })
+    })
 }
 
 handleItemModalWishlist()
@@ -1149,7 +1154,6 @@ function addEventToProductItem(products) {
             const productId = product.getAttribute('data-item')
 
             product.addEventListener('click', () => {
-                const productId = product.getAttribute('data-item')
                 window.location.href = `product-default.html?id=${productId}`;
             })
 
@@ -1661,28 +1665,6 @@ fetch('./assets/data/Product.json')
                 })
             })
         }
-
-        // const productItems = document.querySelectorAll('.product-item')
-
-        // productItems.forEach(product => {
-        //     const compareIcon = product.querySelector('.compare-btn')
-        //     const addWishlistIcon = product.querySelector('.add-wishlist-btn')
-        //     const addCartIcon = product.querySelector('.add-cart-btn')
-
-        //     addWishlistIcon.addEventListener('click', () => {
-        //         const productId = product.closest('.product-item').getAttribute('data-item')
-        //         let wishlistStore = localStorage.getItem('wishlistStore')
-        //         wishlistStore = wishlistStore ? JSON.parse(wishlistStore) : []
-
-        //         // Find prd in data base on ID
-        //         const item = products.find(item => item.id === productId);
-        //         if (item) {
-        //             wishlistStore.push(item)
-        //         }
-        //         // Save wishlist to localStorage
-        //         localStorage.setItem('wishlistStore', JSON.stringify(wishlistStore));
-        //     })
-        // })
 
         handleActiveImgWhenColorChange(products)
         addEventToProductItem(products)
