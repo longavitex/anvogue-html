@@ -281,7 +281,8 @@
     }
 }
 
-.list-size {
+.list-size,
+.list-size-block {
     .size-item {
         transition: all ease 0.3s;
         cursor: pointer;

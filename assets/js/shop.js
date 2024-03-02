@@ -53,7 +53,7 @@ const productList = document.querySelector('.list-product-block .list-product');
 const listPagination = document.querySelector('.list-pagination');
 
 let currentPage = 1;
-const productsPerPage = productList ? Number(productList.getAttribute('list-product')) : 12;
+let productsPerPage = productList ? Number(productList.getAttribute('data-item')) : 12;
 let productsData = [];
 
 
@@ -109,6 +109,36 @@ function fetchProducts() {
             renderProducts(currentPage, productsData);
             renderPagination(productsData);
 
+            // Switch between grid <-> list layout
+            const layoutItems = productContainer.querySelectorAll('.choose-layout .item')
+
+            layoutItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (item.classList.contains('style-grid')) {
+                        productContainer.classList.remove('style-list')
+                        productContainer.classList.add('style-grid')
+                        productContainer.querySelector('.list-product').classList.remove('flex', 'flex-col')
+                        productContainer.querySelector('.list-product').classList.add('grid')
+                        productContainer.querySelector('.list-product').setAttribute('data-item', '9')
+                        productsPerPage = 9
+                    }
+                    else if (item.classList.contains('style-list')) {
+                        productContainer.classList.remove('style-grid')
+                        productContainer.classList.add('style-list')
+                        productContainer.querySelector('.list-product').classList.remove('grid')
+                        productContainer.querySelector('.list-product').classList.add('flex', 'flex-col')
+                        productContainer.querySelector('.list-product').setAttribute('data-item', '4')
+                        productsPerPage = 4
+                    }
+                    renderProducts(1, productsData);
+                    currentPage = 1;
+                    renderPagination(productsData)
+                    addEventToProductItem()
+                })
+            })
+
+
             // handle event when user change filter
             function handleFiltersChange() {
                 const selectedFilters = {
@@ -120,7 +150,6 @@ function fetchProducts() {
                     maxPrice: 300, //default
                     sale: document.querySelector('.check-sale input[type="checkbox"]:checked')
                 };
-
 
                 // Filter options
                 if (document.querySelector('.filter-type select')) {
@@ -199,7 +228,7 @@ function fetchProducts() {
             const sortSelect = document.querySelector('.sort-product select')
             let sortOption = sortSelect.value
 
-            // 
+            // Get filter type from url
             const pathname = new URL(window.location.href)
             const typeUrl = pathname.searchParams.get('type') === null ? '' : pathname.searchParams.get('type')
 
@@ -236,7 +265,7 @@ function fetchProducts() {
                 }
             });
 
-            // Filter options
+            // Shop filter options
             if (document.querySelector('.filter-type select')) {
                 document.querySelector('.filter-type select').addEventListener('change', handleFiltersChange)
             }
@@ -245,7 +274,7 @@ function fetchProducts() {
                 item.addEventListener('click', handleFiltersChange);
             });
 
-            // Filter options
+            // Shop filter options
             if (document.querySelector('.filter-size select')) {
                 document.querySelector('.filter-size select').addEventListener('change', handleFiltersChange)
             }
@@ -254,7 +283,7 @@ function fetchProducts() {
                 item.addEventListener('click', handleFiltersChange);
             });
 
-            // Filter options
+            // Shop filter options
             if (document.querySelector('.filter-color select')) {
                 document.querySelector('.filter-color select').addEventListener('change', handleFiltersChange)
             }
@@ -269,7 +298,7 @@ function fetchProducts() {
                 item.addEventListener('change', handleFiltersChange);
             })
 
-            // Filter options
+            // Shop filter options
             if (document.querySelector('.filter-brand select')) {
                 document.querySelector('.filter-brand select').addEventListener('change', handleFiltersChange)
             }
@@ -639,4 +668,3 @@ function renderPagination(products = []) {
 if (productList) {
     fetchProducts();
 }
-

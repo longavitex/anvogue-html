@@ -65,15 +65,15 @@
                 .heading1,
                 .heading2,
                 .text-display {
-                    animation: animateY 0.8s ease;
+                    animation: animateY 1s ease;
                 }
 
                 .body1 {
-                    animation: animateY 1.2s ease;
+                    animation: animateY 1.3s ease;
                 }
 
                 .button-main {
-                    animation: animateY 1.4s ease;
+                    animation: animateY 1.5s ease;
                 }
             }
         }
@@ -124,7 +124,7 @@
 @keyframes animateX {
     0% {
         opacity: 0;
-        transform: translateX(-120px);
+        transform: translateX(-160px);
     }
 
     100% {
@@ -136,7 +136,7 @@
 @keyframes animateReverseX {
     0% {
         opacity: 0;
-        transform: translateX(120px);
+        transform: translateX(160px);
     }
 
     100% {
@@ -148,7 +148,7 @@
 @keyframes animateY {
     0% {
         opacity: 0;
-        transform: translateY(60px);
+        transform: translateY(120px);
     }
 
     100% {

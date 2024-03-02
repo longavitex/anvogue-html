@@ -76,8 +76,10 @@ const closeMenuMobile = () => {
     menuMobileBlock.classList.remove('open')
 }
 
-menuMobileIcon.addEventListener('click', openMenuMobile)
-closeMenuMobileIcon.addEventListener('click', closeMenuMobile)
+if (menuMobileIcon) {
+    menuMobileIcon.addEventListener('click', openMenuMobile)
+    closeMenuMobileIcon.addEventListener('click', closeMenuMobile)
+}
 
 
 const mobileNavItems = document.querySelectorAll('#menu-mobile .list-nav>ul>li')
@@ -107,7 +109,7 @@ const formSearch = document.querySelectorAll('.form-search')
 if (formSearch) {
     formSearch.forEach(form => {
         const formInput = form.querySelector('input')
-        const searchIcon = form.querySelector('i')
+        const searchIcon = form.querySelector('i.ph-magnifying-glass')
         const searchBtn = form.querySelector('button')
 
         formInput.addEventListener('keyup', (e) => {
@@ -156,7 +158,7 @@ if (searchIcon) {
 const loginIcon = document.querySelector('.user-icon i')
 const loginPopup = document.querySelector('.login-popup')
 
-loginIcon.addEventListener('click', () => {
+loginIcon?.addEventListener('click', () => {
     loginPopup.classList.toggle('open')
 })
 
@@ -293,6 +295,37 @@ modalCartMain.addEventListener('click', (e) => {
 })
 
 
+// Countdown cart
+let timeLeft = 600;
+const countDownCart = setInterval(function () {
+    let minutes = Math.floor(timeLeft / 60);
+    if (minutes / 10 < 1) {
+        minutes = `0${minutes}`
+    }
+
+    let seconds = timeLeft % 60;
+    if (seconds / 10 < 1) {
+        seconds = `0${seconds}`
+    }
+
+    const minuteTime = document.querySelector('.countdown-cart .minute')
+    const secondTime = document.querySelector('.countdown-cart .second')
+
+    if (minuteTime) {
+        minuteTime.innerHTML = minutes
+    }
+    if (secondTime) {
+        secondTime.innerHTML = seconds
+    }
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+        timeLeft = 600;
+    }
+}, 1000)
+
+
 // Open note, shipping, coupon popup
 const noteBtn = modalCart.querySelector('.note-btn')
 const shippingBtn = modalCart.querySelector('.shipping-btn')
@@ -343,7 +376,6 @@ if (modalCart) {
 }
 
 
-
 // sub-menu-department
 const menuDepartmentBtn = document.querySelector('.menu-department-btn')
 const subMenuDepartment = document.querySelector('.sub-menu-department')
@@ -351,6 +383,17 @@ const subMenuDepartment = document.querySelector('.sub-menu-department')
 if (menuDepartmentBtn) {
     menuDepartmentBtn.addEventListener('click', () => {
         subMenuDepartment.classList.toggle('open')
+    })
+}
+
+
+// sub-menu-category
+const menuCategoryBtn = document.querySelector('.category-block .category-btn')
+const subMenuCategory = document.querySelector('.category-block .sub-menu-category')
+
+if (menuCategoryBtn) {
+    menuCategoryBtn.addEventListener('click', () => {
+        subMenuCategory.classList.toggle('open')
     })
 }
 
@@ -432,7 +475,7 @@ tabItems.forEach(item => {
 })
 
 // Countdown time
-const countDown = new Date("June 05, 2024 00:00:00").getTime()
+const countDown = new Date("June 09, 2024 00:00:00").getTime()
 const setCountDown = setInterval(function () {
     let now = new Date().getTime()
     let distance = countDown - now
@@ -831,7 +874,7 @@ if (modalSizeGuide) {
             progressWeight.style.right = 100 - (weightValue / 90) * 100 + "%";
 
             // Change active weight, height
-            let sizeItems = document.querySelectorAll('.modal-sizeguide-block .list-size .size-item')
+            let sizeItems = document.querySelectorAll('.modal-sizeguide-block .list-size-block .size-item')
 
             sizeItems.forEach(size => {
                 if (heightValue > 180 || weightValue > 70) {

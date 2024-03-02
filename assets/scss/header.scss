@@ -297,8 +297,11 @@
 }
 
 // menu-department
-.menu-department-block {
-    .sub-menu-department {
+.menu-department-block,
+.category-block {
+
+    .sub-menu-department,
+    .sub-menu-category {
         transition: all ease 0.5s;
         padding: 0 20px;
         max-height: 0;
