@@ -163,6 +163,22 @@ loginIcon?.addEventListener('click', () => {
 })
 
 
+// initialize the variable in local storage
+let cartStore = localStorage.getItem('cartStore');
+if (cartStore === null) {
+    localStorage.setItem('cartStore', JSON.stringify([]))
+}
+
+let wishlistStore = localStorage.getItem('wishlistStore');
+if (wishlistStore === null) {
+    localStorage.setItem('wishlistStore', JSON.stringify([]))
+}
+
+let compareStore = localStorage.getItem('compareStore');
+if (compareStore === null) {
+    localStorage.setItem('compareStore', JSON.stringify([]))
+}
+
 // Modal Wishlist
 const wishlistIcon = document.querySelector('.wishlist-icon')
 const modalWishlist = document.querySelector('.modal-wishlist-block')
@@ -204,6 +220,62 @@ modalWishlistMain.addEventListener('click', (e) => {
     e.stopPropagation()
 })
 
+// Set wishlist length
+const handleItemModalWishlist = () => {
+    if (wishlistStore) {
+        wishlistIcon.querySelector('span').innerHTML = JSON.parse(wishlistStore).length
+    }
+    
+    // Set wishlist item
+    const listItemWishlist = document.querySelector('.modal-wishlist-block .list-product')
+    
+    if (JSON.parse(wishlistStore).length === 0) {
+        listItemWishlist.innerHTML = `<p>No product in wishlist</p>`
+    } else {
+        JSON.parse(wishlistStore).forEach(item => {
+            const prdItem = document.createElement('div')
+            prdItem.setAttribute('data-item', item.id)
+            prdItem.classList.add('item', 'py-5', 'flex', 'items-center', 'justify-between', 'gap-3', 'border-b', 'border-line')
+            prdItem.innerHTML = `
+                <div class="infor flex items-center gap-5">
+                    <div class="bg-img">
+                        <img src=${item.thumbImage[0]} alt='product'
+                            class='w-[100px] aspect-square flex-shrink-0 rounded-lg' />
+                    </div>
+                    <div class=''>
+                        <div class="name text-button">${item.name}</div>
+                        <div class="flex items-center gap-2 mt-2">
+                            <div class="product-price text-title">$${item.price}.00</div>
+                            <div class="product-origin-price text-title text-secondary2">
+                                <del>$${item.originPrice}.00</del>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="remove-wishlist-btn remove-btn caption1 font-semibold text-red underline cursor-pointer">
+                    Remove
+                </div>
+            `
+    
+            listItemWishlist.appendChild(prdItem)
+        })
+    
+        const prdItems = listItemWishlist.querySelectorAll('.item')
+        prdItems.forEach(prd => {
+            const removeWishlistBtn = prd.querySelector('.remove-wishlist-btn')
+            removeWishlistBtn.addEventListener('click', () => {
+                const prdId = removeWishlistBtn.closest('.item').getAttribute('data-item')
+                // JSON.parse(wishlistStore)
+                const newArray = JSON.parse(wishlistStore).filter(item => item.id !== prdId);
+                localStorage.setItem('wishlistStore', JSON.stringify(newArray))
+            })
+        })
+    }
+}
+
+handleItemModalWishlist()
+
 
 // Remove item from wishlist, cart
 const removeBtns = document.querySelectorAll('.remove-btn')
@@ -215,7 +287,6 @@ if (removeBtns) {
         })
     })
 }
-
 
 
 // Handle layout cols in list product wishlist, shop
@@ -1069,24 +1140,6 @@ const createProductItem = (product) => {
 }
 
 
-// initialize the variable in local storage
-let cartStore = localStorage.getItem('cartStore');
-if (cartStore === null) {
-    localStorage.setItem('cartStore', '')
-}
-
-let wishlistStore = localStorage.getItem('wishlistStore');
-if (wishlistStore === null) {
-    localStorage.setItem('wishlistStore', '')
-}
-
-let compareStore = localStorage.getItem('compareStore');
-if (compareStore === null) {
-    localStorage.setItem('compareStore', '')
-}
-
-
-
 function addEventToProductItem(products) {
     // Product item
     const productItems = document.querySelectorAll('.product-item')
@@ -1148,6 +1201,7 @@ function addEventToProductItem(products) {
 
                     // Save wishlist to localStorage
                     localStorage.setItem('wishlistStore', JSON.stringify(wishlistStore));
+                    handleItemModalWishlist()
                 })
             }
 
