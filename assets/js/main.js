@@ -5,8 +5,8 @@
 /**** Redirect to search-results when enter or click form search ****/
 /**** Modal Search ****/
 /**** Modal login ****/
+/**** initialize the variable(cart, wishlist, compare) in local storage ****/
 /**** Modal Wishlist ****/
-/**** Remove item from wishlist, cart ****/
 /**** Modal Cart ****/
 /**** sub-menu-department ****/
 /**** Open note, shipping, coupon popup ****/
@@ -34,6 +34,8 @@
 /**** Change active video cosmetic2 ****/
 /**** Modal Video ****/
 /**** Scroll to top ****/
+/**** Handle layout cols in list product wishlist page, shop ****/
+/**** Display wishlist, cart, compare item from localStorage ****/
 /**** faqs ****/
 
 
@@ -153,7 +155,6 @@ if (searchIcon) {
 }
 
 
-
 // Modal login
 const loginIcon = document.querySelector('.user-icon i')
 const loginPopup = document.querySelector('.login-popup')
@@ -163,7 +164,7 @@ loginIcon?.addEventListener('click', () => {
 })
 
 
-// initialize the variable in local storage
+// initialize the variable(cart, wishlist, compare) in local storage
 let cartStore = localStorage.getItem('cartStore');
 if (cartStore === null) {
     localStorage.setItem('cartStore', JSON.stringify([]))
@@ -234,7 +235,7 @@ const handleItemModalWishlist = () => {
     listItemWishlist.innerHTML = ''
 
     if (JSON.parse(wishlistStore).length === 0) {
-        listItemWishlist.innerHTML = `<p>No product in wishlist</p>`
+        listItemWishlist.innerHTML = `<p class='mt-1'>No product in wishlist</p>`
     } else {
         JSON.parse(wishlistStore).forEach(item => {
             const prdItem = document.createElement('div')
@@ -282,63 +283,6 @@ const handleItemModalWishlist = () => {
 handleItemModalWishlist()
 
 
-// Remove item from wishlist, cart
-const removeBtns = document.querySelectorAll('.remove-btn')
-
-if (removeBtns) {
-    removeBtns.forEach(removeBtn => {
-        removeBtn.addEventListener('click', () => {
-            removeBtn.closest('.item').remove()
-        })
-    })
-}
-
-
-// Handle layout cols in list product wishlist, shop
-const layoutProductList = document.querySelector('.list-product-block .list-product');
-const chooseLayoutItems = document.querySelectorAll('.choose-layout .item')
-
-if (layoutProductList && chooseLayoutItems) {
-    chooseLayoutItems.forEach(item => {
-        if (item.classList.contains('active')) {
-            if (item.classList.contains('three-col')) {
-                layoutProductList.classList.add('lg:grid-cols-3')
-                layoutProductList.classList.remove('lg:grid-cols-4')
-                layoutProductList.classList.remove('lg:grid-cols-5')
-            }
-            else if (item.classList.contains('four-col')) {
-                layoutProductList.classList.add('lg:grid-cols-4')
-                layoutProductList.classList.remove('lg:grid-cols-3')
-                layoutProductList.classList.remove('lg:grid-cols-5')
-            }
-            else if (item.classList.contains('five-col')) {
-                layoutProductList.classList.add('lg:grid-cols-5')
-                layoutProductList.classList.remove('lg:grid-cols-3')
-                layoutProductList.classList.remove('lg:grid-cols-4')
-            }
-        }
-
-        item.addEventListener('click', () => {
-            if (item.classList.contains('three-col')) {
-                layoutProductList.classList.add('lg:grid-cols-3')
-                layoutProductList.classList.remove('lg:grid-cols-4')
-                layoutProductList.classList.remove('lg:grid-cols-5')
-            }
-            else if (item.classList.contains('four-col')) {
-                layoutProductList.classList.add('lg:grid-cols-4')
-                layoutProductList.classList.remove('lg:grid-cols-3')
-                layoutProductList.classList.remove('lg:grid-cols-5')
-            }
-            else if (item.classList.contains('five-col')) {
-                layoutProductList.classList.add('lg:grid-cols-5')
-                layoutProductList.classList.remove('lg:grid-cols-3')
-                layoutProductList.classList.remove('lg:grid-cols-4')
-            }
-        })
-    })
-}
-
-
 // Modal Cart
 const cartIcon = document.querySelector('.cart-icon')
 const modalCart = document.querySelector('.modal-cart-block')
@@ -369,6 +313,70 @@ continueCartIcon.addEventListener('click', closeModalCart)
 modalCartMain.addEventListener('click', (e) => {
     e.stopPropagation()
 })
+
+
+// Set cart length
+const handleItemModalCart = () => {
+    cartStore = localStorage.getItem('cartStore')
+
+    if (cartStore) {
+        cartIcon.querySelector('span').innerHTML = JSON.parse(cartStore).length
+    }
+
+    // Set cart item
+    const listItemCart = document.querySelector('.modal-cart-block .list-product')
+
+    listItemCart.innerHTML = ''
+
+    if (JSON.parse(cartStore).length === 0) {
+        listItemCart.innerHTML = `<p class='mt-1'>No product in cart</p>`
+    } else {
+        JSON.parse(cartStore).forEach(item => {
+            const prdItem = document.createElement('div')
+            prdItem.setAttribute('data-item', item.id)
+            prdItem.classList.add('item', 'py-5', 'flex', 'items-center', 'justify-between', 'gap-3', 'border-b', 'border-line')
+            prdItem.innerHTML = `
+                <div class="infor flex items-center gap-3 w-full">
+                    <div class="bg-img w-[100px] aspect-square flex-shrink-0 rounded-lg overflow-hidden">
+                        <img src=${item.thumbImage[0]} alt='product'
+                            class='w-full h-full' />
+                    </div>
+                    <div class='w-full'>
+                        <div class="flex items-center justify-between w-full">
+                            <div class="name text-button">${item.name}</div>
+                            <div
+                                class="remove-cart-btn remove-btn caption1 font-semibold text-red underline cursor-pointer">
+                                Remove
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 mt-3 w-full">
+                            <div class="flex items-center text-secondary2 capitalize">
+                                ${item.sizes[0]}/${item.variation[0].color}
+                            </div>
+                            <div class="product-price text-title">$${item.price}.00</div>
+                        </div>
+                    </div>
+                </div>
+            `
+
+            listItemCart.appendChild(prdItem)
+        })
+    }
+
+    const prdItems = listItemCart.querySelectorAll('.item')
+    prdItems.forEach(prd => {
+        const removeCartBtn = prd.querySelector('.remove-cart-btn')
+        removeCartBtn.addEventListener('click', () => {
+            const prdId = removeCartBtn.closest('.item').getAttribute('data-item')
+            // JSON.parse(cartStore)
+            const newArray = JSON.parse(cartStore).filter(item => item.id !== prdId);
+            localStorage.setItem('cartStore', JSON.stringify(newArray))
+            handleItemModalCart()
+        })
+    })
+}
+
+handleItemModalCart()
 
 
 // Countdown cart
@@ -884,6 +892,61 @@ closeCompareIcon.addEventListener('click', closeModalCompare)
 clearCompareIcon.addEventListener('click', closeModalCompare)
 
 
+
+// Set compare length
+const handleItemModalCompare = () => {
+    compareStore = localStorage.getItem('compareStore')
+
+    // Set compare item
+    const listItemCompare = document.querySelector('.modal-compare-block .list-product')
+
+    listItemCompare.innerHTML = ''
+
+    if (JSON.parse(compareStore).length === 0) {
+        listItemCompare.innerHTML = `<p class='mt-1'>No product in compare</p>`
+    } else {
+        JSON.parse(compareStore).forEach(item => {
+            const prdItem = document.createElement('div')
+            prdItem.setAttribute('data-item', item.id)
+            prdItem.classList.add('item', 'p-3', 'border', 'border-line', 'rounded-xl', 'relative')
+            prdItem.innerHTML = `
+                <div class="infor flex items-center gap-4">
+                    <div class="bg-img w-[100px] h-[100px] flex-shrink-0 rounded-lg overflow-hidden">
+                        <img src=${item.thumbImage[0]} alt='img'
+                            class='w-full h-full' />
+                    </div>
+                    <div class=''>
+                        <div class="name text-title">${item.name}</div>
+                        <div class="product-price text-title mt-2">$${item.price}.00</div>
+                    </div>
+                </div>
+                <div
+                    class="remove-btn close-btn absolute -right-4 -top-4 w-8 h-8 rounded-full bg-red text-white flex items-center justify-center duration-300 cursor-pointer hover:bg-black">
+                    <i class="ph ph-x text-sm"></i>
+                </div>
+            `
+
+            listItemCompare.appendChild(prdItem)
+        })
+    }
+
+    const prdItems = listItemCompare.querySelectorAll('.item')
+    prdItems.forEach(prd => {
+        const removeCompareBtn = prd.querySelector('.remove-btn')
+        removeCompareBtn.addEventListener('click', () => {
+            const prdId = removeCompareBtn.closest('.item').getAttribute('data-item')
+            // JSON.parse(compareStore)
+            const newArray = JSON.parse(compareStore).filter(item => item.id !== prdId);
+            localStorage.setItem('compareStore', JSON.stringify(newArray))
+            handleItemModalCompare()
+        })
+    })
+}
+
+handleItemModalCompare()
+
+
+
 // Modal Quickview
 const modalQuickview = document.querySelector('.modal-quickview-block')
 const modalQuickviewMain = document.querySelector('.modal-quickview-block .modal-quickview-main')
@@ -1186,7 +1249,7 @@ function addEventToProductItem(products) {
                     const existingIndex = wishlistStore.findIndex(item => item.id === productId);
 
                     if (existingIndex > -1) {
-                        // If prd đã existed in wishlist, remove it from wishlist
+                        // If prd existed in wishlist, remove it from wishlist
                         wishlistStore.splice(existingIndex, 1);
                         addWishlistIcon.classList.remove('active')
                         addWishlistIcon.querySelector('i').classList.add('ph')
@@ -1210,9 +1273,45 @@ function addEventToProductItem(products) {
             }
 
             if (compareIcon) {
+                let compareStore = localStorage.getItem('compareStore')
+                compareStore = compareStore ? JSON.parse(compareStore) : []
+                compareStore.forEach(prd => {
+                    if (prd.id === productId) {
+                        compareIcon.classList.add('active')
+                    }
+                })
+
                 compareIcon.addEventListener('click', (e) => {
-                    compareIcon.classList.toggle('active')
                     e.stopPropagation()
+
+                    // save prd to compare in local storage
+                    const productId = compareIcon.closest('.product-item').getAttribute('data-item')
+                    let compareStore = localStorage.getItem('compareStore')
+                    compareStore = compareStore ? JSON.parse(compareStore) : []
+
+                    const existingIndex = compareStore.findIndex(item => item.id === productId);
+
+                    if (existingIndex > -1) {
+                        // If prd existed in compare, remove it from compare
+                        compareStore.splice(existingIndex, 1);
+                        compareIcon.classList.remove('active')
+                    } else {
+                        if (compareStore.length < 3) {
+                            // If prd not exist in compare, add it to compare
+                            const productToAdd = products.find(item => item.id === productId);
+                            if (productToAdd) {
+                                compareStore.push(productToAdd);
+                                compareIcon.classList.add('active')
+                            }
+                        }
+                        else {
+                            alert('List compare product must be <= 3')
+                        }
+                    }
+
+                    // Save compare to localStorage
+                    localStorage.setItem('compareStore', JSON.stringify(compareStore));
+                    handleItemModalCompare()
                     openModalCompare()
                 })
             }
@@ -1227,7 +1326,29 @@ function addEventToProductItem(products) {
             if (addCartIcon) {
                 addCartIcon.addEventListener('click', (e) => {
                     e.stopPropagation()
-                    openModalCart()
+                    // save prd to cart in local storage
+                    const productItem = addCartIcon.closest('.product-item')
+                    const productId = productItem.getAttribute('data-item')
+                    let cartStore = localStorage.getItem('cartStore')
+                    cartStore = cartStore ? JSON.parse(cartStore) : []
+
+                    const existingIndex = cartStore.findIndex(item => item.id === productId);
+
+                    if (existingIndex > -1) {
+                        // If prd existed in cart
+                        openModalCart()
+                    } else {
+                        // If prd not exist in cart, add it to cart
+                        const productToAdd = products.find(item => item.id === productId);
+                        if (productToAdd) {
+                            cartStore.push(productToAdd);
+                            openModalCart()
+                        }
+                    }
+
+                    // Save cart to localStorage
+                    localStorage.setItem('cartStore', JSON.stringify(cartStore));
+                    handleItemModalCart()
                 })
             }
 
@@ -1674,36 +1795,39 @@ fetch('./assets/data/Product.json')
 
 
 // Featured product underwear
-const quantityBlock = document.querySelectorAll('.quantity-block')
+const handleQuantity = () => {
+    const quantityBlock = document.querySelectorAll('.quantity-block')
 
-quantityBlock.forEach(item => {
-    const minus = item.querySelector('.ph-minus')
-    const plus = item.querySelector('.ph-plus')
-    const quantity = item.querySelector('.quantity')
+    quantityBlock.forEach(item => {
+        const minus = item.querySelector('.ph-minus')
+        const plus = item.querySelector('.ph-plus')
+        const quantity = item.querySelector('.quantity')
 
-    if (Number(quantity.textContent) < 2) {
-        minus.classList.add('disabled')
-    }
-
-    minus.addEventListener('click', () => {
-        if (Number(quantity.textContent) > 2) {
-            quantity.innerHTML = Number(quantity.innerHTML) - 1
-            minus.classList.remove('disabled')
-        }
-        else {
-            quantity.innerHTML = '1'
+        if (Number(quantity.textContent) < 2) {
             minus.classList.add('disabled')
         }
-    })
 
-    plus.addEventListener('click', () => {
-        quantity.innerHTML = Number(quantity.innerHTML) + 1
-        if (Number(quantity.textContent) >= 2) {
-            minus.classList.remove('disabled')
-        }
-    })
-})
+        minus.addEventListener('click', () => {
+            if (Number(quantity.textContent) > 2) {
+                quantity.innerHTML = Number(quantity.innerHTML) - 1
+                minus.classList.remove('disabled')
+            }
+            else {
+                quantity.innerHTML = '1'
+                minus.classList.add('disabled')
+            }
+        })
 
+        plus.addEventListener('click', () => {
+            quantity.innerHTML = Number(quantity.innerHTML) + 1
+            if (Number(quantity.textContent) >= 2) {
+                minus.classList.remove('disabled')
+            }
+        })
+    })
+}
+
+handleQuantity()
 
 const blogItems = document.querySelectorAll('.blog-item')
 
@@ -2016,6 +2140,219 @@ window.addEventListener('scroll', () => {
         scrollTopBtn.classList.remove('active')
     }
 })
+
+
+
+// Handle layout cols in list product wishlist page, shop
+const layoutProductList = document.querySelector('.list-product-block .list-product');
+const chooseLayoutItems = document.querySelectorAll('.choose-layout .item')
+
+if (layoutProductList && chooseLayoutItems) {
+    chooseLayoutItems.forEach(item => {
+        if (item.classList.contains('active')) {
+            if (item.classList.contains('three-col')) {
+                layoutProductList.classList.add('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('four-col')) {
+                layoutProductList.classList.add('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('five-col')) {
+                layoutProductList.classList.add('lg:grid-cols-5')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+            }
+        }
+
+        item.addEventListener('click', () => {
+            if (item.classList.contains('three-col')) {
+                layoutProductList.classList.add('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('four-col')) {
+                layoutProductList.classList.add('lg:grid-cols-4')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-5')
+            }
+            else if (item.classList.contains('five-col')) {
+                layoutProductList.classList.add('lg:grid-cols-5')
+                layoutProductList.classList.remove('lg:grid-cols-3')
+                layoutProductList.classList.remove('lg:grid-cols-4')
+            }
+        })
+    })
+}
+
+
+// Display wishlist, cart, compare item from localStorage
+const listProductWishlist = document.querySelector('.wishlist-block .list-product')
+const cartPage = document.querySelector('.cart-block')
+const listProductCart = document.querySelector('.cart-block .list-product-main')
+const checkoutPage = document.querySelector('.checkout-block')
+const listProductCheckout = document.querySelector('.checkout-block .list-product-checkout')
+// const listCompare = document.querySelector('.list-compare')
+// const wishlistItems = document.querySelectorAll('.wishlist-item')
+// const cartItems = document.querySelectorAll('.cart-item')
+// const compareItems = document.querySelectorAll('.compare-item')
+
+// Wishlist
+if (listProductWishlist) {
+    let wishlistStore = localStorage.getItem('wishlistStore')
+    wishlistStore = wishlistStore ? JSON.parse(wishlistStore) : []
+
+    wishlistStore.forEach(product => {
+        const productElement = createProductItem(product);
+        listProductWishlist.appendChild(productElement);
+    })
+}
+
+// Cart
+if (listProductCart) {
+    let cartStore = localStorage.getItem('cartStore')
+    cartStore = cartStore ? JSON.parse(cartStore) : []
+
+    // Initial value in cart page
+    let moneyForFreeship = 150;
+    let totalCart = 0;
+    
+    const moneyFreeshipProgress = cartPage.querySelector('.tow-bar-block .progress-line')
+
+    cartStore.forEach(product => {
+        // calculate for prd item
+        const calculateProductTotal = () => {
+            const productTotal = product.price * product.quantityPurchase;
+            return productTotal;
+        };
+
+        const productElement = document.createElement('div')
+        productElement.classList.add('item', 'flex', 'md:mt-7', 'md:pb-7', 'mt-5', 'pb-5', 'border-b', 'border-line', 'w-full')
+        productElement.innerHTML = `
+            <div class="w-1/2">
+                <div class="flex items-center gap-6">
+                    <div class="bg-img md:w-[100px] w-20 aspect-[3/4]">
+                        <img src=${product.thumbImage[0]} alt='img'
+                            class='w-full h-full object-cover rounded-lg' />
+                    </div>
+                    <div>
+                        <div class="text-title">${product.name}</div>
+                        <div class="list-select mt-3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/12 price flex items-center justify-center">
+                <div class="text-title text-center">$${product.price}.00</div>
+            </div>
+            <div class="w-1/6 flex items-center justify-center">
+                <div
+                    class="quantity-block bg-surface md:p-3 p-2 flex items-center justify-between rounded-lg border border-line md:w-[100px] flex-shrink-0 w-20">
+                    <i class="ph-bold ph-minus cursor-pointer text-base max-md:text-sm"></i>
+                    <div class="text-button quantity">1</div>
+                    <i class="ph-bold ph-plus cursor-pointer text-base max-md:text-sm"></i>
+                </div>
+            </div>
+            <div class="w-1/6 flex total-price items-center justify-center">
+                <div class="text-title text-center">$${product.price}.00
+                </div>
+            </div>
+            <div class="w-1/12 flex items-center justify-center">
+                <i
+                    class="remove-btn ph ph-x-circle text-xl max-md:text-base text-red cursor-pointer hover:text-black duration-300"></i>
+            </div>
+        `
+
+        const quantityBlock = productElement.querySelector('.quantity-block');
+        const quantityProduct = quantityBlock.querySelector('.quantity');
+        const totalPriceProduct = productElement.querySelector('.total-price .text-title');
+
+
+        quantityBlock.querySelector('.ph-plus').addEventListener('click', () => {
+            product.quantityPurchase++;
+            quantityProduct.textContent = product.quantityPurchase;
+            totalPriceProduct.textContent = `$${product.quantityPurchase * product.price}.00`;
+            updateTotalCart()
+
+            // Update quantity localStorage
+            localStorage.setItem('cartStore', JSON.stringify(cartStore));
+        });
+
+        quantityBlock.querySelector('.ph-minus').addEventListener('click', () => {
+            if (product.quantityPurchase > 1) {
+                product.quantityPurchase--;
+                quantityProduct.textContent = product.quantityPurchase;
+                totalPriceProduct.textContent = `$${product.quantityPurchase * product.price}.00`;
+                updateTotalCart()
+
+                // Update quantity localStorage
+                localStorage.setItem('cartStore', JSON.stringify(cartStore));
+            }
+        });
+
+        listProductCart.appendChild(productElement);
+        totalCart += calculateProductTotal();
+
+        // Change value in cart page
+        document.querySelector('.total-block .total-product').innerHTML = totalCart
+    })
+
+
+    const updateTotalCart = () => {
+        totalCart = 0;
+        cartStore.forEach(product => {
+            totalCart += product.price * product.quantityPurchase;
+        });
+        // Change value in cart page
+        document.querySelector('.total-block .total-product').innerHTML = totalCart
+        document.querySelector('.heading.banner .more-price').innerHTML = totalCart <= moneyForFreeship ? moneyForFreeship - totalCart : '0'
+        moneyFreeshipProgress.style.width = totalCart <= moneyForFreeship ? `${(totalCart / moneyForFreeship) * 100}%` : `100%`
+    };
+
+    updateTotalCart()
+}
+
+
+// Checkout
+if (listProductCheckout) {
+    let cartStore = localStorage.getItem('cartStore')
+    cartStore = cartStore ? JSON.parse(cartStore) : []
+    let totalCart = 0
+
+    cartStore.forEach(product => {
+        const productElement = document.createElement('div')
+        productElement.classList.add('item', 'flex', 'items-center', 'justify-between', 'w-full', 'pb-5', 'border-b', 'border-line', 'gap-6', 'mt-5')
+        productElement.innerHTML = `
+            <div class="bg-img w-[100px] aspect-square flex-shrink-0 rounded-lg overflow-hidden">
+                <img src=${product.thumbImage[0]} alt='img'
+                    class='w-full h-full' />
+            </div>
+            <div class="flex items-center justify-between w-full">
+                <div>
+                    <div class="name text-title">${product.name}</div>
+                    <div class="caption1 text-secondary mt-2">
+                        <span class='size capitalize'>${product.sizes[0]}</span>
+                        <span>/</span>
+                        <span class='color capitalize'>${product.variation[0].color}</span>
+                    </div>
+                </div>
+                <div class="text-title">
+                    <span class='quantity'>${product.quantityPurchase}</span>
+                    <span class='px-1'>x</span>
+                    <span>
+                        $${product.price}.00
+                    </span>
+                </div>
+            </div>
+        `
+
+        listProductCheckout.appendChild(productElement)
+        totalCart += product.price * product.quantityPurchase;
+        document.querySelector('.total-cart-block .total-cart').innerHTML = `$${totalCart}.00`
+    })
+}
+
 
 
 // faqs
