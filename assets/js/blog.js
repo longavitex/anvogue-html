@@ -14,7 +14,7 @@ const blogList = document.querySelector('.list-blog');
 const listPagination = document.querySelector('.list-pagination');
 
 let currentPage = 1;
-const blogsPerPage = blogList ? Number(blogList.getAttribute('list-blog')) : 3;
+const blogsPerPage = blogList ? Number(blogList.getAttribute('data-item')) : 3;
 let blogsData = [];
 
 // Function to fetch blogs from JSON file
