@@ -318,9 +318,10 @@ modalCartMain.addEventListener('click', (e) => {
 // Set cart length
 const handleItemModalCart = () => {
     cartStore = localStorage.getItem('cartStore')
+    cartStore = cartStore ? JSON.parse(cartStore) : []
 
     if (cartStore) {
-        cartIcon.querySelector('span').innerHTML = JSON.parse(cartStore).length
+        cartIcon.querySelector('span').innerHTML = cartStore.length
     }
 
     // Set cart item
@@ -328,10 +329,10 @@ const handleItemModalCart = () => {
 
     listItemCart.innerHTML = ''
 
-    if (JSON.parse(cartStore).length === 0) {
+    if (cartStore.length === 0) {
         listItemCart.innerHTML = `<p class='mt-1'>No product in cart</p>`
     } else {
-        JSON.parse(cartStore).forEach(item => {
+        cartStore.forEach(item => {
             const prdItem = document.createElement('div')
             prdItem.setAttribute('data-item', item.id)
             prdItem.classList.add('item', 'py-5', 'flex', 'items-center', 'justify-between', 'gap-3', 'border-b', 'border-line')
@@ -368,8 +369,8 @@ const handleItemModalCart = () => {
         const removeCartBtn = prd.querySelector('.remove-cart-btn')
         removeCartBtn.addEventListener('click', () => {
             const prdId = removeCartBtn.closest('.item').getAttribute('data-item')
-            // JSON.parse(cartStore)
-            const newArray = JSON.parse(cartStore).filter(item => item.id !== prdId);
+            // cartStore
+            const newArray = cartStore.filter(item => item.id !== prdId);
             localStorage.setItem('cartStore', JSON.stringify(newArray))
             handleItemModalCart()
         })
@@ -896,16 +897,17 @@ clearCompareIcon.addEventListener('click', closeModalCompare)
 // Set compare length
 const handleItemModalCompare = () => {
     compareStore = localStorage.getItem('compareStore')
+    compareStore = compareStore ? JSON.parse(compareStore) : []
 
     // Set compare item
     const listItemCompare = document.querySelector('.modal-compare-block .list-product')
 
     listItemCompare.innerHTML = ''
 
-    if (JSON.parse(compareStore).length === 0) {
+    if (compareStore.length === 0) {
         listItemCompare.innerHTML = `<p class='mt-1'>No product in compare</p>`
     } else {
-        JSON.parse(compareStore).forEach(item => {
+        compareStore.forEach(item => {
             const prdItem = document.createElement('div')
             prdItem.setAttribute('data-item', item.id)
             prdItem.classList.add('item', 'p-3', 'border', 'border-line', 'rounded-xl', 'relative')
@@ -935,16 +937,36 @@ const handleItemModalCompare = () => {
         const removeCompareBtn = prd.querySelector('.remove-btn')
         removeCompareBtn.addEventListener('click', () => {
             const prdId = removeCompareBtn.closest('.item').getAttribute('data-item')
-            // JSON.parse(compareStore)
-            const newArray = JSON.parse(compareStore).filter(item => item.id !== prdId);
+            // compareStore
+            const newArray = compareStore.filter(item => item.id !== prdId);
             localStorage.setItem('compareStore', JSON.stringify(newArray))
             handleItemModalCompare()
+            updateCompareIcons()
         })
+    })
+
+    const clearCompareBtn = document.querySelector('.modal-compare-block .block-button .clear')
+    clearCompareBtn.addEventListener('click', () => {
+        localStorage.setItem('compareStore', [])
+        updateCompareIcons()
     })
 }
 
-handleItemModalCompare()
+const updateCompareIcons = () => {
+    const compareIcons = document.querySelectorAll('.compare-btn');
+    compareIcons.forEach(compareIcon => {
+        const productId = compareIcon.closest('.product-item')?.getAttribute('data-item');
+        const compareStore = localStorage.getItem('compareStore') ? JSON.parse(localStorage.getItem('compareStore')) : [];
+        const isProductInCompare = compareStore.some(item => item.id === productId);
+        if (isProductInCompare) {
+            compareIcon.classList.add('active');
+        } else {
+            compareIcon.classList.remove('active');
+        }
+    });
+};
 
+handleItemModalCompare()
 
 
 // Modal Quickview
@@ -1278,6 +1300,8 @@ function addEventToProductItem(products) {
                 compareStore.forEach(prd => {
                     if (prd.id === productId) {
                         compareIcon.classList.add('active')
+                    } else {
+                        compareIcon.classList.remove('active')
                     }
                 })
 
@@ -2194,7 +2218,7 @@ const cartPage = document.querySelector('.cart-block')
 const listProductCart = document.querySelector('.cart-block .list-product-main')
 const checkoutPage = document.querySelector('.checkout-block')
 const listProductCheckout = document.querySelector('.checkout-block .list-product-checkout')
-// const listCompare = document.querySelector('.list-compare')
+const listProductCompare = document.querySelector('.compare-block .content-main')
 // const wishlistItems = document.querySelectorAll('.wishlist-item')
 // const cartItems = document.querySelectorAll('.cart-item')
 // const compareItems = document.querySelectorAll('.compare-item')
@@ -2210,6 +2234,151 @@ if (listProductWishlist) {
     })
 }
 
+
+// Compare page
+if (listProductCompare) {
+    let compareStore = localStorage.getItem('compareStore')
+    compareStore = compareStore ? JSON.parse(compareStore) : []
+
+    const listImg = listProductCompare.querySelector('.list-product .right')
+    const listRate = listProductCompare.querySelector('.list-rate-block')
+    const listPrice = listProductCompare.querySelector('.list-price-block')
+    const listType = listProductCompare.querySelector('.list-type-block')
+    const listBrand = listProductCompare.querySelector('.list-brand-block')
+    const listSize = listProductCompare.querySelector('.list-size-block')
+    const listColor = listProductCompare.querySelector('.list-color-block')
+
+    if (compareStore.length === 0) {
+        listProductCompare.innerHTML = `
+        <div class="flex items-center justify-between w-full">
+        <div>
+        <div class="text-title">No product in compare</div>
+        </div>
+        </div>
+        `
+    } else {
+        compareStore.forEach(product => {
+            // list img 
+            const productElement = document.createElement('div')
+            productElement.setAttribute('data-item', product.id)
+            productElement.classList.add('product-item', 'px-10', 'pt-6', 'pb-5', 'border-r', 'border-line', 'cursor-pointer')
+            productElement.innerHTML = `
+                <div class="bg-img w-full aspect-[3/4] rounded-lg overflow-hidden flex-shrink-0">
+                    <img src=${product.thumbImage[0]} alt='img' class='w-full h-full object-cover' />
+                </div>
+                <div class="text-title text-center mt-4">${product.name}</div>
+                <div class="caption2 font-semibold text-secondary2 uppercase text-center mt-1">
+                    ${product.brand}
+                </div>
+                `
+
+            listImg.appendChild(productElement)
+
+            // list star
+            let arrOfStar = '';
+            const rateElement = document.createElement('td')
+            rateElement.classList.add('w-full', 'border', 'border-line', 'h-[60px]', 'border-t-0', 'border-r-0')
+            for (let i = 0; i < 5; i++) {
+                if (product.rate) {
+                    if (i >= product.rate) {
+                        arrOfStar += '<i class="ph-fill ph-star text-sm text-secondary"></i>'
+                    } else {
+                        arrOfStar += '<i class="ph-fill ph-star text-sm text-yellow"></i>'
+                    }
+                }
+            }
+
+            rateElement.innerHTML = `
+                <div class='h-full flex items-center justify-center'>
+                    <div class="rate flex">
+                        ${arrOfStar}
+                    </div>
+                    <p class='pl-1'>(1.234)</p>
+                </div>
+            `
+
+            listRate.appendChild(rateElement)
+
+            // list price
+            const priceElement = document.createElement('td')
+            priceElement.classList.add('w-full', 'border', 'border-line', 'h-[60px]', 'border-t-0', 'border-r-0')
+            priceElement.innerHTML = `
+                <div class='price-item h-full flex items-center justify-center'>
+                    $${product.price}.00
+                </div>
+            `
+
+            listPrice.appendChild(priceElement)
+
+            // list type
+            const typeElement = document.createElement('td')
+            typeElement.classList.add('w-full', 'border', 'border-line', 'h-[60px]', 'border-t-0', 'border-r-0')
+            typeElement.innerHTML = `
+                <div class='type-item h-full flex items-center justify-center capitalize'>
+                    ${product.type}
+                </div>
+            `
+
+            listType.appendChild(typeElement)
+
+            // list brand
+            const brandElement = document.createElement('td')
+            brandElement.classList.add('w-full', 'border', 'border-line', 'h-[60px]', 'border-t-0', 'border-r-0')
+            brandElement.innerHTML = `
+                <div class='brand-item h-full flex items-center justify-center capitalize'>
+                    ${product.brand}
+                </div>
+            `
+
+            listBrand.appendChild(brandElement)
+
+            // list size
+            const sizeElement = document.createElement('td')
+            sizeElement.classList.add('w-full', 'border', 'border-line', 'h-[60px]', 'border-t-0', 'border-r-0')
+            let size = ''
+
+            if (product.sizes) {
+                product.sizes.forEach((item, index) => {
+                    // if last size, don't add ',' in the end
+                    if (index === product.sizes.length - 1) {
+                        size += `<p>${item}</p>`;
+                    } else {
+                        size += `<p>${item}, </p>`;
+                    }
+                })
+            }
+
+            sizeElement.innerHTML = `
+                <div class='list-size h-full flex items-center justify-center capitalize gap-1'>
+                    ${size}
+                </div>
+            `
+
+            listSize.appendChild(sizeElement)
+
+            // list color
+            const colorElement = document.createElement('td')
+            colorElement.classList.add('w-full', 'border', 'border-line', 'h-[60px]', 'border-t-0', 'border-r-0')
+            let color = ''
+
+            if (product.variation) {
+                product.variation.forEach((item) => {
+                    color += `<span class='w-6 h-6 rounded-full' style="background-color: ${item.colorCode};"></span>`;
+                })
+            }
+
+            colorElement.innerHTML = `
+                <div class='list-color h-full flex items-center justify-center capitalize gap-2'>
+                    ${color}
+                </div>
+            `
+
+            listColor.appendChild(colorElement)
+        })
+    }
+}
+
+
 // Cart
 if (listProductCart) {
     let cartStore = localStorage.getItem('cartStore')
@@ -2218,7 +2387,7 @@ if (listProductCart) {
     // Initial value in cart page
     let moneyForFreeship = 150;
     let totalCart = 0;
-    
+
     const moneyFreeshipProgress = cartPage.querySelector('.tow-bar-block .progress-line')
 
     cartStore.forEach(product => {
@@ -2250,7 +2419,7 @@ if (listProductCart) {
                 <div
                     class="quantity-block bg-surface md:p-3 p-2 flex items-center justify-between rounded-lg border border-line md:w-[100px] flex-shrink-0 w-20">
                     <i class="ph-bold ph-minus cursor-pointer text-base max-md:text-sm"></i>
-                    <div class="text-button quantity">1</div>
+                    <div class="text-button quantity">${product.quantityPurchase}</div>
                     <i class="ph-bold ph-plus cursor-pointer text-base max-md:text-sm"></i>
                 </div>
             </div>
@@ -2306,6 +2475,7 @@ if (listProductCart) {
         });
         // Change value in cart page
         document.querySelector('.total-block .total-product').innerHTML = totalCart
+        document.querySelector('.total-cart-block .total-cart').innerHTML = totalCart
         document.querySelector('.heading.banner .more-price').innerHTML = totalCart <= moneyForFreeship ? moneyForFreeship - totalCart : '0'
         moneyFreeshipProgress.style.width = totalCart <= moneyForFreeship ? `${(totalCart / moneyForFreeship) * 100}%` : `100%`
     };
@@ -2350,6 +2520,42 @@ if (listProductCheckout) {
         listProductCheckout.appendChild(productElement)
         totalCart += product.price * product.quantityPurchase;
         document.querySelector('.total-cart-block .total-cart').innerHTML = `$${totalCart}.00`
+    })
+}
+
+// Show, hide login block in checkout
+const formLoginHeading = document.querySelector('.checkout-block .form-login-block')
+const loginHeading = document.querySelector('.checkout-block .login .left span.text-button')
+const iconDownHeading = document.querySelector('.checkout-block .login .right i')
+
+if (loginHeading) {
+    loginHeading.addEventListener('click', () => {
+        formLoginHeading.classList.toggle('open')
+        iconDownHeading.classList.toggle('up')
+    })
+
+    iconDownHeading.addEventListener('click', () => {
+        formLoginHeading.classList.toggle('open')
+        iconDownHeading.classList.toggle('up')
+    })
+}
+
+// Show, hide payment type in checkout
+const listPayment = document.querySelector('.payment-block .list-payment')
+const paymentCheckbox = document.querySelectorAll('.payment-block .list-payment .type>input')
+
+if (paymentCheckbox) {
+    paymentCheckbox.forEach(item => {
+        item.addEventListener('click', () => {
+            if (listPayment.querySelector('.open')) {
+                listPayment.querySelector('.open').classList.remove('open')
+            }
+
+            let parentType = item.parentElement
+            if (item.checked) {
+                parentType.classList.add('open')
+            }
+        })
     })
 }
 
