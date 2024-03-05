@@ -2234,7 +2234,6 @@ if (layoutProductList && chooseLayoutItems) {
 // Display wishlist, cart, compare item from localStorage
 const listProductWishlist = document.querySelector('.wishlist-block .list-product')
 const cartPage = document.querySelector('.cart-block')
-const listProductCart = document.querySelector('.cart-block .list-product-main')
 const checkoutPage = document.querySelector('.checkout-block')
 const listProductCheckout = document.querySelector('.checkout-block .list-product-checkout')
 const listProductCompare = document.querySelector('.compare-block .content-main')
@@ -2399,108 +2398,130 @@ if (listProductCompare) {
 
 
 // Cart
-if (listProductCart) {
-    let cartStore = localStorage.getItem('cartStore')
-    cartStore = cartStore ? JSON.parse(cartStore) : []
+let listProductCart = document.querySelector('.cart-block .list-product-main')
 
-    // Initial value in cart page
-    let moneyForFreeship = 150;
-    let totalCart = 0;
+const handleInforCart = () => {
+    if (listProductCart) {
+        let cartStore = localStorage.getItem('cartStore')
+        cartStore = cartStore ? JSON.parse(cartStore) : []
 
-    const moneyFreeshipProgress = cartPage.querySelector('.tow-bar-block .progress-line')
+        // Initial value in cart page
+        let moneyForFreeship = 150;
+        let totalCart = 0;
 
-    cartStore.forEach(product => {
-        // calculate for prd item
-        const calculateProductTotal = () => {
-            const productTotal = product.price * product.quantityPurchase;
-            return productTotal;
-        };
+        const moneyFreeshipProgress = cartPage.querySelector('.tow-bar-block .progress-line')
 
-        const productElement = document.createElement('div')
-        productElement.classList.add('item', 'flex', 'md:mt-7', 'md:pb-7', 'mt-5', 'pb-5', 'border-b', 'border-line', 'w-full')
-        productElement.innerHTML = `
-            <div class="w-1/2">
-                <div class="flex items-center gap-6">
-                    <div class="bg-img md:w-[100px] w-20 aspect-[3/4]">
-                        <img src=${product.thumbImage[0]} alt='img'
-                            class='w-full h-full object-cover rounded-lg' />
+        listProductCart.innerHTML = ''
+
+        cartStore.forEach(product => {
+            // calculate for prd item
+            const calculateProductTotal = () => {
+                const productTotal = product.price * product.quantityPurchase;
+                return productTotal;
+            };
+
+            const productElement = document.createElement('div')
+            productElement.setAttribute('data-item', product.id)
+            productElement.classList.add('item', 'flex', 'md:mt-7', 'md:pb-7', 'mt-5', 'pb-5', 'border-b', 'border-line', 'w-full')
+            productElement.innerHTML = `
+                <div class="w-1/2">
+                    <div class="flex items-center gap-6">
+                        <div class="bg-img md:w-[100px] w-20 aspect-[3/4]">
+                            <img src=${product.thumbImage[0]} alt='img'
+                                class='w-full h-full object-cover rounded-lg' />
+                        </div>
+                        <div>
+                            <div class="text-title">${product.name}</div>
+                            <div class="list-select mt-3"></div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-title">${product.name}</div>
-                        <div class="list-select mt-3"></div>
+                </div>
+                <div class="w-1/12 price flex items-center justify-center">
+                    <div class="text-title text-center">$${product.price}.00</div>
+                </div>
+                <div class="w-1/6 flex items-center justify-center">
+                    <div
+                        class="quantity-block bg-surface md:p-3 p-2 flex items-center justify-between rounded-lg border border-line md:w-[100px] flex-shrink-0 w-20">
+                        <i class="ph-bold ph-minus cursor-pointer text-base max-md:text-sm"></i>
+                        <div class="text-button quantity">${product.quantityPurchase}</div>
+                        <i class="ph-bold ph-plus cursor-pointer text-base max-md:text-sm"></i>
                     </div>
                 </div>
-            </div>
-            <div class="w-1/12 price flex items-center justify-center">
-                <div class="text-title text-center">$${product.price}.00</div>
-            </div>
-            <div class="w-1/6 flex items-center justify-center">
-                <div
-                    class="quantity-block bg-surface md:p-3 p-2 flex items-center justify-between rounded-lg border border-line md:w-[100px] flex-shrink-0 w-20">
-                    <i class="ph-bold ph-minus cursor-pointer text-base max-md:text-sm"></i>
-                    <div class="text-button quantity">${product.quantityPurchase}</div>
-                    <i class="ph-bold ph-plus cursor-pointer text-base max-md:text-sm"></i>
+                <div class="w-1/6 flex total-price items-center justify-center">
+                    <div class="text-title text-center">$${product.price}.00
+                    </div>
                 </div>
-            </div>
-            <div class="w-1/6 flex total-price items-center justify-center">
-                <div class="text-title text-center">$${product.price}.00
+                <div class="w-1/12 flex items-center justify-center">
+                    <i
+                        class="remove-btn ph ph-x-circle text-xl max-md:text-base text-red cursor-pointer hover:text-black duration-300"></i>
                 </div>
-            </div>
-            <div class="w-1/12 flex items-center justify-center">
-                <i
-                    class="remove-btn ph ph-x-circle text-xl max-md:text-base text-red cursor-pointer hover:text-black duration-300"></i>
-            </div>
-        `
+            `
 
-        const quantityBlock = productElement.querySelector('.quantity-block');
-        const quantityProduct = quantityBlock.querySelector('.quantity');
-        const totalPriceProduct = productElement.querySelector('.total-price .text-title');
+            const quantityBlock = productElement.querySelector('.quantity-block');
+            const quantityProduct = quantityBlock.querySelector('.quantity');
+            const totalPriceProduct = productElement.querySelector('.total-price .text-title');
 
 
-        quantityBlock.querySelector('.ph-plus').addEventListener('click', () => {
-            product.quantityPurchase++;
-            quantityProduct.textContent = product.quantityPurchase;
-            totalPriceProduct.textContent = `$${product.quantityPurchase * product.price}.00`;
-            updateTotalCart()
-
-            // Update quantity localStorage
-            localStorage.setItem('cartStore', JSON.stringify(cartStore));
-        });
-
-        quantityBlock.querySelector('.ph-minus').addEventListener('click', () => {
-            if (product.quantityPurchase > 1) {
-                product.quantityPurchase--;
+            quantityBlock.querySelector('.ph-plus').addEventListener('click', () => {
+                product.quantityPurchase++;
                 quantityProduct.textContent = product.quantityPurchase;
                 totalPriceProduct.textContent = `$${product.quantityPurchase * product.price}.00`;
                 updateTotalCart()
 
                 // Update quantity localStorage
                 localStorage.setItem('cartStore', JSON.stringify(cartStore));
-            }
-        });
+            });
 
-        listProductCart.appendChild(productElement);
-        totalCart += calculateProductTotal();
+            quantityBlock.querySelector('.ph-minus').addEventListener('click', () => {
+                if (product.quantityPurchase > 1) {
+                    product.quantityPurchase--;
+                    quantityProduct.textContent = product.quantityPurchase;
+                    totalPriceProduct.textContent = `$${product.quantityPurchase * product.price}.00`;
+                    updateTotalCart()
 
-        // Change value in cart page
-        document.querySelector('.total-block .total-product').innerHTML = totalCart
-    })
+                    // Update quantity localStorage
+                    localStorage.setItem('cartStore', JSON.stringify(cartStore));
+                }
+            });
+
+            listProductCart.appendChild(productElement);
+            totalCart += calculateProductTotal();
+
+            // Change value in cart page
+            document.querySelector('.total-block .total-product').innerHTML = totalCart
+        })
 
 
-    const updateTotalCart = () => {
-        totalCart = 0;
-        cartStore.forEach(product => {
-            totalCart += product.price * product.quantityPurchase;
-        });
-        // Change value in cart page
-        document.querySelector('.total-block .total-product').innerHTML = totalCart
-        document.querySelector('.total-cart-block .total-cart').innerHTML = totalCart
-        document.querySelector('.heading.banner .more-price').innerHTML = totalCart <= moneyForFreeship ? moneyForFreeship - totalCart : '0'
-        moneyFreeshipProgress.style.width = totalCart <= moneyForFreeship ? `${(totalCart / moneyForFreeship) * 100}%` : `100%`
-    };
+        const updateTotalCart = () => {
+            totalCart = 0;
+            cartStore.forEach(product => {
+                totalCart += product.price * product.quantityPurchase;
+            });
+            // Change value in cart page
+            document.querySelector('.total-block .total-product').innerHTML = totalCart
+            document.querySelector('.total-cart-block .total-cart').innerHTML = totalCart
+            document.querySelector('.heading.banner .more-price').innerHTML = totalCart <= moneyForFreeship ? moneyForFreeship - totalCart : '0'
+            moneyFreeshipProgress.style.width = totalCart <= moneyForFreeship ? `${(totalCart / moneyForFreeship) * 100}%` : `100%`
+            console.log(totalCart);
+        };
 
-    updateTotalCart()
+        updateTotalCart()
+
+        const prdItems = listProductCart.querySelectorAll('.item')
+        prdItems.forEach(prd => {
+            const removeCartBtn = prd.querySelector('.remove-btn')
+            removeCartBtn.addEventListener('click', () => {
+                const prdId = removeCartBtn.closest('.item').getAttribute('data-item')
+                // cartStore
+                const newArray = cartStore.filter(item => item.id !== prdId);
+                localStorage.setItem('cartStore', JSON.stringify(newArray))
+                handleInforCart()
+            })
+        })
+    }
 }
+
+handleInforCart()
 
 
 // Checkout
