@@ -276,9 +276,28 @@ const handleItemModalWishlist = () => {
             const newArray = JSON.parse(wishlistStore).filter(item => item.id !== prdId);
             localStorage.setItem('wishlistStore', JSON.stringify(newArray))
             handleItemModalWishlist()
+            updateWishlistIcons()
         })
     })
 }
+
+const updateWishlistIcons = () => {
+    const wishlistIcons = document.querySelectorAll('.add-wishlist-btn');
+    wishlistIcons.forEach(wishlistIcon => {
+        const productId = wishlistIcon.closest('.product-item')?.getAttribute('data-item');
+        const wishlistStore = localStorage.getItem('wishlistStore') ? JSON.parse(localStorage.getItem('wishlistStore')) : [];
+        const isProductInWishlist = wishlistStore.some(item => item.id === productId);
+        if (isProductInWishlist) {
+            wishlistIcon.classList.add('active');
+            wishlistIcon.querySelector('i').classList.remove('ph')
+            wishlistIcon.querySelector('i').classList.add('ph-fill')
+        } else {
+            wishlistIcon.classList.remove('active');
+            wishlistIcon.querySelector('i').classList.add('ph')
+            wishlistIcon.querySelector('i').classList.remove('ph-fill')
+        }
+    });
+};
 
 handleItemModalWishlist()
 
