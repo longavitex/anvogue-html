@@ -2,8 +2,8 @@
 /**** Add fixed header ****/
 /**** Marquee banner top ****/
 /**** Menu mobile ****/
-/**** Redirect to search-results when enter or click form search ****/
 /**** Modal Search ****/
+/**** Redirect to search-results when enter or click form search ****/
 /**** Modal login ****/
 /**** initialize the variable(cart, wishlist, compare) in local storage ****/
 /**** Modal Wishlist ****/
@@ -105,6 +105,26 @@ backMenuBtns.forEach(btn => {
 })
 
 
+// Modal Search
+const searchIcon = document.querySelector('.search-icon')
+const modalSearch = document.querySelector('.modal-search-block')
+const modalSearchMain = document.querySelector('.modal-search-block .modal-search-main')
+
+if (searchIcon) {
+    searchIcon.addEventListener('click', () => {
+        modalSearchMain.classList.add('open')
+    })
+
+    modalSearch.addEventListener('click', () => {
+        modalSearchMain.classList.remove('open')
+    })
+
+    modalSearchMain.addEventListener('click', (e) => {
+        e.stopPropagation()
+    })
+}
+
+
 // Redirect to search-results when enter or click form search
 const formSearch = document.querySelectorAll('.form-search')
 
@@ -134,24 +154,60 @@ if (formSearch) {
     })
 }
 
+const keywordSearch = document.querySelectorAll('.list-keyword .item')
 
-// Modal Search
-const searchIcon = document.querySelector('.search-icon')
-const modalSearch = document.querySelector('.modal-search-block')
-const modalSearchMain = document.querySelector('.modal-search-block .modal-search-main')
-
-if (searchIcon) {
-    searchIcon.addEventListener('click', () => {
-        modalSearchMain.classList.add('open')
+if (keywordSearch) {
+    keywordSearch.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const query = item.innerHTML.toLowerCase().replace(/\s+/g, '')
+            window.location.href = `search-result.html?query=${query}`
+        })
     })
+}
 
-    modalSearch.addEventListener('click', () => {
-        modalSearchMain.classList.remove('open')
-    })
 
-    modalSearchMain.addEventListener('click', (e) => {
-        e.stopPropagation()
-    })
+// Filter product in search-results
+const listSearchResults = document.querySelector('.search-result-block')
+
+
+if (listSearchResults) {
+    // get curent URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // get value 'query'
+    const queryValue = urlParams.get('query');
+
+    const listProductResult = document.querySelector('.list-product-result')
+    if (queryValue) {
+        fetch('./assets/data/Product.json')
+        .then(response => response.json())
+        .then(products => {
+            const filterPrd = products.filter(product => product.type.includes(queryValue) || product.category.includes(queryValue))
+            const result = listSearchResults.querySelectorAll('.result')
+            const resultQuantity = listSearchResults.querySelector('.result-quantity')
+            
+            // Set number of results
+            resultQuantity.innerHTML = filterPrd.length
+
+            // Set text result
+            result.forEach(item => {
+                item.innerHTML = queryValue
+            })
+
+            // Show product results
+            filterPrd.forEach(product => {
+                const productElement = createProductItem(product);
+                listProductResult.appendChild(productElement);
+            })
+
+            if (filterPrd.length === 0) {
+                listProductResult.innerHTML = `<p>No product found.</p>`
+            }
+        })
+        .catch(error => console.error('Error loading products:', error));
+    } else {
+        listProductResult.innerHTML = `<p>No product searched.</p>`
+    }
 }
 
 
