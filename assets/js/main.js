@@ -8,7 +8,9 @@
 /**** Modal login ****/
 /**** initialize the variable(cart, wishlist, compare) in local storage ****/
 /**** Modal Wishlist ****/
+/**** handleItemModalWishlist ****/
 /**** Modal Cart ****/
+/**** handleItemModalCart ****/
 /**** sub-menu-department ****/
 /**** Open note, shipping, coupon popup ****/
 /**** Banner top ****/
@@ -21,7 +23,9 @@
 /**** list-three-product ****/
 /**** list-feature-product Underwear ****/
 /**** Modal Compare ****/
+/**** handleItemModalCompare ****/
 /**** Modal Quickview ****/
+/**** handleItemModalQuickview ****/
 /**** show information about product in modalQuickview ****/
 /**** Modal SizeGuide ****/
 /**** Create product item ****/
@@ -429,6 +433,7 @@ continueCartIcon.addEventListener("click", closeModalCart);
 modalCartMain.addEventListener("click", (e) => {
   e.stopPropagation();
 });
+
 
 // Set cart length
 const handleItemModalCart = () => {
@@ -993,7 +998,7 @@ var swiper2 = new Swiper(".mySwiper2", {
       // Add class 'swiper-slide-thumb-active' to slide in swiper 2
       document
         .querySelectorAll(".mySwiper .swiper-slide")
-        [activeIndex].classList.add("swiper-slide-thumb-active");
+      [activeIndex].classList.add("swiper-slide-thumb-active");
     },
   },
 });
@@ -1139,9 +1144,27 @@ const handleItemModalQuickview = () => {
   quickViewStore = quickViewStore ? JSON.parse(quickViewStore) : [];
 
   // Set quickView item
-  modalQuickviewMain.innerHTML = "";
-
   quickViewStore.forEach((item) => {
+    modalQuickviewMain.setAttribute('data-item', item.id)
+
+    const listImg = modalQuickviewMain.querySelector('.list-img')
+    listImg.innerHTML = `
+      ${item.images.map((img) => (
+      `
+        <div class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
+          <img
+            src=${img}
+            alt="item"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        `
+    )).join('')}
+    `
+
+    modalQuickviewMain.querySelector('.product-infor .category').innerHTML = item.category
+    modalQuickviewMain.querySelector('.product-infor .name').innerHTML = item.name
+
     let arrOfStar = "";
     for (let i = 0; i < 5; i++) {
       if (item.rate) {
@@ -1152,221 +1175,116 @@ const handleItemModalQuickview = () => {
         }
       }
     }
+    modalQuickviewMain.querySelector('.product-infor .rate').innerHTML = arrOfStar
+    modalQuickviewMain.querySelector('.product-infor .product-price').innerHTML = '$' + item.price + '.00'
+    modalQuickviewMain.querySelector('.product-infor .product-origin-price del').innerHTML = '$' + item.originPrice + '.00'
+    modalQuickviewMain.querySelector('.product-infor .product-sale').innerHTML = '-' + Math.floor(100 - (item.price / item.originPrice) * 100) + '%'
+    modalQuickviewMain.querySelector('.product-infor .desc').innerHTML = item.description
 
-    modalQuickviewMain.innerHTML = `
-      <div class="flex h-full max-md:flex-col-reverse gap-y-6" data-item="${
-        item.id
-      }">
-                <div class="left lg:w-[388px] md:w-[300px] flex-shrink-0 px-6">
-                    <div class="list-img max-md:flex items-center gap-4">
-                      ${item.images.map((img) => (
-                        `
-                        <div class="bg-img w-full aspect-[3/4] max-md:w-[150px] max-md:flex-shrink-0 rounded-[20px] overflow-hidden md:mt-6">
-                          <img
-                            src=${img}
-                            alt="item"
-                            class="w-full h-full object-cover"
-                          />
-                        </div>
-                        `
-                      ))}
-                    </div>
-                </div>
-                <div class="right w-full px-6">
-                    <div class="heading pb-6 flex items-center justify-between relative">
-                        <div class="heading5">Quick View</div>
-                        <div
-                            class="close-btn absolute right-0 top-0 w-6 h-6 rounded-full bg-surface flex items-center justify-center duration-300 cursor-pointer hover:bg-black hover:text-white">
-                            <i class="ph ph-x text-sm"></i>
-                        </div>
-                    </div>
-                    <div class="product-infor">
-                        <div class="flex justify-between">
-                            <div>
-                                <div class="caption2 text-secondary font-semibold uppercase">${
-                                  item.category
-                                }
-                                </div>
-                                <div class="heading4 mt-1">${item.name}</div>
-                            </div>
-                            <div class='add-wishlist-btn w-10 h-10 flex items-center justify-center border border-line
-                                cursor-pointer rounded-lg duration-300 hover:bg-black hover:text-white'>
-                                <i class="ph ph-heart text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-1 mt-3">
-                            <div class="rate flex">
-                                ${arrOfStar}
-                            </div>
-                            <span class='caption1 text-secondary'>(1.234 reviews)</span>
-                        </div>
-                        <div class="flex items-center gap-3 flex-wrap mt-5 pb-6 border-b border-line">
-                            <div class="product-price heading5">$${
-                              item.price
-                            }.00</div>
-                            <div class='w-px h-4 bg-line'></div>
-                            <div class="product-origin-price font-normal text-secondary2">
-                                <del>$${item.originPrice}.00</del>
-                            </div>
-                            <div
-                                class="product-sale caption2 font-semibold bg-green px-3 py-0.5 inline-block rounded-full">
-                                -${Math.floor(
-                                  100 - (item.price / item.originPrice) * 100
-                                )}%
-                            </div>
-                            <div class='desc text-secondary mt-3'>${
-                              item.description
-                            }</div>
-                        </div>
-                        <div class="list-action mt-6">
-                            <div class="choose-color">
-                                <div class="text-title">Colors: <span class='text-title color'></span>
-                                </div>
-                                <div class="list-color flex items-center gap-2 flex-wrap mt-3">
-                                  ${item.variation
-                                    .map(
-                                      (color, index) =>
-                                        `
-                                      <div
-                                          class="color-item w-12 h-12 rounded-xl duration-300 relative"
-                                          key="${index}"
-                                      >
-                                          <img
-                                              src="${color.colorImage}"
-                                              alt='color'
-                                              class='rounded-xl w-full h-full object-cover'
-                                          />
-                                          <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">${color.color}</div>
-                                      </div>
-                                  `
-                                    )
-                                    .join("")}
-                                </div>
-                            </div>
-                            <div class="choose-size mt-5">
-                                <div class="heading flex items-center justify-between">
-                                    <div class="text-title">Size: <span class='text-title size'>M</span>
-                                    </div>
-                                    <div class="caption1 size-guide text-red underline">Size Guide</div>
-                                </div>
-                                <div class="list-size flex items-center gap-2 flex-wrap mt-3">
-                                ${item.sizes
-                                    .map(
-                                      (size, index) =>
-                                        `
-                                      <div
-                                          class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line"
-                                          key="${index}"
-                                      >
-                                          ${size}
-                                      </div>
-                                  `
-                                    )
-                                    .join("")}
-                                </div>
-                            </div>
-                            <div class="text-title mt-5">Quantity:</div>
-                            <div class="choose-quantity flex items-center flex-wrap lg:justify-between gap-5 mt-3">
-                                <div
-                                    class="quantity-block md:p-3 max-md:py-1.5 max-md:px-3 flex items-center justify-between rounded-lg border border-line sm:w-[180px] w-[120px] flex-shrink-0">
-                                    <i class="ph-bold ph-minus cursor-pointer body1"></i>
-                                    <div class="quantity body1 font-semibold">1</div>
-                                    <i class="ph-bold ph-plus cursor-pointer body1"></i>
-                                </div>
-                                <div
-                                    class="add-cart-btn button-main w-full text-center bg-white text-black border border-black">
-                                    Add
-                                    To Cart</div>
-                            </div>
-                            <div class="button-block mt-5">
-                                <a href="checkout.html" class="button-main w-full text-center">Buy It Now</a>
-                            </div>
-                        </div>
-                        <div class="flex items-center flex-wrap lg:gap-20 gap-8 gap-y-4 mt-5">
-                            <div class="compare flex items-center gap-3 cursor-pointer">
-                                <div
-                                    class="compare-btn md:w-12 md:h-12 w-10 h-10 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white">
-                                    <i class="ph-fill ph-arrows-counter-clockwise cursor-pointer heading6"></i>
-                                </div>
-                                <span>Compare</span>
-                            </div>
-                            <div class="share flex items-center gap-3 cursor-pointer">
-                                <div
-                                    class="share-btn md:w-12 md:h-12 w-10 h-10 flex items-center justify-center border border-line cursor-pointer rounded-xl duration-300 hover:bg-black hover:text-white">
-                                    <i class="ph-fill ph-share-network cursor-pointer heading6"></i>
-                                </div>
-                                <span>Share Products</span>
-                            </div>
-                        </div>
-                        <div class="more-infor mt-6">
-                            <div class="flex items-center gap-4 flex-wrap">
-                                <div class="flex items-center gap-1">
-                                    <i class="ph ph-arrow-clockwise cursor-pointer body1"></i>
-                                    <div class="text-title">Delivery & Return</div>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <i class="ph ph-question cursor-pointer body1"></i>
-                                    <div class="text-title">Ask A Question</div>
-                                </div>
-                            </div>
-                            <div class="flex items-center flex-wrap gap-1 mt-3">
-                                <i class="ph ph-timer cursor-pointer body1"></i>
-                                <span class="text-title">Estimated Delivery:</span>
-                                <span class="text-secondary">14 January - 18 January</span>
-                            </div>
-                            <div class="flex items-center flex-wrap gap-1 mt-3">
-                                <i class="ph ph-eye cursor-pointer body1"></i>
-                                <span class="text-title">38</span>
-                                <span class="text-secondary">people viewing this product right now!</span>
-                            </div>
-                            <div class="flex items-center gap-1 mt-3">
-                                <div class="text-title">SKU:</div>
-                                <div class="text-secondary">53453412</div>
-                            </div>
-                            <div class="flex items-center gap-1 mt-3">
-                                <div class="text-title">Categories:</div>
-                                <div class="text-secondary">fashion, women
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-1 mt-3">
-                                <div class="text-title">Tag:</div>
-                                <div class="text-secondary">dress</div>
-                            </div>
-                        </div>
-                        <div class="list-payment mt-7">
-                            <div
-                                class="main-content lg:pt-8 pt-6 lg:pb-6 pb-4 sm:px-4 px-3 border border-line rounded-xl relative max-md:w-2/3 max-sm:w-full">
-                                <div
-                                    class="heading6 px-5 bg-white absolute -top-[14px] left-1/2 -translate-x-1/2 whitespace-nowrap">
-                                    Guranteed safe checkout</div>
-                                <div class="list grid grid-cols-6">
-                                    <div class="item flex items-center justify-center lg:px-3 px-1">
-                                        <img src='./assets/images/payment/Frame-0.png' alt='payment' class='w-full' />
-                                    </div>
-                                    <div class="item flex items-center justify-center lg:px-3 px-1">
-                                        <img src='./assets/images/payment/Frame-1.png' alt='payment' class='w-full' />
-                                    </div>
-                                    <div class="item flex items-center justify-center lg:px-3 px-1">
-                                        <img src='./assets/images/payment/Frame-2.png' alt='payment' class='w-full' />
-                                    </div>
-                                    <div class="item flex items-center justify-center lg:px-3 px-1">
-                                        <img src='./assets/images/payment/Frame-3.png' alt='payment' class='w-full' />
-                                    </div>
-                                    <div class="item flex items-center justify-center lg:px-3 px-1">
-                                        <img src='./assets/images/payment/Frame-4.png' alt='payment' class='w-full' />
-                                    </div>
-                                    <div class="item flex items-center justify-center lg:px-3 px-1">
-                                        <img src='./assets/images/payment/Frame-5.png' alt='payment' class='w-full' />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    `;
+    const listColor = modalQuickviewMain.querySelector('.list-color')
+    listColor.innerHTML = `
+      ${item.variation.map((color) => (
+      `
+        <div class="color-item w-12 h-12 rounded-xl duration-300 relative">
+          <img
+              src="${color.colorImage}"
+              alt='color'
+              class='rounded-xl w-full h-full object-cover'
+          />
+          <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">${color.color}</div>
+        </div>
+        `
+    )).join('')}
+    `
+
+    const listSize = modalQuickviewMain.querySelector('.list-size')
+    listSize.innerHTML = `
+      ${item.sizes.map((size) => (
+      `
+        <div
+            class="size-item w-12 h-12 flex items-center justify-center text-button rounded-full bg-white border border-line"
+        >
+            ${size}
+        </div>
+      `
+    )).join('')}
+    `
+
+    let wishlistStore = localStorage.getItem("wishlistStore");
+    wishlistStore = wishlistStore ? JSON.parse(wishlistStore) : [];
+    const addWishlistIcon = modalQuickviewMain.querySelector('.add-wishlist-btn')
+
+    const existingIndex = wishlistStore.findIndex(
+      (prd) => prd.id === item.id
+    );
+
+    if (existingIndex > -1) {
+      // If prd existed in wishlist, remove it from wishlist
+      addWishlistIcon.classList.add("active");
+      addWishlistIcon.querySelector("i").classList.remove("ph");
+      addWishlistIcon.querySelector("i").classList.add("ph-fill");
+    } else {
+      // If prd not exist in wishlist, add it to wishlist
+      addWishlistIcon.classList.remove("active");
+      addWishlistIcon.querySelector("i").classList.add("ph");
+      addWishlistIcon.querySelector("i").classList.remove("ph-fill");
+    }
+
+    addWishlistIcon.addEventListener("click", (e) => {
+      const existingIndex = wishlistStore.findIndex(
+        (prd) => prd.id === item.id
+      );
+
+      if (existingIndex > -1) {
+        // If prd existed in wishlist, remove it from wishlist
+        wishlistStore.splice(existingIndex, 1);
+        addWishlistIcon.classList.remove("active");
+        addWishlistIcon.querySelector("i").classList.add("ph");
+        addWishlistIcon.querySelector("i").classList.remove("ph-fill");
+      } else {
+        // If prd not exist in wishlist, add it to wishlist
+        wishlistStore.push(item);
+        addWishlistIcon.classList.add("active");
+        addWishlistIcon.querySelector("i").classList.remove("ph");
+        addWishlistIcon.querySelector("i").classList.add("ph-fill");
+      }
+
+      // Save wishlist to localStorage
+      localStorage.setItem("wishlistStore", JSON.stringify(wishlistStore));
+
+      handleItemModalWishlist()
+      openModalWishlist()
+    });
+
+    let cartStore = localStorage.getItem("cartStore");
+    cartStore = cartStore ? JSON.parse(cartStore) : [];
+    const addCartIcon = modalQuickviewMain.querySelector('.add-cart-btn')
+
+    addCartIcon.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      const existingIndex = cartStore.findIndex(
+        (prd) => prd.id === item.id
+      );
+
+      if (existingIndex > -1) {
+        // If prd existed in cart
+        openModalCart();
+      } else {
+        // If prd not exist in cart, add it to cart
+        cartStore.push(item);
+        openModalCart();
+      }
+
+      // Save cart to localStorage
+      localStorage.setItem("cartStore", JSON.stringify(cartStore));
+      handleItemModalCart();
+    });
+
+    addEventToProductItem()
   });
 };
+
 
 
 // Modal SizeGuide
@@ -1492,9 +1410,8 @@ const createProductItem = (product) => {
   });
 
   productItem.innerHTML = `
-        <div class="product-main cursor-pointer block" data-item="${
-          product.id
-        }">
+        <div class="product-main cursor-pointer block" data-item="${product.id
+    }">
             <div class="product-thumb bg-white relative overflow-hidden rounded-2xl">
                 ${productTags}
                 <div class="list-action-right absolute top-3 right-3 max-lg:hidden">
@@ -1519,43 +1436,41 @@ const createProductItem = (product) => {
                     <div
                         class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">
                         Quick View</div>
-                        ${
-                          product.action === "add to cart"
-                            ? `
+                        ${product.action === "add to cart"
+      ? `
                             <div
                                 class="add-cart-btn w-full text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
                                 Add To Cart
                             </div>
                         `
-                            : `
+      : `
                             <div
                                 class="quick-shop-btn text-button-uppercase py-2 text-center rounded-full duration-500 bg-white hover:bg-black hover:text-white">
                                 Quick Shop</div>
                             <div class="quick-shop-block absolute left-5 right-5 bg-white p-5 rounded-[20px]">
                                 <div class="list-size flex items-center justify-center flex-wrap gap-2">
-                                    ${
-                                      product.sizes &&
-                                      product.sizes
-                                        .map(
-                                          (size, index) =>
-                                            `<div key="${index}" class="size-item w-10 h-10 rounded-full flex items-center justify-center text-button bg-white border border-line">${size.trim()}</div>`
-                                        )
-                                        .join("")
-                                    }
+                                    ${product.sizes &&
+      product.sizes
+        .map(
+          (size, index) =>
+            `<div key="${index}" class="size-item w-10 h-10 rounded-full flex items-center justify-center text-button bg-white border border-line">${size.trim()}</div>`
+        )
+        .join("")
+      }
                                 </div >
     <div class="add-cart-btn button-main w-full text-center rounded-full py-3 mt-4">Add
         To cart</div>
                             </div >
     `
-                        }
+    }
                 </div>
             </div>
             <div class="product-infor mt-4 lg:mb-7">
                 <div class="product-sold sm:pb-4 pb-2">
                     <div class="progress bg-line h-1.5 w-full rounded-full overflow-hidden relative">
                         <div class='progress-sold bg-red absolute left-0 top-0 h-full' style="width: ${Math.floor(
-                          (product.sold / product.quantity) * 100
-                        )}%">
+      (product.sold / product.quantity) * 100
+    )}%">
                         </div>
                     </div>
                     <div class="flex items-center justify-between gap-3 gap-y-1 flex-wrap mt-2">
@@ -1567,24 +1482,21 @@ const createProductItem = (product) => {
                         <div class="text-button-uppercase">
                             <span class='text-secondary2 max-sm:text-xs'>Available:
                             </span>
-                            <span class='max-sm:text-xs'>${
-                              product.quantity - product.sold
-                            }</span>
+                            <span class='max-sm:text-xs'>${product.quantity - product.sold
+    }</span>
                         </div>
                     </div>
                 </div>
-                <div class="product-name text-title duration-300">${
-                  product.name
-                }</div>
-                ${
-                  product.variation.length > 0 &&
-                  product.action === "add to cart"
-                    ? `
+                <div class="product-name text-title duration-300">${product.name
+    }</div>
+                ${product.variation.length > 0 &&
+      product.action === "add to cart"
+      ? `
                         <div class="list-color py-2 max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                             ${product.variation
-                              .map(
-                                (item, index) =>
-                                  `<div
+        .map(
+          (item, index) =>
+            `<div
                                     key="${index}"
                                     class="color-item w-8 h-8 rounded-full duration-300 relative"
                                     style="background-color:${item.colorCode};"
@@ -1592,15 +1504,15 @@ const createProductItem = (product) => {
                                     <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">${item.color}</div>
                                 </div>
                                 `
-                              )
-                              .join("")}
+        )
+        .join("")}
                         </div>`
-                    : `
+      : `
                     <div class="list-color list-color-image max-md:hidden flex items-center gap-3 flex-wrap duration-500">
                         ${product.variation
-                          .map(
-                            (item, index) =>
-                              `
+        .map(
+          (item, index) =>
+            `
                             <div
                                 class="color-item w-12 h-12 rounded-xl duration-300 relative"
                                 key="${index}"
@@ -1613,29 +1525,28 @@ const createProductItem = (product) => {
                                 <div class="tag-action bg-black text-white caption2 capitalize px-1.5 py-0.5 rounded-sm">${item.color}</div>
                             </div>
                         `
-                          )
-                          .join("")}
+        )
+        .join("")}
                     </div>
                 `
-                }
+    }
         <div
         class="product-price-block flex items-center gap-2 flex-wrap mt-1 duration-300 relative z-[1]">
         <div class="product-price text-title">$${product.price}.00</div>
-        ${
-          Math.floor(100 - (product.price / product.originPrice) * 100) > 0
-            ? `
+        ${Math.floor(100 - (product.price / product.originPrice) * 100) > 0
+      ? `
                 <div class="product-origin-price caption1 text-secondary2">
                     <del>$${product.originPrice}.00</del>
                 </div>
                 <div
                     class="product-sale caption1 font-medium bg-green px-3 py-0.5 inline-block rounded-full">
                     -${Math.floor(
-                      100 - (product.price / product.originPrice) * 100
-                    )}%
+        100 - (product.price / product.originPrice) * 100
+      )}%
                 </div>
         `
-            : ""
-        }
+      : ""
+    }
             </div>
         </div>
         </div>
@@ -1697,7 +1608,7 @@ function addEventToProductItem(products) {
             addWishlistIcon.querySelector("i").classList.remove("ph-fill");
           } else {
             // If prd not exist in wishlist, add it to wishlist
-            const productToAdd = products.find((item) => item.id === productId);
+            const productToAdd = products?.find((item) => item.id === productId);
             if (productToAdd) {
               wishlistStore.push(productToAdd);
               addWishlistIcon.classList.add("active");
@@ -1745,7 +1656,7 @@ function addEventToProductItem(products) {
           } else {
             if (compareStore.length < 3) {
               // If prd not exist in compare, add it to compare
-              const productToAdd = products.find(
+              const productToAdd = products?.find(
                 (item) => item.id === productId
               );
               if (productToAdd) {
@@ -1774,7 +1685,7 @@ function addEventToProductItem(products) {
           quickViewStore = quickViewStore && [];
 
           // add it to quick view
-          const productToAdd = products.find((item) => item.id === productId);
+          const productToAdd = products?.find((item) => item.id === productId);
           if (productToAdd) {
             quickViewStore.push(productToAdd);
           }
@@ -1807,7 +1718,7 @@ function addEventToProductItem(products) {
             openModalCart();
           } else {
             // If prd not exist in cart, add it to cart
-            const productToAdd = products.find((item) => item.id === productId);
+            const productToAdd = products?.find((item) => item.id === productId);
             if (productToAdd) {
               cartStore.push(productToAdd);
               openModalCart();
@@ -1839,6 +1750,13 @@ function addEventToProductItem(products) {
     });
   }
 
+  handleActiveSizeChange()
+  handleActiveColorChange()
+}
+
+
+// Active size
+const handleActiveSizeChange = () => {
   // List size
   const listSizes = document.querySelectorAll(".list-size");
 
@@ -1868,7 +1786,11 @@ function addEventToProductItem(products) {
       }
     });
   });
+}
 
+
+// Active size
+const handleActiveColorChange = () => {
   // List color
   const listColors = document.querySelectorAll(".list-color");
 
@@ -1900,6 +1822,8 @@ function addEventToProductItem(products) {
   });
 }
 
+
+
 // Change product img when active color in list color
 const handleActiveImgWhenColorChange = (products) => {
   const listColors = document.querySelectorAll(".list-color");
@@ -1909,9 +1833,9 @@ const handleActiveImgWhenColorChange = (products) => {
 
     colorItems.forEach((color) => {
       color.addEventListener("click", () => {
-        const activeColor = color.querySelector(".tag-action").textContent;
+        const activeColor = color.querySelector(".tag-action")?.textContent;
         const productMain = color.closest(".product-main");
-        const dataItem = productMain.getAttribute("data-item");
+        const dataItem = productMain?.getAttribute("data-item");
         const product = products.find((item) => item.id === dataItem);
         const imgActive = product?.variation.find(
           (item) => item.color === activeColor
@@ -2120,7 +2044,7 @@ fetch("./assets/data/Product.json")
                     (product) =>
                       product.sale &&
                       product.category ===
-                        listSixProduct.getAttribute("data-type")
+                      listSixProduct.getAttribute("data-type")
                   )
                   .slice(0, 6)
                   .forEach((product) => {
@@ -2136,7 +2060,7 @@ fetch("./assets/data/Product.json")
                     (product) =>
                       product.new &&
                       product.category ===
-                        listSixProduct.getAttribute("data-type")
+                      listSixProduct.getAttribute("data-type")
                   )
                   .slice(0, 6)
                   .forEach((product) => {
@@ -3048,9 +2972,8 @@ const handleInforCart = () => {
       quantityBlock.querySelector(".ph-plus").addEventListener("click", () => {
         product.quantityPurchase++;
         quantityProduct.textContent = product.quantityPurchase;
-        totalPriceProduct.textContent = `$${
-          product.quantityPurchase * product.price
-        }.00`;
+        totalPriceProduct.textContent = `$${product.quantityPurchase * product.price
+          }.00`;
         updateTotalCart();
 
         // Update quantity localStorage
@@ -3061,9 +2984,8 @@ const handleInforCart = () => {
         if (product.quantityPurchase > 1) {
           product.quantityPurchase--;
           quantityProduct.textContent = product.quantityPurchase;
-          totalPriceProduct.textContent = `$${
-            product.quantityPurchase * product.price
-          }.00`;
+          totalPriceProduct.textContent = `$${product.quantityPurchase * product.price
+            }.00`;
           updateTotalCart();
 
           // Update quantity localStorage

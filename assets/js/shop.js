@@ -151,6 +151,8 @@ function fetchProducts() {
                     sale: document.querySelector('.check-sale input[type="checkbox"]:checked')
                 };
 
+                console.log('type: ', selectedFilters.type, 'size: ', selectedFilters.size, 'color: ', selectedFilters.color, 'brand: ', selectedFilters.brand);
+
                 // Filter options
                 if (document.querySelector('.filter-type select')) {
                     const typeValue = document.querySelector('.filter-type select').value;
@@ -265,25 +267,43 @@ function fetchProducts() {
                 }
             });
 
-            // Shop filter options
+            // shop-filter-options.html
             if (document.querySelector('.filter-type select')) {
                 document.querySelector('.filter-type select').addEventListener('change', handleFiltersChange)
             }
 
             sizeItems.forEach(item => {
-                item.addEventListener('click', handleFiltersChange);
+                item.addEventListener('click', () => {
+                    let parent = item.parentElement;
+                    if (!parent.querySelector(".active")) {
+                        item.classList.add("active");
+                    } else {
+                        parent.querySelector(".active").classList.remove("active");
+                        item.classList.add("active");
+                    }
+                    handleFiltersChange()
+                });
             });
 
-            // Shop filter options
+            // shop-filter-options.html
             if (document.querySelector('.filter-size select')) {
                 document.querySelector('.filter-size select').addEventListener('change', handleFiltersChange)
             }
 
             colorItems.forEach(item => {
-                item.addEventListener('click', handleFiltersChange);
+                item.addEventListener('click', () => {
+                    let parent = item.parentElement;
+                    if (!parent.querySelector(".active")) {
+                        item.classList.add("active");
+                    } else {
+                        parent.querySelector(".active").classList.remove("active");
+                        item.classList.add("active");
+                    }
+                    handleFiltersChange()
+                });
             });
 
-            // Shop filter options
+            // shop-filter-options.html
             if (document.querySelector('.filter-color select')) {
                 document.querySelector('.filter-color select').addEventListener('change', handleFiltersChange)
             }
@@ -298,7 +318,7 @@ function fetchProducts() {
                 item.addEventListener('change', handleFiltersChange);
             })
 
-            // Shop filter options
+            // shop-filter-options.html
             if (document.querySelector('.filter-brand select')) {
                 document.querySelector('.filter-brand select').addEventListener('change', handleFiltersChange)
             }
