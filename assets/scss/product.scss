@@ -106,6 +106,16 @@
             visibility: hidden;
             z-index: 0;
         }
+
+        .countdown-time-block {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 0;
+            background: rgba($color: #FFFFFF, $alpha: 0.5);
+            transition: all 0.4s ease;
+        }
     }
 
     &.grid-type {
@@ -128,6 +138,11 @@
                         opacity: 1;
                         visibility: visible;
                     }
+                }
+
+                .countdown-time-block {
+                    opacity: 0;
+                    visibility: hidden;
                 }
             }
         }

@@ -277,6 +277,18 @@
             }
         }
     }
+
+    .list-filtered {
+        .clear-btn {
+            display: none;
+        }
+
+        &:has(.list) {
+            .clear-btn {
+                display: block;
+            }
+        }
+    }
 }
 
 .shop-product.breadcrumb1 {

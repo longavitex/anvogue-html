@@ -692,7 +692,7 @@ tabItems.forEach((item) => {
 });
 
 // Countdown time
-const countDown = new Date("June 09, 2024 00:00:00").getTime();
+const countDown = new Date("June 30, 2024 00:00:00").getTime();
 const setCountDown = setInterval(function () {
   let now = new Date().getTime();
   let distance = countDown - now;
@@ -1432,6 +1432,20 @@ const createProductItem = (product) => {
                 <div class="product-img w-full h-full aspect-[3/4]">
                     ${productImages}
                 </div>
+                ${product.sale && product.category === 'cosmetic' ? (`
+                  <div class="countdown-time-block py-1.5 flex items-center justify-center">
+                    <div class="text-xs font-semibold uppercase text-red">
+                      <span class='countdown-day'>24</span>
+                      <span>D : </span>
+                      <span class='countdown-hour'>14</span>
+                      <span>H : </span>
+                      <span class='countdown-minute'>36</span>
+                      <span>M : </span>
+                      <span class='countdown-second'>51</span>
+                      <span>S</span>
+                    </div>
+                  </div>
+                `) : ''}
                 <div class="list-action grid grid-cols-2 gap-3 px-5 absolute w-full bottom-5 max-lg:hidden">
                     <div
                         class="quick-view-btn w-full text-button-uppercase py-2 text-center rounded-full duration-300 bg-white hover:bg-black hover:text-white">

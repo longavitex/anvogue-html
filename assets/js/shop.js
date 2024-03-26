@@ -76,7 +76,7 @@ rangeInput.forEach(input => {
         let maxValue = parseInt(rangeInput[1].value)
 
         if (maxValue - minValue < priceGap) {
-            if (e.target.className === 'range-min') {
+            if (e.target.class === 'range-min') {
                 rangeInput[0].value = maxValue - priceGap
             } else {
                 rangeInput[1].value = minValue + priceGap
@@ -138,10 +138,11 @@ function fetchProducts() {
                 })
             })
 
+            let selectedFilters = {};
 
             // handle event when user change filter
             function handleFiltersChange() {
-                const selectedFilters = {
+                selectedFilters = {
                     type: document.querySelector('.filter-type .active')?.getAttribute('data-item'),
                     size: Array.from(document.querySelectorAll('.filter-size .size-item.active')).map(item => item.getAttribute('data-item')),
                     color: Array.from(document.querySelectorAll('.filter-color .color-item.active')).map(item => item.getAttribute('data-item')),
@@ -150,8 +151,6 @@ function fetchProducts() {
                     maxPrice: 300, //default
                     sale: document.querySelector('.check-sale input[type="checkbox"]:checked')
                 };
-
-                console.log('type: ', selectedFilters.type, 'size: ', selectedFilters.size, 'color: ', selectedFilters.color, 'brand: ', selectedFilters.brand);
 
                 // Filter options
                 if (document.querySelector('.filter-type select')) {
@@ -190,6 +189,52 @@ function fetchProducts() {
                     if (selectedFilters.sale && product.sale !== true) return false;
                     return true;
                 });
+
+
+                // Set list filtered
+                const listFiltered = document.querySelector('.list-filtered')
+                listFiltered.classList.add('flex', 'items-center', 'gap-3', 'mt-4')
+                const clearBtn = listFiltered.querySelector('.clear-btn')
+
+                const newHtmlListFiltered = `
+                    <div class="total-product">
+                        ${filteredProducts?.length}
+                        <span class='text-secondary pl-1'>Products Found</span>
+                    </div>
+                    <div class="list flex items-center gap-3">
+                        <div class='w-px h-4 bg-line'></div>
+                        ${selectedFilters.type.length ? (
+                        `
+                                <div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                                    <i class='ph ph-x cursor-pointer'></i>
+                                    <span>${selectedFilters.type}</span>
+                                </div>
+                            `
+                    ) : ''}
+                        ${selectedFilters.size.length ? (
+                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                                <i class='ph ph-x cursor-pointer'></i>
+                                <span>${selectedFilters.size}</span>
+                            </div>`
+                    ) : ''}
+                        ${selectedFilters.color.length ? (
+                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                                <i class='ph ph-x cursor-pointer'></i>
+                                <span>${selectedFilters.color}</span>
+                            </div>`
+                    ) : ''}
+                        ${selectedFilters.brand.length ? (
+                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                                <i class='ph ph-x cursor-pointer'></i>
+                                <span>${selectedFilters.brand}</span>
+                            </div>`
+                    ) : ''}
+                    </div>
+                `
+
+                if (filteredProducts.length > 0) {
+                    clearBtn.insertAdjacentHTML('beforebegin', newHtmlListFiltered);
+                }
 
                 // Handle sort product
                 if (sortOption === 'soldQuantityHighToLow') {
@@ -334,6 +379,19 @@ function fetchProducts() {
             sortSelect.addEventListener('change', () => {
                 sortOption = sortSelect.value
                 handleFiltersChange();
+            })
+
+            // Remove filtered
+            const clearBtn = document.querySelector('.list-filtered .clear-btn')
+
+            clearBtn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-type .active')?.forEach(item => item.classList.remove('active'))
+                document.querySelectorAll('.filter-size .active')?.forEach(item => item.classList.remove('active'))
+                document.querySelectorAll('.filter-color .active')?.forEach(item => item.classList.remove('active'))
+                document.querySelectorAll('.filter-brand .brand-item input[type="checkbox"]:checked').forEach(item => item.checked = false)
+
+                handleFiltersChange()
+                listFiltered.remove()
             })
         })
         .catch(error => console.error('Error fetching products:', error));
