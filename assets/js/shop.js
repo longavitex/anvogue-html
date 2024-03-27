@@ -280,6 +280,9 @@ function fetchProducts() {
                     document.querySelectorAll('.filter-size .active')?.forEach(item => item.classList.remove('active'))
                     document.querySelectorAll('.filter-color .active')?.forEach(item => item.classList.remove('active'))
                     document.querySelectorAll('.filter-brand .brand-item input[type="checkbox"]:checked').forEach(item => item.checked = false)
+                    if (document.querySelector('.check-sale input[type="checkbox"]:checked')) {
+                        document.querySelector('.check-sale input[type="checkbox"]:checked').checked = false
+                    }
 
                     handleFiltersChange()
                     listFiltered.innerHTML = ''
