@@ -475,7 +475,14 @@ const handleItemModalCart = () => {
   if (cartStore.length === 0) {
     listItemCart.innerHTML = `<p class='mt-1'>No product in cart</p>`;
   } else {
+    // Initial money to freeship in cart
+    let moneyForFreeship = 150;
+    let totalCart = 0;
+
     cartStore.forEach((item) => {
+      totalCart = Number(totalCart) + Number(item.price)
+
+      // Create prd
       const prdItem = document.createElement("div");
       prdItem.setAttribute("data-item", item.id);
       prdItem.classList.add(
@@ -514,6 +521,11 @@ const handleItemModalCart = () => {
 
       listItemCart.appendChild(prdItem);
     });
+
+    // Set money to freeship in cart
+    modalCart.querySelector('.more-price').innerHTML = moneyForFreeship - totalCart
+    modalCart.querySelector('.tow-bar-block .progress-line').style.width = (totalCart / moneyForFreeship * 100) + '%'
+    modalCart.querySelector('.total-cart').innerHTML = '$' + totalCart + '.00'
   }
 
   const prdItems = listItemCart.querySelectorAll(".item");
@@ -525,6 +537,12 @@ const handleItemModalCart = () => {
       const newArray = cartStore.filter((item) => item.id !== prdId);
       localStorage.setItem("cartStore", JSON.stringify(newArray));
       handleItemModalCart();
+
+      if (cartStore.length === 0) {
+        modalCart.querySelector('.more-price').innerHTML = 0
+        modalCart.querySelector('.tow-bar-block .progress-line').style.width = '0'
+        modalCart.querySelector('.total-cart').innerHTML = '$0.00'
+      }
     });
   });
 };
