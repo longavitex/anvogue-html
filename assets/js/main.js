@@ -2,6 +2,7 @@
 /**** Add fixed header ****/
 /**** Marquee banner top ****/
 /**** Menu mobile ****/
+/**** Modal Newsletter ****/
 /**** Modal Search ****/
 /**** Redirect to search-results when enter or click form search ****/
 /**** Filter product in search-results ****/
@@ -112,6 +113,26 @@ backMenuBtns.forEach((btn) => {
     subNavParent.classList.remove("open");
   });
 });
+
+// Modal Newsletter
+const modalNewsletter = document.querySelector(".modal-newsletter");
+const modalNewsletterMain = document.querySelector(
+  ".modal-newsletter .modal-newsletter-main"
+);
+
+if (modalNewsletter) {
+  setTimeout(() => {
+    modalNewsletterMain.classList.add('open')
+  }, 3000);
+
+  modalNewsletter.addEventListener('click', () => {
+    modalNewsletterMain.classList.remove('open')
+  })
+
+  modalNewsletterMain.addEventListener('click', (e) => {
+    e.stopPropagation()
+  })
+}
 
 // Modal Search
 const searchIcon = document.querySelector(".search-icon");
@@ -1710,6 +1731,7 @@ function addEventToProductItem(products) {
             JSON.stringify(quickViewStore)
           );
           handleItemModalQuickview();
+          closeModalCart()
           openModalQuickview();
         });
       }

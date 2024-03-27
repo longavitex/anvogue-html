@@ -1,6 +1,7 @@
 /* Product Item */
 .product-item {
     display: block;
+    cursor: pointer;
     animation: showProduct .4s linear;
 
     .product-thumb .list-action-right {
