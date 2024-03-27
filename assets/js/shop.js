@@ -203,20 +203,20 @@ function fetchProducts() {
                         <div class='w-px h-4 bg-line'></div>
                         ${selectedFilters.type ? (
                         `
-                                <div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                                <div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize" data-type="type">
                                     <i class='ph ph-x cursor-pointer'></i>
                                     <span>${selectedFilters.type}</span>
                                 </div>
                             `
                     ) : ''}
                         ${selectedFilters.size.length ? (
-                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize" data-type="size">
                                 <i class='ph ph-x cursor-pointer'></i>
                                 <span>${selectedFilters.size}</span>
                             </div>`
                     ) : ''}
                         ${selectedFilters.color.length ? (
-                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize" data-type="color">
                                 <i class='ph ph-x cursor-pointer'></i>
                                 <span>${selectedFilters.color}</span>
                             </div>`
@@ -225,7 +225,7 @@ function fetchProducts() {
                         `
                             ${selectedFilters.brand.map(item => (
                             `
-                                    <div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                                    <div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize" data-type="brand" data-item=${item}>
                                         <i class='ph ph-x cursor-pointer'></i>
                                         <span>${item}</span>
                                     </div>
@@ -248,6 +248,31 @@ function fetchProducts() {
                 listFiltered.insertAdjacentHTML('beforeend', newHtmlListFiltered);
 
                 // Remove filtered
+                // Remove item from list filtered
+                const clearBtnItem = document.querySelectorAll('.list-filtered .list .item')
+
+                clearBtnItem.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        let dataType = btn.getAttribute('data-type')
+                        document.querySelectorAll(`.filter-${dataType} .active`)?.forEach(item => item.classList.remove('active'))
+
+                        if (dataType === 'brand') {
+                            let dataItem = btn.getAttribute('data-item')
+                            document.querySelectorAll('.filter-brand .brand-item input[type="checkbox"]:checked').forEach(item => {
+                                if (item.id === dataItem) {
+                                    item.checked = false
+                                }
+                            })
+                        }
+
+                        handleFiltersChange()
+                        if (!selectedFilters.type && selectedFilters.size.length === 0 && selectedFilters.color.length === 0 && selectedFilters.brand.length === 0) {
+                            listFiltered.innerHTML = ''
+                        }
+                    })
+                })
+
+                // Remove all
                 const clearBtn = document.querySelector('.list-filtered .clear-btn')
 
                 clearBtn?.addEventListener('click', () => {
