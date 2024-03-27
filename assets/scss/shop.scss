@@ -284,6 +284,8 @@
         }
 
         &:has(.list) {
+            margin-top: 16px;
+
             .clear-btn {
                 display: block;
             }

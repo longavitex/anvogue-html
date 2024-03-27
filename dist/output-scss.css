@@ -3028,6 +3028,9 @@ textarea:focus {
 .list-product-block .list-filtered .clear-btn {
   display: none;
 }
+.list-product-block .list-filtered:has(.list) {
+  margin-top: 16px;
+}
 .list-product-block .list-filtered:has(.list) .clear-btn {
   display: block;
 }

@@ -193,17 +193,15 @@ function fetchProducts() {
 
                 // Set list filtered
                 const listFiltered = document.querySelector('.list-filtered')
-                listFiltered.classList.add('flex', 'items-center', 'gap-3', 'mt-4')
-                const clearBtn = listFiltered.querySelector('.clear-btn')
 
-                const newHtmlListFiltered = `
+                let newHtmlListFiltered = `
                     <div class="total-product">
                         ${filteredProducts?.length}
                         <span class='text-secondary pl-1'>Products Found</span>
                     </div>
                     <div class="list flex items-center gap-3">
                         <div class='w-px h-4 bg-line'></div>
-                        ${selectedFilters.type.length ? (
+                        ${selectedFilters.type ? (
                         `
                                 <div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
                                     <i class='ph ph-x cursor-pointer'></i>
@@ -224,17 +222,43 @@ function fetchProducts() {
                             </div>`
                     ) : ''}
                         ${selectedFilters.brand.length ? (
-                        `<div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
-                                <i class='ph ph-x cursor-pointer'></i>
-                                <span>${selectedFilters.brand}</span>
-                            </div>`
+                        `
+                            ${selectedFilters.brand.map(item => (
+                            `
+                                    <div class="item flex items-center px-2 py-1 gap-1 bg-linear rounded-full capitalize">
+                                        <i class='ph ph-x cursor-pointer'></i>
+                                        <span>${item}</span>
+                                    </div>
+                                `
+                        )).join('')}
+                        `
                     ) : ''}
+                    </div>
+                    <div
+                        class="clear-btn flex items-center px-2 py-1 gap-1 rounded-full w-fit border border-red cursor-pointer">
+                        <i class='ph ph-x cursor-pointer text-red'></i>
+                        <span class='text-button-uppercase text-red'>Clear All</span>
                     </div>
                 `
 
-                if (filteredProducts.length > 0) {
-                    clearBtn.insertAdjacentHTML('beforebegin', newHtmlListFiltered);
-                }
+                // remove content in listFiltered
+                listFiltered.innerHTML = '';
+
+                // add newHtmlListFiltered to listFiltered
+                listFiltered.insertAdjacentHTML('beforeend', newHtmlListFiltered);
+
+                // Remove filtered
+                const clearBtn = document.querySelector('.list-filtered .clear-btn')
+
+                clearBtn?.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-type .active')?.forEach(item => item.classList.remove('active'))
+                    document.querySelectorAll('.filter-size .active')?.forEach(item => item.classList.remove('active'))
+                    document.querySelectorAll('.filter-color .active')?.forEach(item => item.classList.remove('active'))
+                    document.querySelectorAll('.filter-brand .brand-item input[type="checkbox"]:checked').forEach(item => item.checked = false)
+
+                    handleFiltersChange()
+                    listFiltered.innerHTML = ''
+                })
 
                 // Handle sort product
                 if (sortOption === 'soldQuantityHighToLow') {
@@ -379,19 +403,6 @@ function fetchProducts() {
             sortSelect.addEventListener('change', () => {
                 sortOption = sortSelect.value
                 handleFiltersChange();
-            })
-
-            // Remove filtered
-            const clearBtn = document.querySelector('.list-filtered .clear-btn')
-
-            clearBtn.addEventListener('click', () => {
-                document.querySelectorAll('.filter-type .active')?.forEach(item => item.classList.remove('active'))
-                document.querySelectorAll('.filter-size .active')?.forEach(item => item.classList.remove('active'))
-                document.querySelectorAll('.filter-color .active')?.forEach(item => item.classList.remove('active'))
-                document.querySelectorAll('.filter-brand .brand-item input[type="checkbox"]:checked').forEach(item => item.checked = false)
-
-                handleFiltersChange()
-                listFiltered.remove()
             })
         })
         .catch(error => console.error('Error fetching products:', error));
